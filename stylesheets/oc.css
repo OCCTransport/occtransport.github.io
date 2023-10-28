@@ -1,0 +1,47 @@
+.ocBanner {
+  background-image: url(../photos/banners/oc.jpeg);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--oc);
+}
+
+.oc-color {
+  color: var(--oc);
+}
+
+.oc-border {
+  border-top: 3px solid var(--oc);
+}
+
+.oc-bg {
+  background-color: var(--oc);
+}
+
+.oc {
+  background-color: var(--oc);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.oc:hover {
+  background-color: white;
+  border: 4px solid var(--oc);
+}
+.oc h2 {
+  color: white;
+}
+.oc:hover h2 {
+  color: var(--oc);
+}
+.oc h4 {
+  color: white;
+}
+.oc:hover h4 {
+  color: var(--oc);
+}
+.oc p {
+  color: white;
+}
+.oc:hover p {
+  color: var(--oc);
+}

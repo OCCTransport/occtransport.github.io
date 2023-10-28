@@ -1,0 +1,47 @@
+.rrtBanner {
+  background-image: url(../photos/banners/rrt.jpeg);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--rrt);
+}
+
+.rrt-color {
+  color: var(--rrt);
+}
+
+.rrt-border {
+  border-top: 3px solid var(--rrt);
+}
+
+.rrt-bg {
+  background-color: var(--rrt);
+}
+
+.rrt {
+  background-color: var(--rrt);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.rrt:hover {
+  background-color: white;
+  border: 4px solid var(--rrt);
+}
+.rrt h2 {
+  color: white;
+}
+.rrt:hover h2 {
+  color: var(--rrt);
+}
+.rrt h4 {
+  color: white;
+}
+.rrt:hover h4 {
+  color: var(--rrt);
+}
+.rrt p {
+  color: white;
+}
+.rrt:hover p {
+  color: var(--rrt);
+}

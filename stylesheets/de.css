@@ -1,0 +1,55 @@
+.deBanner {
+  background-image: url(../photos/banners/de.jpeg);
+}
+
+.deb1Banner {
+  background-image: url(../photos/banners/deb1.jpeg);
+}
+
+.dea1Banner {
+  background-image: url(../photos/banners/dea1.jpeg);
+}
+
+.de-border {
+  border-top: 3px solid var(--de);
+}
+
+.de-bg {
+  background-color: var(--de);
+}
+
+.de-color {
+  color: var(--de);
+}
+
+.de {
+  background-color: var(--de);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.de:hover {
+  background-color: white;
+  border: 4px solid var(--de);
+}
+.de h2 {
+  color: white;
+}
+.de:hover h2 {
+  color: var(--de);
+}
+.de h4 {
+  color: white;
+}
+.de:hover h4 {
+  color: var(--de);
+}
+.de p {
+  color: white;
+}
+.de:hover p {
+  color: var(--de);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--de);
+}

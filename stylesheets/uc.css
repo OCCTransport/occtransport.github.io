@@ -1,0 +1,47 @@
+.ucBanner {
+  background-image: url(../photos/banners/uc.jpeg);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--uc);
+}
+
+.uc-color {
+  color: var(--uc);
+}
+
+.uc-border {
+  border-top: 3px solid var(--uc);
+}
+
+.uc-bg {
+  background-color: var(--uc);
+}
+
+.uc {
+  background-color: var(--uc);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.uc:hover {
+  background-color: white;
+  border: 4px solid var(--uc);
+}
+.uc h2 {
+  color: white;
+}
+.uc:hover h2 {
+  color: var(--uc);
+}
+.uc h4 {
+  color: white;
+}
+.uc:hover h4 {
+  color: var(--uc);
+}
+.uc p {
+  color: white;
+}
+.uc:hover p {
+  color: var(--uc);
+}

@@ -1,0 +1,1032 @@
+/* Define variables */
+:root {
+	--ws: #191970;
+	--ms: #6495ed;
+	--dcl: #d2042d;
+	--udc: #ff7f50;
+	--lrs: #800020;
+	--ds: #708090;
+	--cs: #228b22;
+	--uc: #bf40bf;
+	--iu: #cf9fff;
+	--rrt: #e37383;
+	--oc: #ffc000;
+	--ri: #afe1af;
+	--de: #000000;
+	--lift: #bee7a5;
+	--charter: #dea5a4;
+	--advertising: #9adedb;
+
+	--stopsred: #ff6961;
+	--stopsorange: #ff964f;
+	--stopsblue: #89cff0;
+	--stopsgreen: #77dd77;
+}
+
+/* Set default margin and padding (Do Not Edit!) */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+/* Set Entire Website Styling (Do Not Edit!) */
+
+/* Controls font and body container sizing for entire website. */
+body {
+	font-family: "Inter", sans-serif !important;
+	min-height: calc(100vh - 80px);
+	min-width: 100%;
+	position: relative;
+	padding-bottom: 80px;
+}
+
+/* Set Text Styles for Headings and Paragraphs */
+h1 {
+	font-size: 3rem;
+	font-weight: bold;
+	letter-spacing: 1.25px;
+	line-height: 1.25;
+	color: black;
+}
+
+h2 {
+	font-size: 2.5rem;
+	font-weight: bold;
+	letter-spacing: 1.25px;
+	line-height: 1.25;
+	color: black;
+}
+
+h3 {
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: 1.25px;
+	line-height: 1.25;
+	color: black;
+}
+
+h4 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	letter-spacing: 1.25px;
+	line-height: 1.25;
+	color: black;
+}
+
+.rs-table th {
+	font-size: 1.2rem;
+	font-weight: bold;
+	line-height: 1.25;
+	color: black;
+}
+
+p,
+a,
+.rs-table td,
+label,
+input,
+li {
+	font-size: 1.2rem;
+	font-weight: normal;
+	line-height: 1.25;
+	color: black;
+}
+
+/* Set Color Styles for Fonts */
+.busBlue-color {
+	color: #4997d0;
+}
+
+.ln-color {
+	color: black;
+}
+
+.lift-color {
+	color: #bee7a5;
+}
+
+.charter-color {
+	color: #dea5a4;
+}
+
+.advertising-color {
+	color: #9adedb;
+}
+
+a:link {
+	color: blue;
+}
+
+a:visited {
+	color: blue;
+}
+
+/* Nav Bar Style (Do Not Edit!) */
+header {
+	position: sticky;
+	top: 0;
+	padding: 0 2rem;
+	background-color: #4997d0;
+	z-index: 3;
+}
+
+/* Set styles for the Desktop Header & Navigation Bar */
+.header .navbar {
+	display: flex;
+	width: 100%;
+	height: 80px;
+	margin: 0 auto;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Set styles for the OCCT Logo */
+.header .navbar .occtlogo-cont img {
+	width: 140px;
+}
+
+/* Set styles for the Page Links */
+.header .navbar .pagelinks {
+	display: flex;
+	margin-bottom: 0 !important;
+}
+
+.header .navbar .pagelinks li {
+	border-left: 1.5px solid #ffffff;
+	padding: 0 0.75rem;
+	list-style: none;
+}
+
+.header .navbar .pagelinks li:first-child {
+	border-left: none;
+}
+
+.header .navbar .pagelinks a {
+	transition: all 0.1s ease-in-out;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.header .navbar .pagelinks a:hover {
+	color: #d3d3d3;
+}
+
+.header .navbar .contus-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.25rem 0;
+	width: 200px;
+}
+
+/* Set styles for the Page Link Change from Desktop to Mobile */
+.header .navbar .toggle_btn {
+	color: #ffffff;
+	cursor: pointer;
+	display: none;
+	font-size: 1.5rem;
+}
+
+/* Set styles for the Mobile Header & Navigation Bar */
+.header .navbar-mobile {
+	display: none;
+	right: 2rem;
+	position: absolute;
+	background: #4997d0;
+	backdrop-filter: blur(15px);
+	top: 70px;
+	left: 0;
+	height: 0px;
+	width: 100%;
+	overflow: hidden;
+	transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.header .navbar-mobile li {
+	padding-top: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header .navbar-mobile.navShow {
+	height: 380px;
+}
+
+.header .navbar-mobile .pagelinks-mobile {
+	padding-left: 0 !important;
+	border-top: 1px solid #ffffff;
+}
+
+.header .navbar-mobile .pagelinks-mobile li {
+	padding: 1rem 0;
+}
+
+.header .navbar-mobile .pagelinks-mobile a {
+	transition: all 0.2s ease-in-out;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: normal;
+	letter-spacing: 1px;
+}
+
+.header .navbar-mobile .pagelinks-mobile a:hover {
+	color: #d3d3d3;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	padding: 0.25rem 0;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile a {
+	text-decoration: none;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile .sociallogo {
+	padding: 0 0.25rem !important;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile .sociallogo img {
+	width: 40px;
+	height: 40px;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile .sociallogo:hover {
+	scale: 1.1;
+}
+
+.header .navbar-mobile .sociallogos-cont-mobile .sociallogo:active {
+	scale: 0.95;
+}
+
+/* Set Homepage Styling (Do Not Edit!) */
+
+/* Set Styles for Webpage Container */
+.page-container {
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+}
+
+/* Set Styles for Content Container */
+.content-container {
+	width: 100%;
+	max-width: 2000px;
+	height: 100%;
+	margin: auto;
+	background-color: white;
+	display: block;
+}
+
+/* Set styles for Banners */
+.photoBanner-cont {
+	width: 100%;
+	height: 30vh;
+	background-size: cover;
+	background-position: center center;
+}
+
+.videoBanner-cont {
+	width: 100%;
+	height: 30vh;
+}
+
+.videoBanner {
+	position: relative;
+	width: 100%;
+	height: 30vh;
+}
+
+.videoBanner video {
+	width: 100%;
+	height: 30vh;
+	object-fit: cover;
+	z-index: 0;
+}
+
+/* Set backgrounds of each page's banner */
+.homeBanner {
+	background-image: url(../photos/banners/fleetpic2.jpeg);
+}
+
+.rsBanner {
+	background-image: url(../photos/banners/fleetpic2.jpeg);
+}
+
+
+.page-content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Set styles for a Half-Page Container */
+.half-container {
+	width: 50%;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+/* Set styles for a Full-Page Container */
+.full-container {
+	width: 100%;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+/* Set styles for Homepage Left Side: Service Updates */
+.occt-twitter-feed {
+	margin-top: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.sectionbutton-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem 0;
+	width: 100%;
+}
+
+.sectionbutton {
+	width: 100%;
+	text-align: center;
+	padding: 0 1rem;
+}
+
+.sectionbutton a {
+	background: #4997d0;
+	display: block;
+	padding: 0.75rem;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #d3d3d3;
+	border-radius: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+.sectionbutton a:hover {
+	background: #ffffff;
+	color: #4997d0;
+}
+
+/* Set styles for all Content-containing Containers */
+.outside-cont {
+	width: 100%;
+}
+
+/* Set border color by route, default is busBlue */
+.busBlue-border {
+	border-top: 3px solid #4997d0;
+}
+
+.ln-border {
+	border-top: 3px solid black;
+}
+
+.main-border {
+	border-top: 3px solid black;
+}
+
+.de-border {
+	border-top: 3px solid black;
+}
+
+.lift-border {
+	border-top: 3px solid #bee7a5;
+}
+
+.charter-border {
+	border-top: 3px solid #dea5a4;
+}
+
+.advertising-border {
+	border-top: 3px solid #9adedb;
+}
+
+/* End border color */
+
+.inside-cont {
+	padding: 0.5rem;
+}
+
+.graySect {
+	background-color: #d3d3d3;
+}
+
+.graySect .sectionbutton a {
+	border-color: white;
+}
+
+.graySect .sectionbutton a:hover {
+	background: #ffffff;
+	border-color: #4997d0;
+	color: #4997d0;
+}
+
+.container-title {
+	padding: 0.25rem 0rem;
+}
+
+.container-info {
+	padding: 0.25rem 0rem;
+}
+
+.container-info h4 {
+	padding: 0.25rem 0rem;
+}
+
+
+/* Footer */
+.footer {
+	width: 100%;
+	height: 100px;
+	background-color: #4997d0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.footer .sociallogo-cont {
+	width: 100%;
+	height: 50%;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.footer .trademark {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sociallogo-cont img {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding-top: 1rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
+
+.footer .trademark p {
+	color: #ffffff;
+}
+
+/* Set rules and dimensions for the colored section container */
+.stopname-container {
+	width: 100%;
+	padding: 0.5rem 0rem;
+	background-color: #4997d0;
+	border-top: 1rem solid white;
+	text-align: center;
+	justify-content: center;
+}
+
+.stopname-container h2 {
+	color: white;
+}
+
+/* Route and Schedules Page */
+
+/* Set rules and dimensions for Route Buttons */
+.routebuttons-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	/* If more than 12 routes, increase from 3 to 4 rows. */
+	grid-template-rows: repeat(3, 1fr);
+	gap: 40px;
+	padding: 20px;
+}
+
+.inoutbuttons-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	/* If more than 12 routes, increase from 3 to 4 rows. */
+	grid-template-rows: repeat(1, 1fr);
+	gap: 40px;
+	padding: 20px;
+}
+
+.stopbuttons-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	/* If more than 12 routes, increase from 3 to 4 rows. */
+	grid-template-rows: repeat(auto, 1fr);
+	gap: 20px;
+	padding: 1rem 0.5rem;
+}
+
+.routebuttons-item {
+	background-color: #ccc;
+	padding: 0;
+	margin: 0;
+	border-radius: 10px;
+	min-height: 150px;
+	min-width: 150px;
+	box-sizing: border-box;
+}
+
+.stopbuttons-item {
+	background-color: #ccc;
+	padding: 0;
+	margin: 0;
+	border-radius: 10px;
+	min-height: 50px;
+	min-width: 100px;
+	box-sizing: border-box;
+}
+
+.routebuttonsDetails {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	text-align: center;
+}
+
+.stopbuttonsDetails {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	text-align: center;
+}
+
+.routebuttonsDetails h4 {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.routebuttonsDetails p {
+	margin-bottom: 5px;
+}
+
+/* Additional Services Page */
+
+/* Set rules and dimensions for Service Buttons */
+.servicebuttons-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	/* If more than 12 routes, increase from 3 to 4 rows. */
+	gap: 40px;
+	padding: 20px;
+}
+
+.servicebuttons-item {
+	background-color: #ccc;
+	padding: 0;
+	margin: 0;
+	border-radius: 10px;
+	min-height: 150px;
+	min-width: 150px;
+	box-sizing: border-box;
+}
+
+.servicebuttonsDetails {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	text-align: center;
+}
+
+.servicebuttonsDetails h4 {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.servicebuttonsDetails p {
+	margin-bottom: 5px;
+}
+
+/* Individual Routes Page */
+.route-map {
+	margin: auto;
+	max-width: 50%;
+	height: 100%;
+	align-items: center;
+}
+
+.route-map img {
+	width: 100%;
+	height: auto;
+}
+
+.rs-content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.route-schedule {
+	width: 50%;
+	height: 100%;
+	align-items: center;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+.route-schedule .container {
+	max-width: 100%;
+	margin: auto;
+	background-color: white;
+}
+
+.route-schedule .tab_box {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 2px solid rgba(229, 229, 229);
+	position: relative;
+}
+
+.route-schedule .tab_box .tab_btn {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #d3d3d3;
+	background: none;
+	border: none;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.route-schedule .content_box .content {
+	display: none;
+	animation: moving 0.5s ease;
+}
+
+@keyframes moving {
+	from {
+		transform: translateX(50px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+.route-schedule .content_box .content.active {
+	display: block;
+}
+
+.route-schedule .content_box .content h2 {
+	margin-bottom: 10px;
+}
+
+.route-schedule .line {
+	position: absolute;
+	top: 57px;
+	left: 74px;
+	width: 122px;
+	height: 5px;
+	color: black;
+	border-radius: 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.route-stops {
+	width: 50%;
+	height: 100%;
+	align-items: center;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+.sch-notes {
+	width: 100%;
+	padding: 1rem 0rem;
+}
+
+.rs-table {
+	width: 100%;
+	padding: 1rem 0;
+}
+
+.rs-table table {
+	table-layout: fixed;
+	margin: auto;
+	width: 100%;
+}
+
+.rs-table tr {
+	text-align: center;
+}
+
+.rs-table th,
+.rs-table td {
+	padding: 1rem 1rem;
+}
+
+.rs-table th {
+	color: white;
+}
+
+.rs-table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.stop-img {
+	width: 100%;
+	align-items: center;
+}
+
+.stop-img img {
+	width: 100%;
+	height: auto;
+}
+
+/* Contact Us Form */
+.contactus-form {
+	padding: 1rem 0rem;
+}
+
+.contactus-form form {
+	padding: 1rem 1rem;
+	max-width: 100%;
+	line-height: 1.5;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+
+.contactus-form .form-element {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+}
+
+.contactus-form p {
+	color: red;
+	padding-bottom: 0.5rem;
+}
+
+.contactus-form label {
+	color: #000000;
+	padding-bottom: 0.5rem;
+}
+
+.contactus-form input,
+.contactus-form textarea {
+	border: none;
+	border-bottom: 2px solid #4997d0;
+	line-height: 2;
+	padding: 0.5rem 0rem;
+}
+
+.contactus-form select {
+	width: 100%;
+	padding: 0.75rem;
+	background-color: white;
+	border-radius: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+
+.contactus-form button {
+	width: 100%;
+	background: #4997d0;
+	display: block;
+	padding: 0.75rem;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #d3d3d3;
+	border-radius: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	letter-spacing: 1px;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+
+form button:hover {
+	background: #ffffff;
+	color: #4997d0;
+}
+
+ul {
+	padding: 0rem 1rem;
+}
+
+li {
+	padding: 0.1rem 0rem;
+}
+
+ul ul {
+	padding: 0rem 1rem;
+}
+
+input[type="radio"] {
+	transform: scale(2);
+	margin: 0.5rem;
+}
+
+/* Define window sizes where Nav Bar changes from Desktop to Mobile version. (Do Not Edit!) */
+@media (max-width: 1300px) {
+	body {
+		padding-bottom: 70px;
+	}
+	h1 {
+		font-size: 2.75rem;
+	}
+	h2 {
+		font-size: 2.25rem;
+	}
+	h3 {
+		font-size: 1.75rem;
+	}
+	h4,
+	.route-schedule .tab_box .tab_btn {
+		font-size: 1.25rem;
+	}
+	p,
+	a,
+	.rs-table td,
+	.rs-table th,
+	label,
+	input,
+	li {
+		font-size: 1.15rem;
+	}
+	.contactus-form button,
+	.contactus-form select {
+		font-size: 1.15rem;
+	}
+
+	.header .navbar {
+		height: 70px;
+	}
+	.header .navbar .occtlogo-cont img {
+		width: 120px;
+	}
+	.header .navbar .pagelinks li {
+		padding: 0 0.5rem;
+	}
+	.header .navbar .sociallogos-cont {
+		padding: 0.2rem 0;
+		width: 120px;
+	}
+
+	.header .navbar .sociallogos-cont .sociallogo img {
+		width: 35px;
+		height: 35px;
+		padding: 0 0.2rem;
+	}
+
+
+	.route-map {
+		max-width: 70%;
+	}
+	.rs-table table {
+		width: 100%;
+	}
+
+	.rs-content {
+		display: block;
+	}
+
+	.route-schedule,
+	.route-stops {
+		width: auto;
+	}
+}
+
+@media (max-width: 1125px) {
+	.header .navbar .pagelinks,
+	.header .navbar .contus-button {
+		display: none;
+	}
+
+	.header .navbar .occtlogo-cont {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.header .navbar .toggle_btn {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 5%;
+		transform: translate(-50%, -50%);
+		z-index: 99;
+	}
+
+	.header .navbar-mobile {
+		display: block;
+	}
+
+	.routebuttons-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.photoBanner-cont,
+	.videoBanner-cont,
+	.videoBanner,
+	.videoBanner video {
+		height: 25vh;
+	}
+	.page-content {
+		display: block;
+	}
+
+	.half-container {
+		width: auto;
+	}
+}
+
+@media (max-width: 1125px) {
+	h1 {
+		font-size: 2.5rem;
+	}
+	h2 {
+		font-size: 2.1rem;
+	}
+	h3,
+	.route-schedule .tab_box .tab_btn {
+		font-size: 1.7rem;
+	}
+	h4 {
+		font-size: 1.3rem;
+	}
+	p,
+	a,
+	.rs-table th,
+	.rs-table td,
+	label,
+	input,
+	li {
+		font-size: 1.1rem;
+	}
+	.contactus-form button,
+	.contactus-form select {
+		font-size: 1.1rem;
+	}
+	.photoBanner-cont,
+	.videoBanner-cont,
+	.videoBanner,
+	.videoBanner video {
+		height: 20vh;
+	}
+
+	.route-map {
+		max-width: 80%;
+	}
+}
+
+@media (max-width: 950px) {
+	.routebuttons-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.servicebuttons-container {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+@media (max-width: 768px) {
+	body {
+		padding-bottom: 60px;
+	}
+
+	.header .navbar {
+		height: 60px;
+	}
+
+
+	.header .navbar-mobile {
+		top: 60px;
+	}
+
+	.route-map {
+		max-width: 100%;
+	}
+
+	.rs-table th,
+	.rs-table td {
+		padding: 1rem 1rem;
+	}
+}
+
+@media (max-width: 710px) {
+	.routebuttons-container,
+	.inoutbuttons-container {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}

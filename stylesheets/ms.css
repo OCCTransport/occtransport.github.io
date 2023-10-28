@@ -1,0 +1,55 @@
+.ms-color {
+  color: var(--ms);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--ms);
+}
+
+.msBanner {
+  background-image: url(../photos/banners/ms.jpeg);
+}
+
+.msoutBanner {
+  background-image: url(../photos/banners/msout.jpeg);
+}
+
+.msinBanner {
+  background-image: url(../photos/banners/msin.jpeg);
+}
+
+.ms-border {
+  border-top: 3px solid var(--ms);
+}
+
+.ms-bg {
+  background-color: var(--ms);
+}
+
+.ms {
+  background-color: var(--ms);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.ms:hover {
+  background-color: white;
+  border: 4px solid var(--ms);
+}
+.ms h2 {
+  color: white;
+}
+.ms:hover h2 {
+  color: var(--ms);
+}
+.ms h4 {
+  color: white;
+}
+.ms:hover h4 {
+  color: var(--ms);
+}
+.ms p {
+  color: white;
+}
+.ms:hover p {
+  color: var(--ms);
+}

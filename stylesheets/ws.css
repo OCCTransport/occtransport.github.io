@@ -1,0 +1,55 @@
+.wsBanner {
+  background-image: url(../photos/banners/ws.jpeg);
+}
+
+.wsoutBanner {
+  background-image: url(../photos/banners/wsout.jpeg);
+}
+
+.wsinBanner {
+  background-image: url(../photos/banners/wsin.jpeg);
+}
+
+.ws-border {
+  border-top: 3px solid var(--ws);
+}
+
+.ws-bg {
+  background-color: var(--ws);
+}
+
+.ws-color {
+  color: var(--ws);
+}
+
+.ws {
+  background-color: var(--ws);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.ws:hover {
+  background-color: white;
+  border: 4px solid var(--ws);
+}
+.ws h2 {
+  color: white;
+}
+.ws:hover h2 {
+  color: var(--ws);
+}
+.ws h4 {
+  color: white;
+}
+.ws:hover h4 {
+  color: var(--ws);
+}
+.ws p {
+  color: white;
+}
+.ws:hover p {
+  color: var(--ws);
+}
+
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--ws);
+}

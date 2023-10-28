@@ -1,0 +1,43 @@
+.route-schedule .tab_box .tab_btn.active {
+  color: var(--cs);
+}
+
+.cs-color {
+  color: var(--cs);
+}
+
+.cs-border {
+  border-top: 3px solid var(--cs);
+}
+
+.cs-bg {
+  background-color: var(--cs);
+}
+
+.cs {
+  background-color: var(--cs);
+  text-decoration: none;
+  border: 4px solid black;
+}
+.cs:hover {
+  background-color: white;
+  border: 4px solid var(--cs);
+}
+.cs h2 {
+  color: white;
+}
+.cs:hover h2 {
+  color: var(--cs);
+}
+.cs h4 {
+  color: white;
+}
+.cs:hover h4 {
+  color: var(--cs);
+}
+.cs p {
+  color: white;
+}
+.cs:hover p {
+  color: var(--cs);
+}
