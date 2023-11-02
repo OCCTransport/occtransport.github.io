@@ -38,7 +38,7 @@ body {
 	min-height: calc(100vh - 80px);
 	min-width: 100%;
 	position: relative;
-	padding-bottom: 80px;
+	padding-bottom: 100px;
 }
 
 /* Set Text Styles for Headings and Paragraphs */
@@ -216,7 +216,6 @@ header {
 }
 
 .header .navbar-mobile .pagelinks-mobile {
-	padding-left: 0 !important;
 	border-top: 1px solid #ffffff;
 }
 
@@ -362,6 +361,12 @@ header {
 	padding: 0 1rem;
 }
 
+.sectionbutton-mobile {
+	width: 95%;
+	text-align: center;
+	padding: 0 1rem;
+}
+
 .sectionbutton a {
 	background: #4997d0;
 	display: block;
@@ -376,7 +381,26 @@ header {
 	letter-spacing: 1px;
 }
 
+.sectionbutton-mobile a {
+	background: #4997d0;
+	display: block;
+	padding: 0.75rem;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #d3d3d3;
+	border-radius: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
 .sectionbutton a:hover {
+	background: #ffffff;
+	color: #4997d0;
+}
+
+.sectionbutton-mobile a:hover {
 	background: #ffffff;
 	color: #4997d0;
 }
@@ -840,7 +864,7 @@ input[type="radio"] {
 /* Define window sizes where Nav Bar changes from Desktop to Mobile version. (Do Not Edit!) */
 @media (max-width: 1300px) {
 	body {
-		padding-bottom: 70px;
+		padding-bottom: 100px;
 	}
 	h1 {
 		font-size: 2.75rem;
@@ -1002,7 +1026,7 @@ input[type="radio"] {
 
 @media (max-width: 768px) {
 	body {
-		padding-bottom: 60px;
+		padding-bottom: 100px;
 	}
 
 	.header .navbar {
