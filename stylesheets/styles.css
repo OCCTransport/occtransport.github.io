@@ -313,11 +313,11 @@ header {
 
 /* Set backgrounds of each page's banner */
 .homeBanner {
-	background-image: url(../photos/banners/fleetpic2.jpeg);
+	background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/OCCT+Fleet+Picture+2.jpeg);
 }
 
 .rsBanner {
-	background-image: url(../photos/banners/fleetpic2.jpeg);
+	background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/OCCT+Fleet+Picture+2.jpeg);
 }
 
 

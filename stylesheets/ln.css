@@ -1,17 +1,17 @@
 .lnwsoutBanner {
-  background-image: url(../photos/banners/lnwsout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/LN+WS+Outbound.jpeg);
 }
 
 .lnwsinBanner {
-  background-image: url(../photos/banners/lnwsin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/LN+WS+Inbound.jpeg);
 }
 
 .lndcloutBanner {
-  background-image: url(../photos/banners/lndclout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/LN+DCL+Outbound.jpeg);
 }
 
 .lndclinBanner {
-  background-image: url(../photos/banners/lndclin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/LN+DCL+Inbound.jpeg);
 }
 
 .route-schedule .tab_box .tab_btn.active {

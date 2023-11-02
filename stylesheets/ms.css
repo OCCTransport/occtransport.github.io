@@ -7,15 +7,15 @@
 }
 
 .msBanner {
-  background-image: url(../photos/banners/ms.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/MS.jpeg);
 }
 
 .msoutBanner {
-  background-image: url(../photos/banners/msout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/MS+Outbound.jpeg);
 }
 
 .msinBanner {
-  background-image: url(../photos/banners/msin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/MS+Inbound.jpeg);
 }
 
 .ms-border {

@@ -7,15 +7,15 @@
 }
 
 .udcBanner {
-  background-image: url(../photos/banners/udc.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/UDC.jpeg);
 }
 
 .udcoutBanner {
-  background-image: url(../photos/banners/udcout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/UDC+Outbound.jpeg);
 }
 
 .udcinBanner {
-  background-image: url(../photos/banners/udcin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/UDC+Inbound.jpeg);
 }
 
 .udc-border {

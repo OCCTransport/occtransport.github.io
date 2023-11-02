@@ -1,13 +1,13 @@
 .wsBanner {
-  background-image: url(../photos/banners/ws.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/WS.jpeg);
 }
 
 .wsoutBanner {
-  background-image: url(../photos/banners/wsout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/WS+Outbound.jpeg);
 }
 
 .wsinBanner {
-  background-image: url(../photos/banners/wsin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/WS+Inbound.jpeg);
 }
 
 .ws-border {

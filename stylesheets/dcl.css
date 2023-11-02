@@ -7,15 +7,15 @@
 }
 
 .dclBanner {
-  background-image: url(../photos/banners/dcl.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DCL.jpeg);
 }
 
 .dcloutBanner {
-  background-image: url(../photos/banners/dclout.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DCL+Outbound.jpeg);
 }
 
 .dclinBanner {
-  background-image: url(../photos/banners/dclin.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DCL+Inbound.jpeg);
 }
 
 .dcl-border {

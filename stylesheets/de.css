@@ -1,13 +1,13 @@
 .deBanner {
-  background-image: url(../photos/banners/de.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DE.jpeg);
 }
 
 .deb1Banner {
-  background-image: url(../photos/banners/deb1.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DE+Before+1.jpeg);
 }
 
 .dea1Banner {
-  background-image: url(../photos/banners/dea1.jpeg);
+  background-image: url(https://occtransport.s3.amazonaws.com/Website+Banners/DE+After+1.jpeg);
 }
 
 .de-border {
