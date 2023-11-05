@@ -181,6 +181,14 @@ header {
 	width: 200px;
 }
 
+.contus-button-mobile {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.25rem 0;
+	width: 100%;
+}
+
 /* Set styles for the Page Link Change from Desktop to Mobile */
 .header .navbar .toggle_btn {
 	color: #ffffff;
@@ -362,7 +370,7 @@ header {
 }
 
 .sectionbutton-mobile {
-	width: 90%;
+	width: 100%;
 	text-align: center;
 	padding: 0 1rem;
 }
