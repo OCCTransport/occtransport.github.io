@@ -869,6 +869,39 @@ input[type="radio"] {
 	margin: 0.5rem;
 }
 
+.sched-cont {
+	text-align: center;
+	padding: 0 1rem;
+	margin: auto;
+	width: 40%;
+	padding: 1rem 0rem;
+}
+
+.sched-cont a {
+	background: #2596be;
+	display: block;
+	padding: 1rem;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	border-radius: 10px;
+	font-weight: bold;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+.sched-cont p {
+	color: white;
+	width: 100%;
+}
+
+.sched-cont a:hover, .sched-cont a:hover p {
+	background: #ffffff;
+	color: #2596be;
+	border-color: #2596be;
+}
+
 /* Define window sizes where Nav Bar changes from Desktop to Mobile version. (Do Not Edit!) */
 @media (max-width: 1300px) {
 	body {
