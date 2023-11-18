@@ -1015,6 +1015,10 @@ input[type="radio"] {
 	.half-container {
 		width: auto;
 	}
+
+	.sched-cont {
+		width: 60%;
+	}
 }
 
 @media (max-width: 1125px) {
@@ -1086,6 +1090,10 @@ input[type="radio"] {
 	.rs-table th,
 	.rs-table td {
 		padding: 1rem 1rem;
+	}
+
+	.sched-cont {
+		width: 80%;
 	}
 }
 
