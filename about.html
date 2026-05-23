@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/shared.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+<style>
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 10px; }
+
+.page-header { background: var(--navy); padding: 40px 28px 36px; }
+.page-header p { font-size: 16px; color: rgba(255,255,255,0.52); margin-top: 10px; max-width: 520px; }
+
+.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+.main-col { display: flex; flex-direction: column; gap: 28px; }
+
+.card-head { padding: 26px 28px 0; display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.card-head-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-icon svg { width: 22px; height: 22px; color: var(--blue); }
+.card-head h2 { font-size: 20px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+.card-body { padding: 0 28px 28px; }
+.card-body p { font-size: 16px; color: var(--gray-600); line-height: 1.75; margin-bottom: 14px; }
+.card-body p:last-child { margin-bottom: 0; }
+
+/* STAT ROW */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.stat-box { background: var(--blue-pale); border-radius: var(--radius-sm); padding: 20px; text-align: center; }
+.stat-num { font-size: 32px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 13px; color: var(--gray-600); }
+
+/* TIMELINE */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item:last-child .tl-line { display: none; }
+.tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 48px; }
+.tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--blue-bright); border: 3px solid var(--blue-pale); flex-shrink: 0; margin-top: 5px; }
+.tl-line { width: 2px; flex: 1; background: var(--gray-100); margin-top: 4px; }
+.tl-year { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: .04em; margin-top: 10px; }
+.tl-content { padding-bottom: 0; }
+.tl-content strong { display: block; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.tl-content p { font-size: 15px; color: var(--gray-600); line-height: 1.65; margin: 0; }
+
+/* TEAM GRID */
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.team-card { background: var(--off-white); border: 1px solid var(--gray-100); border-radius: var(--radius-sm); padding: 18px 20px; }
+.team-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+.team-name { font-size: 16px; font-weight: 600; color: var(--navy); }
+.team-role { font-size: 14px; color: var(--gray-400); }
+.team-email { display: inline-flex; color: var(--blue-muted); flex-shrink: 0; transition: color .12s; }
+.team-email:hover { color: var(--blue); }
+.team-email svg { width: 15px; height: 15px; }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sb-card-head { background: var(--navy); padding: 17px 22px; display: flex; align-items: center; gap: 11px; }
+.sb-card-head svg { width: 18px; height: 18px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+.sb-card-head h3 { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.sb-card-body { padding: 20px 22px; }
+.sb-card-body p { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 14px; }
+.sb-link-list { display: flex; flex-direction: column; gap: 8px; }
+.sb-link-list a { font-size: 15px; color: var(--blue); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.sb-link-list a:hover { color: var(--navy); }
+.sb-link-list svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn-sb { display: inline-flex; align-items: center; justify-content: center; width: 100%; font-family: var(--font); font-size: 15px; font-weight: 500; padding: 12px; border-radius: var(--radius-sm); background: var(--blue-pale); color: var(--blue); border: 1px solid var(--blue-muted); cursor: pointer; transition: background .12s; text-decoration: none; }
+.btn-sb:hover { background: var(--blue-muted); }
+
+.footer-logo p   { font-size: 14px; line-height: 1.6; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 22px; }
+  .stat-row { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .page-header h1 { font-size: 28px; }
+  .page-header { padding: 28px 20px 24px; }
+  .main { padding: 28px 18px 64px; }
+  .stat-row { grid-template-columns: 1fr 1fr; /* 2×2 grid for 4 stats */ }
+  .team-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+    </a>
+    <ul class="nav-links">
+      <li><a href="routeschedule.html">Routes &amp; Schedules</a></li>
+      <li><a href="employment.html">Employment</a></li>
+      <li><a href="passtips.html">Passenger Tips</a></li>
+      <li><a href="services.html">Additional Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contactus.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMobile" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <a href="routeschedule.html">Routes &amp; Schedules</a>
+  <a href="employment.html">Employment</a>
+  <a href="passtips.html">Passenger Tips</a>
+  <a href="services.html">Additional Services</a>
+  <a href="about.html">About</a>
+  <a href="news.html">News</a>
+  <a href="contactus.html" class="mob-cta">Contact Us</a>
+</div>
+
+<!-- ============================================================
+     NOTICE BAR: Update in "alerts.js"
+     ============================================================ -->
+
+
+<div class="alert-bar" role="region" aria-label="Service alert"></div>
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header" role="region" aria-label="Page header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>&rsaquo;</span> About</div>
+    <h1>About OCC Transport</h1>
+    <p>We are Binghamton University's student-run transit agency serving the University Community since 1971.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content" class="main">
+  <div class="main-col">
+
+    <!-- Who We Are -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+        </div>
+        <h2>Who We Are</h2>
+      </div>
+      <div class="card-body">
+        <p>OCC Transport Inc. (OCCT) is a student-run transit organization providing free bus service to the Binghamton University community. Our mission is to provide safe, reliable, convenient, consistent, and courteous transportation for the greater Binghamton University community.</p>
+        <p>We operate 19 routes with a fleet of 21 vehicles, staffed by 75+ drivers, 3 coordinators, 2 directors, and 4 mechanics. Almost all of our drivers, dispatchers, and coordinators are Binghamton University students, making OCCT one of the largest majority student-run transit agencies in the country.</p>
+        <p>All buses are free to ride with a valid BU ID. OCCT is funded through the Student Association fee and operates under SA oversight.</p>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h2>History</h2>
+      </div>
+      <div class="card-body">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-year">1971</div></div>
+            <div class="tl-content">
+              <strong>The First Bus: "Maxwell"</strong>
+              <p>The Off Campus College Council (OC3) purchased a used school bus from Whitney Point Central School District for $800. The bus was named "Maxwell" and painted blue — establishing the signature color carried by every OCCT vehicle since.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-year">1979</div></div>
+            <div class="tl-content">
+              <strong>Growing to Five Buses</strong>
+              <p>By 1979, the operation had expanded to five buses and multiple routes, connecting more students to off-campus housing across Vestal, Binghamton, and the surrounding area.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-year">1995</div></div>
+            <div class="tl-content">
+              <strong>Board of Directors Established</strong>
+              <p>A formal Board of Directors was established in 1995, bringing structured governance to the growing organization while maintaining its student-run identity.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-year">Today</div></div>
+            <div class="tl-content">
+              <strong>19 Routes, 10,000+ Weekday Riders</strong>
+              <p>OCCT now operates 19 routes with a fleet of 21 vehicles, carrying over 10,000 passengers on weekdays. Live bus tracking is available through our partner ETA SPOT.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leadership -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+        </div>
+        <h2>Leadership</h2>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom:20px;">OCCT is governed by a Board of Directors composed of student representatives, university staff, and operational leadership.</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">Chinemerem (Mira) Emenogu</span>
+              <a href="mailto:president@binghamtonsa.org" class="team-email" title="president@binghamtonsa.org">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">CEO</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">Luciana Denegri</span>
+              <a href="mailto:vpf@binghamtonsa.org" class="team-email" title="vpf@binghamtonsa.org">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Chairperson, CFO</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">Jake Dronke</span>
+              <a href="mailto:director@occtransport.org" class="team-email" title="director@occtransport.org">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Executive Director</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">TBD</span>
+              <a href="" class="team-email" title="">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Coordinator Representative</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">TBD</span>
+              <a href="" class="team-email" title="">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Driver Representative</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">TBD</span>
+              <a href="" class="team-email" title="">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Driver Representative</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">Jason Andrews</span>
+              <a href="mailto:jandrews@binghamton.edu" class="team-email" title="jandrews@binghamton.edu">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Fleet Operations Manager</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">Dave Husch</span>
+              <a href="mailto:dhusch@binghamton.edu" class="team-email" title="dhusch@binghamton.edu">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">University Director of Transportation</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name-row">
+              <span class="team-name">TBD</span>
+              <a href="mailto:president@gsobinghamton.org" class="team-email" title="president@gsobinghamton.org">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              </a>
+            </div>
+            <div class="team-role">Graduate Student Organization President</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+        <h3>Get in Touch</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Have a question or concern? We want to hear from you.</p>
+        <a href="contactus.html" class="btn-sb">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+        <h3>Work for OCCT</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>We're always looking for students to join our team.</p>
+        <a href="employment.html" class="btn-sb">View Employment Info</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c-.317-.159.69-.159 1.006 0l4.994 2.497z"/></svg>
+        <h3>Quick links</h3>
+      </div>
+      <div class="sb-card-body">
+        <div class="sb-link-list">
+          <a href="routeschedule.html"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Routes &amp; Schedules</a>
+          <a href="https://binghamtonupublic.etaspot.net/" target="_blank" rel="noopener noreferrer"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Track Live (ETA SPOT)</a>
+          <a href="passtips.html"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Passenger Tips</a>
+          <a href="news.html"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>News &amp; Info</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+      <p>Serving the Binghamton University community since 1971.</p>
+    </div>
+    <div class="footer-links">
+      <a href="routeschedule.html">Routes &amp; Schedules</a>
+      <a href="employment.html">Employment</a>
+      <a href="passtips.html">Passenger Tips</a>
+      <a href="services.html">Additional Services</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/occtransport/" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+      <a href="https://twitter.com/OCCT" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+      <a href="https://www.instagram.com/buocct/" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; OCC Transport Inc.</span>
+    <span>Office: UUW-B20</span>
+    <span>Free to ride with your Binghamton University ID</span>
+  </div>
+</footer>
+
+
+<script src="js/shared.js"></script>
+<script src="js/alerts.js"></script>
+</body>
+</html>
