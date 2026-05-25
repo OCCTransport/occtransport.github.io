@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/shared.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employment — OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+<style>
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 10px; }
+
+.page-header { background: var(--navy); padding: 40px 28px 36px; }
+
+.main { max-width: 1160px; margin: 0 auto; padding: 56px 28px 96px; display: grid; grid-template-columns: 1fr 300px; grid-template-areas: "program sidebar" "form sidebar"; gap: 36px; align-items: start; }
+.main-col { grid-area: program; display: flex; flex-direction: column; gap: 28px; }
+.main-form { grid-area: form; }
+.sidebar { grid-area: sidebar; }
+
+.card-head { padding: 26px 28px 0; display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.card-head-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-icon svg { width: 22px; height: 22px; color: var(--blue); }
+.card-head h2 { font-size: 20px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+.card-body { padding: 0 28px 28px; }
+
+/* PROGRAM INFO */
+.program-section { margin-bottom: 22px; }
+.program-section:last-child { margin-bottom: 0; }
+.program-section h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.program-section p { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
+
+.section-divider { border: none; border-top: 1px solid var(--gray-100); margin: 20px 0; }
+
+/* FORM */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-group:last-of-type { margin-bottom: 0; }
+.form-group label { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+.form-group input,
+.form-group select,
+.form-group textarea { font-family: var(--font); font-size: 16px; color: var(--gray-800); background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 11px 14px; transition: border-color .12s, box-shadow .12s; outline: none; width: 100%; }
+.form-group input:focus,
+.form-group select:focus { border-color: var(--blue-bright); box-shadow: 0 0 0 3px rgba(38,132,212,.12); }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24' stroke='%238a97ab' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+.form-note { font-size: 13px; color: var(--gray-400); margin-top: 4px; }
+.btn-submit { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 16px; font-weight: 500; padding: 13px 28px; border-radius: var(--radius-sm); background: var(--blue-bright); color: #fff; border: none; cursor: pointer; transition: background .12s; margin-top: 20px; }
+.btn-submit:hover { background: #3090df; }
+.btn-submit svg { width: 17px; height: 17px; }
+
+/* RADIO GROUPS */
+.radio-group { display: flex; gap: 20px; flex-wrap: wrap; padding: 4px 0; }
+.radio-option { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--gray-800); cursor: pointer; }
+.radio-option input[type="radio"] { width: 16px; height: 16px; accent-color: var(--blue-bright); cursor: pointer; flex-shrink: 0; }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sb-card-head { background: var(--navy); padding: 17px 22px; display: flex; align-items: center; gap: 11px; }
+.sb-card-head svg { width: 18px; height: 18px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+.sb-card-head h3 { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.sb-card-body { padding: 20px 22px; }
+.sb-card-body p { font-size: 15px; color: var(--gray-600); line-height: 1.7; margin-bottom: 14px; }
+.sb-card-body p:last-of-type { margin-bottom: 0; }
+.btn-sb { display: inline-flex; align-items: center; justify-content: center; width: 100%; font-family: var(--font); font-size: 15px; font-weight: 500; padding: 12px; border-radius: var(--radius-sm); background: var(--blue-pale); color: var(--blue); border: 1px solid var(--blue-muted); cursor: pointer; transition: background .12s; text-decoration: none; margin-bottom: 10px; }
+.btn-sb:last-child { margin-bottom: 0; }
+.btn-sb:hover { background: var(--blue-muted); }
+
+/* REQUIREMENTS LIST */
+.req-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.req-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+.req-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); margin-top: 7px; flex-shrink: 0; }
+
+/* STAFF ROW */
+.staff-contact-row { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+.staff-contact-row strong { display: block; font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.staff-contact-row a { color: var(--blue); }
+.staff-contact-row a:hover { color: var(--navy); }
+
+.footer-logo p   { font-size: 14px; line-height: 1.6; }
+
+/* HONEYPOT */
+.hp-field { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; overflow: hidden; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 24px; left: 24px; background: #16a34a; color: #fff; font-size: 15px; font-weight: 500; padding: 13px 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 10px; z-index: 999; opacity: 0; transform: translateY(10px); transition: opacity .22s, transform .22s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; grid-template-areas: "program" "sidebar" "form"; }
+  .footer-inner { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 620px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .page-header h1 { font-size: 28px; }
+  .page-header { padding: 28px 20px 24px; }
+  .main { padding: 28px 18px 64px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+    </a>
+    <ul class="nav-links">
+      <li><a href="routeschedule.html">Routes &amp; Schedules</a></li>
+      <li><a href="employment.html" class="active">Employment</a></li>
+      <li><a href="passtips.html">Passenger Tips</a></li>
+      <li><a href="services.html">Additional Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contactus.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMobile" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <a href="routeschedule.html">Routes &amp; Schedules</a>
+  <a href="employment.html">Employment</a>
+  <a href="passtips.html">Passenger Tips</a>
+  <a href="services.html">Additional Services</a>
+  <a href="about.html">About</a>
+  <a href="news.html">News</a>
+  <a href="contactus.html" class="mob-cta">Contact Us</a>
+</div>
+
+<!-- ============================================================
+     NOTICE BAR: Update in "alerts.js"
+     ============================================================ -->
+
+
+<div class="alert-bar" role="region" aria-label="Service alert"></div>
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header" role="region" aria-label="Page header">
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>&rsaquo;</span> Employment</div>
+    <h1>Employment</h1>
+    <p>Join the team and serve the Binghamton University community.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content" class="main">
+  <div class="main-col">
+
+    <!-- Training Program -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+        </div>
+        <h2>OCC Transport&rsquo;s Training Program</h2>
+      </div>
+      <div class="card-body">
+
+        <div class="program-section">
+          <h3>Description</h3>
+          <p>Our training program is a 6&ndash;8 week intensive program designed to develop qualified bus drivers. Participants earn a New York State Class B Commercial Driver&rsquo;s License and receive a completion stipend after successfully completing the training program, getting hired, and passing a probationary period.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="program-section">
+          <h3>Program Overview</h3>
+          <p>Our training program features 3-4 weekly driving sessions approximately 3-4 hours long, plus an additional 2-3 classroom hours each week. Flexible scheduling is available, however, our training program demands roughly <strong>15-18 hours per week</strong> of time commitment both in and outside of scheduled training sessions. The NYS CDL Class B Road Test takes place towards the end of training. All training sessions are mandatory. All employees are required to work a minimum of <strong>approximately 15 hours per week.</strong></p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="program-section">
+          <h3>Hiring Policy</h3>
+          <p>OCC Transport is an Equal Opportunity Employer. Hiring decisions are based on demonstrated driving competency, rule compliance, and passage of the road test.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="program-section">
+          <h3>Other Positions</h3>
+          <p>We also accept applications for the <strong>Lift</strong> (Paratransit Driver, no CDL Training) and <strong>Late Nite Event Staff</strong> on a rolling basis throughout the year. Please contact recruiting for more information.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- Training Interest Form -->
+  <div class="card main-form">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        </div>
+        <h2>Training Interest Form</h2>
+      </div>
+      <div class="card-body">
+
+        <iframe name="hiddenConfirmEmploy" id="hiddenConfirmEmploy" style="display:none;" onload="if(submittedEmploy){window.location='employment.html?sent=1';}"></iframe>
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSfb1DJYWE1xVTTFCekM3oIFcNt9JgsLgerwWLY6luJoZx1TsA/formResponse" method="post" target="hiddenConfirmEmploy" onsubmit="return handleSubmitEmploy(this)">
+          <p class="form-note" style="margin-bottom:16px;">* is a required field. <strong>Submission of this form does not guarantee a response.</strong></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="entry_name">* Name</label>
+              <input type="text" id="entry_name" name="entry.2005620554" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="entry_email">* Email</label>
+              <input type="email" id="entry_email" name="entry.1045781291" placeholder="Your email address" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="entry_phone">Phone Number</label>
+            <input type="tel" id="entry_phone" name="entry.1065046570" placeholder="(xxx) xxx-xxxx">
+          </div>
+
+          <div class="form-group">
+            <label>* Do you have a New York State driver&rsquo;s license?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="entry.1166974658" value="Yes" required> Yes</label>
+              <label class="radio-option"><input type="radio" name="entry.1166974658" value="Other"> Other</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="entry_license_other">If you answered &ldquo;Other&rdquo;, where is your license from?</label>
+            <input type="text" id="entry_license_other" name="entry.1424982210" placeholder="Enter place of license">
+          </div>
+
+          <div class="form-group">
+            <label>* Do you have at least one year of driving experience?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="entry.839337160" value="Yes" required> Yes</label>
+              <label class="radio-option"><input type="radio" name="entry.839337160" value="No"> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>* Do you have any points on your license?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="entry.1181332235" value="Yes" required> Yes</label>
+              <label class="radio-option"><input type="radio" name="entry.1181332235" value="No"> No</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="entry_semesters">* How many semesters do you have left at Binghamton (excluding Winter and Summer Sessions)?</label>
+            <select id="entry_semesters" name="entry.1602974776" required>
+              <option value="" selected disabled>Select&hellip;</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8+</option>
+            </select>
+          </div>
+
+          <div class="hp-field" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+          <button type="submit" class="btn-submit">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            Submit Interest Form
+          </button>
+          <p id="spam-error" style="display:none;color:#dc2626;font-size:14px;margin-top:10px;">Your message was flagged as spam. Please remove any links or special characters and try again.</p>
+        </form>
+      </div>
+    </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>Applicant Requirements</h3>
+      </div>
+      <div class="sb-card-body">
+        <ul class="req-list">
+          <li>Minimum one year of active, licensed U.S. driving experience</li>
+          <li>Clean driving record: zero active points or violations</li>
+          <li>DOT medical and physical clearance</li>
+          <li>Enrolled at Binghamton University for a minimum of 6&ndash;7 remaining semesters</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        <h3>Contact Recruiting</h3>
+      </div>
+      <div class="sb-card-body">
+        <div class="staff-contact-row">
+          <strong>Haiden Danto-Scanlan</strong>
+          Assistant Training Coordinator<br>
+          <a href="mailto:atc@occtransport.org">atc@occtransport.org</a><br>
+          <a href="mailto:recruiting@occtransport.org">recruiting@occtransport.org</a><br>
+          (607) 777-6914
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        <h3>General Questions</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Have questions before applying? Reach out to our office.</p>
+       <br><a href="contactus.html" class="btn-sb">Contact Us</a></br>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast">
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+  Message successfully sent
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+      <p>Serving the Binghamton University community since 1971.</p>
+    </div>
+    <div class="footer-links">
+      <a href="routeschedule.html">Routes &amp; Schedules</a>
+      <a href="employment.html">Employment</a>
+      <a href="passtips.html">Passenger Tips</a>
+      <a href="services.html">Additional Services</a>
+      <a href="about.html">About</a>
+      <a href="news.html">News</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/occtransport/" class="footer-soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+      <a href="https://twitter.com/OCCT" class="footer-soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+      <a href="https://www.instagram.com/buocct/" class="footer-soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; OCC Transport Inc.</span>
+    <span>Office: UUW-B20</span>
+    <span>Free to ride with your Binghamton University ID</span>
+  </div>
+</footer>
+
+<script>
+var formLoadTime = Date.now();
+var submittedEmploy = false;
+
+function isSpam(form) {
+  if (form.querySelector('[name="website"]').value) return true;
+  if (Date.now() - formLoadTime < 3000) return true;
+  var fields = form.querySelectorAll('input[type="text"], textarea');
+  var patterns = [/https?:\/\//i, /[a-z0-9.-]+\.[a-z]{2,}\/\S+/i, />>>/, /<<</, /[\uD800-\uDFFF]/];
+  for (var i = 0; i < fields.length; i++)
+    for (var j = 0; j < patterns.length; j++)
+      if (patterns[j].test(fields[i].value)) return true;
+  return false;
+}
+
+function handleSubmitEmploy(form) {
+  var err = document.getElementById('spam-error');
+  if (isSpam(form)) { err.style.display = 'block'; return false; }
+  err.style.display = 'none';
+  submittedEmploy = true;
+  return true;
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+if (new URLSearchParams(window.location.search).get('sent') === '1') showToast();
+</script>
+<script src="js/shared.js"></script>
+<script src="js/alerts.js"></script>
+</body>
+</html>

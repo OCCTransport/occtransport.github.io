@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../css/shared.css">
+<style>:root { --route-color: #6495ED; }</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main & Lester (OB) &mdash; MS Stop &mdash; OCC Transport</title>
+<link rel="icon" type="image/png" href="../img/OCCTransportLogo(1) (1).png">
+<style>
+.stop-photo-wrap { width: 100%; aspect-ratio: 16/9; background: var(--gray-100); border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--gray-200); }
+.stop-photo-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--gray-400); width: 100%; height: 100%; padding: 24px; text-align: center; }
+.stop-photo-placeholder svg { width: 48px; height: 48px; opacity: 0.5; }
+.stop-photo-placeholder p { font-size: 14px; color: var(--gray-400); }
+
+.notes-empty { font-size: 14px; color: var(--gray-400); font-style: italic; }
+
+.routes-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.route-chip { display: inline-flex; align-items: center; gap: 10px; background: var(--off-white); border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 16px; text-decoration: none; transition: border-color .12s, background .12s; }
+.route-chip:hover { border-color: var(--blue-muted); background: var(--blue-pale); }
+.route-chip-badge { font-size: 15px; font-weight: 700; color: #fff; background: var(--route-color); border-radius: 6px; padding: 3px 10px; letter-spacing: 0.04em; }
+.route-chip-name { font-size: 15px; font-weight: 500; color: var(--navy); }
+.route-chip-dir { font-size: 12px; color: var(--gray-400); margin-left: 2px; }
+
+.location-info { display: flex; flex-direction: column; gap: 12px; }
+.location-address { font-size: 15px; color: var(--gray-400); font-style: italic; }
+
+.sidebar { display: flex; flex-direction: column; gap: 16px; }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sb-card-head { padding: 14px 18px; background: var(--navy); display: flex; align-items: center; gap: 10px; }
+.sb-card-head svg { width: 18px; height: 18px; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+.sb-card-head h3 { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+.sb-card-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.sb-card-body p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+.btn-sb { display: block; text-align: center; background: var(--blue-pale); color: var(--blue); font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: var(--radius-sm); border: 1px solid var(--blue-muted); transition: all .12s; }
+.btn-sb:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .sidebar { order: -1; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+    </a>
+    <ul class="nav-links">
+      <li><a href="../routeschedule.html" class="active">Routes &amp; Schedules</a></li>
+      <li><a href="../employment.html">Employment</a></li>
+      <li><a href="../passtips.html">Passenger Tips</a></li>
+      <li><a href="../services.html">Additional Services</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../news.html">News</a></li>
+      <li><a href="../contactus.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMobile" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
+  <a href="../routeschedule.html">Routes &amp; Schedules</a>
+  <a href="../employment.html">Employment</a>
+  <a href="../passtips.html">Passenger Tips</a>
+  <a href="../services.html">Additional Services</a>
+  <a href="../about.html">About</a>
+  <a href="../news.html">News</a>
+  <a href="../contactus.html" class="mob-cta">Contact Us</a>
+</div>
+
+<div class="alert-bar" role="region" aria-label="Service alert"></div>
+
+<div class="page-header" role="region" aria-label="Page header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="../routeschedule.html">Routes &amp; Schedules</a>
+      <span>&rsaquo;</span>
+      <a href="../routes/ms.html">MS &mdash; Main Street Shuttle</a>
+      <span>&rsaquo;</span>
+      Stops
+    </div>
+    <div class="page-header-title">
+      <span class="route-badge-lg" style="color:#fff">MS</span>
+      <div>
+        <h1>Main & Lester</h1>
+        <p>Outbound stop &mdash; Main Street Shuttle &bull; <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(255,255,255,0.22);color:#fff;padding:2px 9px;border-radius:4px;">Outbound</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" class="main">
+  <div class="main-col">
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+          </svg>
+        </div>
+        <h2>Stop Photo</h2>
+      </div>
+      <div class="card-body">
+        <div class="stop-photo-wrap">
+          <img src="https://occtransport.s3.us-east-1.amazonaws.com/Stops/Lester%20Av%20%28Outbound%29.jpg" alt="Stop photo" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+          </svg>
+        </div>
+        <h2>Notes</h2>
+      </div>
+      <div class="card-body">
+        <p class="notes-empty">No special notes for this stop.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
+          </svg>
+        </div>
+        <h2>Routes Servicing This Stop</h2>
+      </div>
+      <div class="card-body">
+        <div class="routes-list">
+          <a href="../routes/ms.html" class="route-chip">
+            <span class="route-chip-badge" style="background:#6495ED;color:#fff">MS</span>
+            <span class="route-chip-name">Main Street Shuttle</span>
+            <span class="route-chip-dir">Outbound &rsaquo;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon">
+          <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+          </svg>
+        </div>
+        <h2>Location</h2>
+      </div>
+      <div class="card-body">
+        <div class="location-info">
+          <p class="location-address">Address and coordinates coming soon.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+        <h3>Full Route</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>View the complete MS Main Street Shuttle route, schedule, and all stops.</p>
+        <a href="../routes/ms.html" class="btn-sb">MS &mdash; Main Street Shuttle</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        <h3>Download Schedule</h3>
+      </div>
+      <div class="sb-card-body">
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
+        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+        <h3>Service Alerts</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Check News &amp; Info for the latest service changes, delays, and early closures.</p>
+        <a href="../news.html" class="btn-sb">News &amp; Info</a>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-card-head">
+        <svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+        <h3>Questions?</h3>
+      </div>
+      <div class="sb-card-body">
+        <p>Can&rsquo;t find what you&rsquo;re looking for? Our team is happy to help.</p>
+        <a href="../contactus.html" class="btn-sb">Contact Us</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+      <p>Serving the Binghamton University community since 1971.</p>
+    </div>
+    <div class="footer-links">
+      <a href="../routeschedule.html">Routes &amp; Schedules</a>
+      <a href="../employment.html">Employment</a>
+      <a href="../passtips.html">Passenger Tips</a>
+      <a href="../services.html">Additional Services</a>
+      <a href="../about.html">About</a>
+      <a href="../news.html">News</a>
+      <a href="../contactus.html">Contact Us</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/occtransport/" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Facebook+Logo.png" alt="Facebook"></a>
+      <a href="https://twitter.com/OCCT" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/X+Logo.png" alt="X"></a>
+      <a href="https://www.instagram.com/buocct/" class="soc-link" target="_blank" rel="noopener noreferrer"><img src="https://occtransport.s3.amazonaws.com/Logos/Instagram+Logo.png" alt="Instagram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; OCC Transport Inc.</span>
+    <span>Office: UUW-B20</span>
+    <span>Free to ride with your Binghamton University ID</span>
+  </div>
+</footer>
+
+
+<script src="../js/shared.js"></script>
+<script src="../js/alerts.js"></script>
+</body>
+</html>
