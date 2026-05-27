@@ -1,6 +1,6 @@
 const ALERT = {
-  active: false,
-  text: 'This is a sample service message.',
+  active: true,
+  text: 'Construction and road work are affecting several routes.',
   link: { href: 'news.html', label: 'Details' }
 };
 

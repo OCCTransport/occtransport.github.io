@@ -247,6 +247,21 @@
         <div class="td-after"><div class="after-time" id="after-UC">--</div></div>
       </div>
 
+      <!-- CS (Campus Shuttle) — Summer session evenings 6:30–8:30 PM; shown only within 30 min of next departure / 30 min after last -->
+      <div class="dep-row hidden" id="card-CS">
+        <div><span class="badge" style="background:#228B22;">CS</span></div>
+        <div class="td-dest">
+          <div class="route-name">Campus Shuttle</div>
+          <div class="route-stops">Newing; Gyms; Susq.; Hillside; Mntnvw</div>
+          <div class="mohawk-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Cross the street: Mohawk Stop
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-CS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-CS">--</div></div>
+      </div>
+
       <div class="dep-row" id="card-VS">
         <div><span class="badge" style="background:#E37383;">VS</span></div>
         <div class="td-dest">
@@ -316,6 +331,7 @@ const MODIFIED = {
     RIU:  { weekday: [], weekend: [] },
     VS:   { weekday: [], weekend: [] },
     ICS:  { weekday: [], weekend: [] },
+    CS:   { weekday: [], weekend: [] },
     // IU:   { weekday: [], weekend: [] },  // Fall semester
     // LNWS: { weekday: [], weekend: [] },  // Fall semester
     // LNDCL:{ weekday: [], weekend: [] },  // Fall semester
@@ -391,6 +407,10 @@ const SCHEDULES = {
       "12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30",
       "16:00","16:30","17:00","17:30"
     ],
+    weekend: []
+  },
+  CS: { /* Campus Shuttle — evenings only, departs Engineering Building (across the street) */
+    weekday: ["18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30"],
     weekend: []
   },
   OC: { weekday: [], weekend: [] }, /* Not in summer service */
@@ -559,7 +579,7 @@ function refresh() {
   document.getElementById('card-ICS').classList.toggle('hidden', !interim);
 
   const deps = {};
-  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','DE','LNWS','LNDCL','ICS'].forEach(k => {
+  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','DE','LNWS','LNDCL','ICS','CS'].forEach(k => {
     deps[k] = getDepartures(k, now);
   });
 
@@ -570,6 +590,17 @@ function refresh() {
   /* Summer: UDC Express and DE not in service — keep hidden */
   document.getElementById('card-UDC').classList.add('hidden');
   document.getElementById('card-DE').classList.add('hidden');
+
+  /* CS: show only within 30 min before next departure or 30 min after last departure */
+  const csVisible = (() => {
+    const csDeps = deps.CS;
+    if (!csDeps.length) return false;
+    const future = csDeps.filter(m => m >= nowMin);
+    if (future.length > 0 && future[0] - nowMin <= 30) return true;
+    const last = csDeps[csDeps.length - 1];
+    return nowMin > last && nowMin <= last + 30;
+  })();
+  document.getElementById('card-CS').classList.toggle('hidden', !csVisible);
 
   /* Summer: WS and DCL always shown — no Late Nite service
    * (Fall restore: uncomment block below and remove the two lines above it)
@@ -590,7 +621,7 @@ function refresh() {
   document.getElementById('card-WS').classList.remove('hidden');
   document.getElementById('card-DCL').classList.remove('hidden');
 
-  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','DE','LNWS','LNDCL','ICS'].forEach(k => {
+  ['WS','DCL','MS','DS','UDC','UC','RIU','VS','DE','LNWS','LNDCL','ICS','CS'].forEach(k => {
     updateCard(k, nowMin, deps[k]);
   });
 }
