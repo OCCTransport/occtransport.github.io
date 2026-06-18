@@ -1,8 +1,7 @@
 const ALERT = {
   active: true,
   text: 'There will be no service on Friday, June 19th, in observance of Juneteenth.',
-  link: null
-  // link: { href: 'news.html', label: 'Details' }
+  link:{ href: 'news.html', label: 'Details' }
 };
 
 (function () {
