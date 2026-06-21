@@ -1,7 +1,7 @@
 const ALERT = {
   active: true,
-  text: 'There will be no service on Friday, June 19th, in observance of Juneteenth.',
-  link:{ href: 'news.html', label: 'Details' }
+  text: 'Construction and road work are affecting several routes.',
+  link: { href: 'news.html', label: 'Details' }
 };
 
 (function () {
@@ -26,6 +26,6 @@ const ALERT = {
       '<svg aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">' +
         '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>' +
       '</svg>' +
-      '<p><strong>Service alert:</strong> <strong>' + ALERT.text + '</strong>' + linkHtml + '</p>' +
+      '<p><strong>Service alert:</strong> ' + ALERT.text + linkHtml + '</p>' +
     '</div>';
 })();
