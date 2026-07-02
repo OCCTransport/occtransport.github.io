@@ -9,7 +9,7 @@
   --border: rgba(255,255,255,0.07);
   --text:   #edf2f7;
   --muted:  #7a8fa6;
-  --dim:    rgba(255,255,255,0.28);
+  --dim:    rgba(255,255,255,0.50); /* WCAG AA: 5.3:1 on --bg (was 0.28 = 2.45:1) */
   --soon:   #34d058;
   --gold:   #f0a500;
   --blue:   #2684d4;

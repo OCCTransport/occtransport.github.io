@@ -25,8 +25,8 @@
   </div>
   <div class="time-bar-right">
     <div class="day-toggle">
-      <button class="day-btn active" id="btnWkd" onclick="setMode('weekday', true)">Weekday</button>
-      <button class="day-btn" id="btnWkn" onclick="setMode('weekend', true)">Weekend</button>
+      <button class="day-btn active" id="btnWkd" aria-pressed="true" onclick="setMode('weekday', true)">Weekday</button>
+      <button class="day-btn" id="btnWkn" aria-pressed="false" onclick="setMode('weekend', true)">Weekend</button>
     </div>
     <div class="auto-label" id="autoLabel">Auto-detected</div>
     <div class="legend-hint"><span class="legend-swatch"></span> Scheduled within 5 min</div>
@@ -321,6 +321,8 @@ function setMode(mode, manual) {
   manualMode = !!manual;
   document.getElementById('btnWkd').classList.toggle('active', mode === 'weekday');
   document.getElementById('btnWkn').classList.toggle('active', mode === 'weekend');
+  document.getElementById('btnWkd').setAttribute('aria-pressed', mode === 'weekday' ? 'true' : 'false');
+  document.getElementById('btnWkn').setAttribute('aria-pressed', mode === 'weekend' ? 'true' : 'false');
   document.getElementById('autoLabel').textContent = manual ? 'Manual override' : 'Auto-detected';
   refresh();
 }

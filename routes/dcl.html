@@ -40,13 +40,9 @@
 .dir-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0; }
 .dir-btn { font-family: var(--font); background: var(--off-white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 14px 16px; cursor: pointer; transition: all .15s; text-align: left; display: flex; flex-direction: column; gap: 2px; }
 .dir-btn:hover { border-color: var(--blue-muted); background: var(--blue-pale); }
-.dir-btn.active { background: var(--route-color); border-color: var(--route-color); }
 .dir-btn .dir-arrow { font-size: 18px; font-weight: 700; color: var(--gray-400); transition: color .15s; margin-bottom: 2px; }
-.dir-btn.active .dir-arrow { color: rgba(255,255,255,0.7); }
 .dir-btn .dir-label { font-size: 15px; font-weight: 600; color: var(--navy); transition: color .15s; }
-.dir-btn.active .dir-label { color: #fff; }
 .dir-btn .dir-desc { font-size: 12px; color: var(--gray-400); transition: color .15s; }
-.dir-btn.active .dir-desc { color: rgba(255,255,255,0.55); }
 
 /* ── DIRECTION PANELS ── */
 .dir-panel { display: none; }
@@ -73,7 +69,6 @@
 /*schedule*/
 .schedule-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
 .sched-tab { font-family: var(--font); font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); background: var(--off-white); color: var(--gray-600); cursor: pointer; transition: all .12s; }
-.sched-tab.active { background: var(--route-color); border-color: var(--route-color); color: #fff; }
 .sched-panel { display: none; }
 .sched-panel.active { display: block; }
 .sched-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-sm); border: 1px solid var(--gray-100); }
@@ -153,14 +148,14 @@
 .other-route-badge { font-size: 11px; font-weight: 700; color: #fff; border-radius: 4px; padding: 2px 7px; letter-spacing: 0.04em; flex-shrink: 0; min-width: 38px; text-align: center; }
 .other-route-name { font-size: 13px; color: var(--gray-800); font-weight: 500; }
 .badge-ws  { background: #191970; }
-.badge-ms  { background: #6495ED; }
+.badge-ms  { background: #6495ED; color: #000; }
 .badge-dcl { background: #D2042D; }
-.badge-udc { background: #FF7F50; }
-.badge-ds  { background: #708090; }
-.badge-cs  { background: #228B22; }
-.badge-uc  { background: #BF40BF; }
+.badge-udc { background: #FF7F50; color: #000; }
+.badge-ds  { background: #708090; color: #000; }
+.badge-cs  { background: #228B22; color: #000; }
+.badge-uc  { background: #BF40BF; color: #000; }
 .badge-iu  { background: #CF9FFF; color: #000; }
-.badge-vs  { background: #E37383; }
+.badge-vs  { background: #E37383; color: #000; }
 .badge-oc  { background: #FFC000; color: #000; }
 .badge-ics { background: rgb(174,225,174); color: #000; }
 .badge-de  { background: #000000; }

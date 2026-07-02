@@ -55,3 +55,20 @@ function setDir(serviceOrDir, dir) {
   document.getElementById(prefix + '-out-btn').classList.toggle('active', dir === 'out');
   document.getElementById(prefix + '-in-btn').classList.toggle('active',  dir === 'in');
 }
+
+/* ── Expose selected state of toggle controls to assistive tech (WCAG 4.1.2) ──
+   Mirrors the visual .active class onto aria-pressed. Uses a MutationObserver so
+   it stays correct whether .active is toggled by the shared functions above or by
+   a page's own setDir/showSched (e.g. the Late Nite pages). */
+(function () {
+  function sync(btn) {
+    btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const btns = document.querySelectorAll('.dir-btn, .sched-tab, .svc-toggle-btn');
+    if (!btns.length) return;
+    btns.forEach(sync);
+    const obs = new MutationObserver(function (muts) { muts.forEach(function (m) { sync(m.target); }); });
+    btns.forEach(function (b) { obs.observe(b, { attributes: true, attributeFilter: ['class'] }); });
+  });
+})();
