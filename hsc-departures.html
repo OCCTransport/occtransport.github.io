@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="css/departures.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Departures &mdash; Pharmacy School &mdash; OCC Transport</title>
+<title>MS Departures, Pharmacy School, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
 </head>
@@ -19,7 +19,7 @@
     <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
   </div>
   <div class="time-bar-center">
-    <div class="time-bar-location">Health Science Campus &mdash; Pharmacy School</div>
+    <div class="time-bar-location">Health Science Campus: Pharmacy School</div>
     <div class="time-bar-clock" id="clock">--:-- --</div>
     <div class="time-bar-date" id="dateDisplay">Loading&hellip;</div>
   </div>
@@ -49,7 +49,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
-    <span>Interim service week &mdash; only the ICS shuttle is operating on campus. No Main Street service today.</span>
+    <span>Interim service week: only the ICS shuttle is operating on campus. No Main Street service today.</span>
   </div>
 </div>
 
@@ -66,9 +66,9 @@
 <!-- DEPARTURE BOARD: two-panel layout -->
 <div class="panels">
 
-  <!-- LEFT PANEL: MS Outbound — heading toward UDC -->
+  <!-- LEFT PANEL: MS Outbound: heading toward UDC -->
   <div class="panel">
-    <div class="panel-label">MS Outbound &mdash; Toward University Downtown Center</div>
+    <div class="panel-label">MS Outbound: Toward University Downtown Center</div>
     <div class="panel-head">
       <div class="ph-cell">Route</div>
       <div class="ph-cell">Direction</div>
@@ -84,7 +84,7 @@
           <div class="route-stops">Departs University Union &rarr; Pharmacy School &rarr; Visions Arena</div>
           <div class="dir-tag">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            Outbound &mdash; to University Downtown Center
+            Outbound: to University Downtown Center
           </div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-MSOUT">--</div></div>
@@ -96,9 +96,9 @@
 
   <div class="panel-divider"></div>
 
-  <!-- RIGHT PANEL: MS Inbound — heading back to BU -->
+  <!-- RIGHT PANEL: MS Inbound: heading back to BU -->
   <div class="panel">
-    <div class="panel-label">MS Inbound &mdash; Toward Binghamton University</div>
+    <div class="panel-label">MS Inbound: Toward Binghamton University</div>
     <div class="panel-head">
       <div class="ph-cell">Route</div>
       <div class="ph-cell">Direction</div>
@@ -114,7 +114,7 @@
           <div class="route-stops">Departs UDC &rarr; Murray St &rarr; Pharmacy School &rarr; BU</div>
           <div class="dir-tag">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
-            Inbound &mdash; to Binghamton University
+            Inbound: to Binghamton University
           </div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-MSIN">--</div></div>
@@ -149,7 +149,7 @@
  * ===================================================================== */
 const MODIFIED = {
   active: false,
-  notice: "Memorial Day — No OCCT service today.",
+  notice: "Memorial Day: No OCCT service today.",
   schedules: {
     MSOUT: { weekday: [], weekend: [] },
     MSIN:  { weekday: [], weekend: [] },
@@ -176,7 +176,7 @@ function isInterimWeek(now) {
 }
 
 /* =====================================================================
- * SCHEDULES — times represent ARRIVALS AT THE PHARMACY SCHOOL STOP.
+ * SCHEDULES: times represent ARRIVALS AT THE PHARMACY SCHOOL STOP.
  * Outbound: MS departs Union, arrives Pharmacy School en route to UDC.
  * Inbound:  MS departs UDC, arrives Pharmacy School en route back to BU.
  * ===================================================================== */
@@ -184,12 +184,12 @@ function isInterimWeek(now) {
  * Fall semester: restore weekend arrays and original weekday times.
  * =========================================================================== */
 const SCHEDULES = {
-  /* MS Outbound — arrives Pharmacy School en route Union → UDC */
+  /* MS Outbound: arrives Pharmacy School en route Union → UDC */
   MSOUT: {
     weekday: ["08:09","09:54","12:59","15:24","17:44"],
     weekend: []
   },
-  /* MS Inbound — arrives Pharmacy School en route UDC → BU */
+  /* MS Inbound: arrives Pharmacy School en route UDC → BU */
   MSIN: {
     weekday: ["10:17","12:32","14:57","18:42","20:22"],
     weekend: []

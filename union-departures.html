@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="css/departures.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Next Departure &mdash; University Union &mdash; OCC Transport</title>
+<title>Next Departure, University Union, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
 </head>
@@ -19,7 +19,7 @@
     <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
   </div>
   <div class="time-bar-center">
-    <div class="time-bar-location">University Union &mdash; Outbound Departures</div>
+    <div class="time-bar-location">University Union: Outbound Departures</div>
     <div class="time-bar-clock" id="clock">--:-- --</div>
     <div class="time-bar-date" id="dateDisplay">Loading&hellip;</div>
   </div>
@@ -59,7 +59,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
-    <span>Interim service week &mdash; only the ICS shuttle is operating today. All other summer routes are paused.</span>
+    <span>Interim service week: only the ICS shuttle is operating today. All other summer routes are paused.</span>
   </div>
 </div>
 
@@ -69,7 +69,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6a9.72 9.72 0 01.748-3.752A9.753 9.753 0 003 12c0 5.385 4.365 9.75 9.75 9.75 4.596 0 8.477-3.182 9.502-7.498a.75.75 0 000-.25z"/>
     </svg>
-    <span>Late Nite Service in effect &mdash; WS &amp; DCL routes may be suspended due to biohazard incidents or other operational issues. Allow extra wait time.</span>
+    <span>Late Nite Service in effect: WS &amp; DCL routes may be suspended due to biohazard incidents or other operational issues. Allow extra wait time.</span>
   </div>
 </div>
 
@@ -114,7 +114,7 @@
       <div class="dep-row" id="card-DCL">
         <div><span class="badge" style="background:#D2042D;">DCL</span></div>
         <div class="td-dest">
-          <div class="route-name">Downtown Center&mdash;Leroy</div>
+          <div class="route-name">Downtown Center&ndash;Leroy</div>
           <div class="route-stops">Riverside Dr &amp; Leroy St &rarr; UDC</div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-DCL">--</div></div>
@@ -124,7 +124,7 @@
       <div class="dep-row hidden" id="card-LNDCL">
         <div><span class="badge" style="background:#D2042D; font-size:1.8vh;">LN DCL</span></div>
         <div class="td-dest">
-          <div class="route-name">Late Nite Downtown&mdash;Leroy</div>
+          <div class="route-name">Late Nite Downtown&ndash;Leroy</div>
           <div class="route-stops">Riverside Dr &amp; Leroy St &rarr; State &amp; Hawley Sts</div>
           <div class="ln-tag">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
@@ -191,18 +191,18 @@
     </div>
     <div class="panel-body">
 
-      <!-- SUMMER: RIU replaces IU — departs Union, weekdays 8 AM–6 PM every 30 min -->
+      <!-- SUMMER: RIU replaces IU: departs Union, weekdays 8 AM–6 PM every 30 min -->
       <div class="dep-row" id="card-RIU">
         <div><span class="badge dark" style="background:#AEE1AE;">RIU</span></div>
         <div class="td-dest">
-          <div class="route-name">Residential&mdash;ITC&mdash;UClub Shuttle</div>
+          <div class="route-name">Residential&ndash;ITC&ndash;UClub Shuttle</div>
           <div class="route-stops">Res. Halls; Mohawk; ITC; UClub; Meadows; Hayes</div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-RIU">--</div></div>
         <div class="td-after"><div class="after-time" id="after-RIU">--</div></div>
       </div>
 
-      <!-- ICS (Interim weeks only) — departs Mohawk, weekdays 8 AM–5:30 PM every 30 min -->
+      <!-- ICS (Interim weeks only): departs Mohawk, weekdays 8 AM–5:30 PM every 30 min -->
       <div class="dep-row hidden" id="card-ICS">
         <div><span class="badge dark" style="background:rgb(174,225,174);">ICS</span></div>
         <div class="td-dest">
@@ -217,22 +217,22 @@
         <div class="td-after"><div class="after-time" id="after-ICS">--</div></div>
       </div>
 
-      <!-- IU (ITC-UClub) — Fall semester; kept for reactivation -->
+      <!-- IU (ITC-UClub): Fall semester; kept for reactivation -->
       <!-- <div class="dep-row hidden" id="card-IU">
         <div><span class="badge dark" style="background:#CF9FFF;">IU</span></div>
         <div class="td-dest">
-          <div class="route-name">ITC&mdash;UClub Shuttle</div>
+          <div class="route-name">ITC&ndash;UClub Shuttle</div>
           <div class="route-stops">ITC; UClub; Meadows; Hayes</div>
           <div class="mohawk-tag">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Cross the street &mdash; Mohawk Stop
+            Cross the street: Mohawk Stop
           </div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-IU">--</div></div>
         <div class="td-after"><div class="after-time" id="after-IU">--</div></div>
       </div> -->
 
-      <!-- UC (UCLUB) — evening only in summer -->
+      <!-- UC (UCLUB): evening only in summer -->
       <div class="dep-row" id="card-UC">
         <div><span class="badge" style="background:#BF40BF;">UC</span></div>
         <div class="td-dest">
@@ -247,7 +247,7 @@
         <div class="td-after"><div class="after-time" id="after-UC">--</div></div>
       </div>
 
-      <!-- CS (Campus Shuttle) — Summer session evenings 6:30–8:30 PM; shown only within 30 min of next departure / 30 min after last -->
+      <!-- CS (Campus Shuttle): Summer session evenings 6:30–8:30 PM; shown only within 30 min of next departure / 30 min after last -->
       <div class="dep-row hidden" id="card-CS">
         <div><span class="badge" style="background:#228B22;">CS</span></div>
         <div class="td-dest">
@@ -272,7 +272,7 @@
         <div class="td-after"><div class="after-time" id="after-VS">--</div></div>
       </div>
 
-      <!-- SUMMER: OC removed — restore for fall
+      <!-- SUMMER: OC removed: restore for fall
       <div class="dep-row" id="card-OC">
         <div><span class="badge dark" style="background:#FFC000;">OC</span></div>
         <div class="td-dest">
@@ -321,7 +321,7 @@
  * ===================================================================== */
 const MODIFIED = {
   active: false,
-  notice: "Memorial Day — No OCCT service today.",
+  notice: "Memorial Day: No OCCT service today.",
   schedules: {
     WS:   { weekday: [], weekend: [] },
     DCL:  { weekday: [], weekend: [] },
@@ -359,7 +359,7 @@ function isInterimWeek(now) {
 }
 
 /* =====================================================================
- * DEFAULT SCHEDULES — 24-hour "HH:MM"
+ * DEFAULT SCHEDULES: 24-hour "HH:MM"
  * Day-restricted: { t: "HH:MM", d: [JS weekday numbers] }
  *   0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat
  * UC and ICS depart from Mohawk Stop (across the street from Union).
@@ -384,12 +384,12 @@ const SCHEDULES = {
     weekday: ["09:40","11:55","14:20","18:05","19:45"],
     weekend: []
   },
-  UDC: { weekday: [], weekend: [] }, /* UDC Express — not in summer service */
+  UDC: { weekday: [], weekend: [] }, /* UDC Express: not in summer service */
   UC: {
-    weekday: ["18:30","19:30"], /* Evening only — departs Mohawk Stop */
+    weekday: ["18:30","19:30"], /* Evening only: departs Mohawk Stop */
     weekend: []
   },
-  RIU: { /* Residential-ITC-UClub Shuttle — departs Union every 30 min */
+  RIU: { /* Residential-ITC-UClub Shuttle: departs Union every 30 min */
     weekday: [
       "08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30",
       "12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30",
@@ -401,7 +401,7 @@ const SCHEDULES = {
     weekday: ["11:20","12:55","14:30","17:25","19:00"],
     weekend: []
   },
-  ICS: { /* ITC-Campus Shuttle — INTERIM WEEKS ONLY, departs Mohawk every 30 min */
+  ICS: { /* ITC-Campus Shuttle: INTERIM WEEKS ONLY, departs Mohawk every 30 min */
     weekday: [
       "08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30",
       "12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30",
@@ -409,14 +409,14 @@ const SCHEDULES = {
     ],
     weekend: []
   },
-  CS: { /* Campus Shuttle — evenings only, departs Engineering Building (across the street) */
+  CS: { /* Campus Shuttle: evenings only, departs Engineering Building (across the street) */
     weekday: ["18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30"],
     weekend: []
   },
   OC: { weekday: [], weekend: [] }, /* Not in summer service */
   DE: { weekday: [], weekend: [] }, /* Not in summer service */
 
-  /* ── FALL SEMESTER — kept for reactivation ──────────────────────────────
+  /* ── FALL SEMESTER: kept for reactivation ──────────────────────────────
   IU: {
     weekday: [
       "07:30","07:40","08:00","08:30","09:00","09:30","10:00","10:30",
@@ -573,7 +573,7 @@ function refresh() {
   document.getElementById('noWknBar').style.display = (dayMode === 'weekend') ? 'block' : 'none';
 
   /* Interim weeks: show interim banner + ICS card.
-   * All other route cards remain visible — their empty schedules render as "No More Service". */
+   * All other route cards remain visible: their empty schedules render as "No More Service". */
   const interim = isInterimWeek(now);
   document.getElementById('interimBar').style.display = (interim && dayMode === 'weekday') ? 'block' : 'none';
   document.getElementById('card-ICS').classList.toggle('hidden', !interim);
@@ -587,7 +587,7 @@ function refresh() {
   document.getElementById('card-RIU').classList.remove('hidden');
   document.getElementById('card-UC').classList.remove('hidden');
 
-  /* Summer: UDC Express and DE not in service — keep hidden */
+  /* Summer: UDC Express and DE not in service: keep hidden */
   document.getElementById('card-UDC').classList.add('hidden');
   document.getElementById('card-DE').classList.add('hidden');
 
@@ -602,7 +602,7 @@ function refresh() {
   })();
   document.getElementById('card-CS').classList.toggle('hidden', !csVisible);
 
-  /* Summer: WS and DCL always shown — no Late Nite service
+  /* Summer: WS and DCL always shown: no Late Nite service
    * (Fall restore: uncomment block below and remove the two lines above it)
   const isSaturday   = jsDay === 6;
   const isSunday     = jsDay === 0;
@@ -655,7 +655,7 @@ async function fetchAlerts() {
 
     renderAlerts(highAlerts);
   } catch (e) {
-    /* network/CORS error — leave placeholder as-is */
+    /* network/CORS error: leave placeholder as-is */
     console.warn('Alerts fetch failed:', e);
   }
 }

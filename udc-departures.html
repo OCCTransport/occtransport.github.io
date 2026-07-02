@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="css/departures.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inbound Departures &mdash; University Downtown Center &mdash; OCC Transport</title>
+<title>Inbound Departures, University Downtown Center, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
 </head>
@@ -19,7 +19,7 @@
     <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
   </div>
   <div class="time-bar-center">
-    <div class="time-bar-location">University Downtown Center &mdash; Inbound Departures</div>
+    <div class="time-bar-location">University Downtown Center: Inbound Departures</div>
     <div class="time-bar-clock" id="clock">--:-- --</div>
     <div class="time-bar-date" id="dateDisplay">Loading&hellip;</div>
   </div>
@@ -49,7 +49,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
-    <span>Interim service week &mdash; only the ICS shuttle is operating on campus. No downtown routes today.</span>
+    <span>Interim service week: only the ICS shuttle is operating on campus. No downtown routes today.</span>
   </div>
 </div>
 
@@ -66,7 +66,7 @@
 <!-- DEPARTURE BOARD: two-panel layout -->
 <div class="panels">
 
-  <!-- LEFT PANEL: MS IN & WS IN — depart from UDC -->
+  <!-- LEFT PANEL: MS IN & WS IN: depart from UDC -->
   <div class="panel">
     <div class="panel-label">Departing from University Downtown Center</div>
     <div class="panel-head">
@@ -116,7 +116,7 @@
 
   <div class="panel-divider"></div>
 
-  <!-- RIGHT PANEL: DCL IN & DS IN — depart from nearby stops -->
+  <!-- RIGHT PANEL: DCL IN & DS IN: depart from nearby stops -->
   <div class="panel">
     <div class="panel-label">Departing from Nearby Downtown Stops</div>
     <div class="panel-head">
@@ -130,7 +130,7 @@
       <div class="dep-row" id="card-DCL">
         <div><span class="badge" style="background:#D2042D;">DCL</span></div>
         <div class="td-dest">
-          <div class="route-name">Downtown Center&mdash;Leroy Inbound</div>
+          <div class="route-name">Downtown Center&ndash;Leroy Inbound</div>
           <div class="route-stops">State &amp; Hawley Sts &rarr; Leroy St &rarr; BU</div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-DCL">--</div></div>
@@ -179,7 +179,7 @@
  * ===================================================================== */
 const MODIFIED = {
   active: false,
-  notice: "Memorial Day — No OCCT service today.",
+  notice: "Memorial Day: No OCCT service today.",
   schedules: {
     MS:  { weekday: [], weekend: [] },
     WS:  { weekday: [], weekend: [] },
@@ -210,7 +210,7 @@ function isInterimWeek(now) {
 }
 
 /* =====================================================================
- * INBOUND SCHEDULES — 24-hour "HH:MM"
+ * INBOUND SCHEDULES: 24-hour "HH:MM"
  * Times represent departures from the downtown terminus heading to BU.
  * MS & WS depart from UDC; DCL departs from State & Hawley Sts;
  * DS departs from Visions Arena (across the street from UDC).
@@ -235,7 +235,7 @@ const SCHEDULES = {
     weekday: ["08:30","10:15","13:20","15:45","18:05"],
     weekend: []
   },
-  UDC: { weekday: [], weekend: [] } /* UDC Express — not in summer service */
+  UDC: { weekday: [], weekend: [] } /* UDC Express: not in summer service */
 };
 
 /* ===================================================================== */
