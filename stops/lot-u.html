@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem('occt-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@500;600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/wayfinding.css">
 <style>:root { --route-color: #228B22; --header-bg: #218921; }</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lot U, CS Stop, OCC Transport</title>
@@ -42,6 +44,22 @@
   .main { grid-template-columns: 1fr; }
   .sidebar { order: -1; }
 }
+
+/* ── Wayfinding alignment layer (light touch: geometry, type, dark mode) ── */
+:root { --radius: var(--r); --radius-sm: var(--r-sm); --shadow: none; }
+.page-header { background: var(--header-bg, var(--route-color)); }
+.page-header h1 { font-family: var(--head); font-weight: 800; letter-spacing: -0.02em; color: var(--header-fg, #fff); }
+.route-badge-lg { font-family: var(--head); font-weight: 800; }
+.card-head { padding: 0 0 8px; margin-bottom: 14px; border-bottom: 1px solid var(--line); gap: 10px; }
+.card-head-icon { display: none; }
+.card-head h2 { font-family: var(--head); font-weight: 800; font-size: 20px; letter-spacing: -0.01em; color: var(--ink); }
+.card-body { padding: 0 0 4px; }
+.sb-card-head { background: var(--ink); }
+.sb-card-head h3 { font-family: var(--head); font-weight: 700; font-size: 15px; color: #fff; }
+.btn-sb { background: #1a6fba; color: #fff; border: none; font-weight: 600; }
+.btn-sb:hover { background: #2684d4; color: #fff; }
+.route-chip-badge { font-family: var(--head); font-weight: 800; }
+.route-chip-name { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -52,7 +70,8 @@
     <a class="nav-logo" href="../index.html">
       <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
     </a>
-    <ul class="nav-links">
+    <div class="nav-right">
+<ul class="nav-links">
       <li><a href="../routeschedule.html" class="active">Routes &amp; Schedules</a></li>
       <li><a href="../employment.html">Employment</a></li>
       <li><a href="../passtips.html">Passenger Tips</a></li>
@@ -61,9 +80,15 @@
       <li><a href="../news.html">News</a></li>
       <li><a href="../contactus.html" class="nav-cta">Contact Us</a></li>
     </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false" onclick="toggleTheme()">
+        <svg class="tt-moon" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        <svg class="tt-sun" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+      </button>
+
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMobile" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
+    </div>
   </div>
 </nav>
 
@@ -257,5 +282,6 @@
 
 <script src="../js/shared.js"></script>
 <script src="../js/alerts.js"></script>
+<script src="../js/theme.js"></script>
 </body>
 </html>
