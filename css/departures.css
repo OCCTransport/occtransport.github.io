@@ -24,6 +24,9 @@ body {
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
+  /* Fallback for embedded signage players (e.g. BrightSign HTML widgets) where
+     height:100% can resolve to 0 in an un-sized container and collapse the board. */
+  min-height: 100vh;
 }
 
 /* ── TIME BAR (status bar) ── */
@@ -424,8 +427,8 @@ body {
   .panel { overflow: visible; }
   .panel-label { padding: 7px 16px; font-size: 0.68rem; }
   .panel-head {
-    grid-template-columns: 52px 1fr 90px 90px;
-    gap: 6px;
+    grid-template-columns: 46px 1fr 100px 86px;
+    gap: 8px;
     padding: 5px 16px;
   }
   .ph-cell { font-size: 0.62rem; }
@@ -433,8 +436,8 @@ body {
   /* Departure rows */
   .dep-row {
     flex: none;
-    grid-template-columns: 52px 1fr 90px 90px;
-    gap: 6px;
+    grid-template-columns: 46px 1fr 100px 86px;
+    gap: 8px;
     padding: 16px 16px;
     min-height: unset;
   }
@@ -451,7 +454,7 @@ body {
   .mohawk-tag svg { width: 10px; height: 10px; flex-shrink: 0; }
 
   /* Times */
-  .dep-time { font-size: 1.45rem; }
+  .dep-time { font-size: 1.3rem; }
   .dep-time.no-svc { font-size: 0.62rem; white-space: normal; }
   .td-after { min-width: 0; }
   .after-time { font-size: 0.95rem; }
