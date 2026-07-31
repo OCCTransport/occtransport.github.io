@@ -268,9 +268,9 @@ function scheduledToday(now) {
   return ITC_ARRIVALS_WEEKDAY.map(toMin).sort(function(a, b) { return a - b; });
 }
 
-/* Next arrival with a 3-min grace window (matches the other boards). */
+/* Next arrival with a 1-min grace window (matches the other boards). */
 function getNext(times, nowMin) {
-  var recent = times.filter(function(m) { return m >= nowMin - 3 && m < nowMin; });
+  var recent = times.filter(function(m) { return m >= nowMin - 1 && m < nowMin; });
   var future = times.filter(function(m) { return m >= nowMin; });
   if (recent.length > 0) return recent[recent.length - 1];
   return future.length > 0 ? future[0] : null;

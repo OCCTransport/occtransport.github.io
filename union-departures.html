@@ -506,7 +506,7 @@ function getDepartures(routeKey, now) {
 }
 
 function getNext(departures, nowMin) {
-  var recent = departures.filter(function(m) { return m >= nowMin - 3 && m < nowMin; });
+  var recent = departures.filter(function(m) { return m >= nowMin - 1 && m < nowMin; });
   var future = departures.filter(function(m) { return m >= nowMin; });
   if (recent.length > 0) {
     return { next: recent[recent.length - 1], after: future.length > 0 ? future[0] : null };
