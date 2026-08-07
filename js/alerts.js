@@ -1,6 +1,6 @@
 const ALERT = {
   active: true,
-  text: 'Construction and road work are affecting several routes.',
+  text: 'Fall 2026 Schedule is now published. OCCT will be running ICS-only interim service 8/10-8/14, and alternate Welcome Back Weekend service 8/14-8/17. Regular service will begin on Tuesday, August 18th.',
   link: { href: 'news.html', label: 'Details' }
 };
 
