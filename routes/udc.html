@@ -56,7 +56,7 @@
 .sched-table tr:nth-child(even) td { background: var(--off-white); }
 .sched-table td:first-child { font-weight: 600; color: var(--navy); }
 .sched-note { font-size: 12px; color: var(--gray-400); margin-top: 10px; line-height: 1.55; }
-.sched-day-tag { font-size: 10px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .04em; margin-left: 5px; }
+.sched-day-tag { font-size: 10px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .04em; margin-left: 5px; text-decoration: underline; }
 
 /*callout*/ .callout { background: var(--gold-light); border: 1px solid var(--gold); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; color: #5c3a00; line-height: 1.6; }
 .callout strong { font-weight: 600; }
@@ -231,10 +231,6 @@
 
       <div class="card-body">
 
-        <div class="callout callout-warn" style="margin-bottom:20px;">
-          <strong>No service this summer.</strong> The UDC Express does not operate during Summer 2026 (5/25/26&ndash;8/7/26). For travel between BU and the University Downtown Center this summer, use the <strong><u><a href="ws.html">WS</a></u></strong>, <strong><u><a href="ms.html">MS</a></u></strong>, <strong><u><a href="dcl.html">DCL</a></u></strong>, or <strong><u><a href="ds.html">DS</a></u></strong> shuttles. Service returns in the fall semester.
-        </div>
-
         <!-- Direction tabs -->
         <div class="dir-tabs">
           <button class="dir-btn active" id="reg-out-btn" onclick="setDir('out')">
@@ -290,39 +286,24 @@
                   <thead><tr><th>Depart BU<th>Arrive UDC</th></tr></thead>
                                     <tbody>
                     <tr><td>7:15 AM</td><td>7:30 AM</td></tr>
-                    <tr><td>7:30 AM</td><td>7:45 AM</td></tr>
-                    <tr><td>7:40 AM</td><td>7:55 AM</td></tr>
                     <tr><td>7:45 AM</td><td>8:00 AM</td></tr>
-                    <tr><td>7:55 AM</td><td>8:10 AM</td></tr>
+                    <tr><td>8:10 AM</td><td>8:25 AM</td></tr>
                     <tr><td>8:15 AM</td><td>8:30 AM</td></tr>
-                    <tr><td>8:20 AM</td><td>8:35 AM</td></tr>
-                    <tr><td>8:40 AM</td><td>8:55 AM</td></tr>
+                    <tr><td>8:25 AM</td><td>8:40 AM</td></tr>
+                    <tr><td>8:35 AM</td><td>8:50 AM</td></tr>
                     <tr><td>8:45 AM</td><td>9:00 AM</td></tr>
-                    <tr><td>8:55 AM</td><td>9:10 AM</td></tr>
-                    <tr><td>9:00 AM</td><td>9:15 AM</td></tr>
+                    <tr><td>9:02 AM</td><td>9:15 AM</td></tr>
                     <tr><td>9:15 AM</td><td>9:30 AM</td></tr>
-                    <tr><td>9:25 AM</td><td>9:40 AM</td></tr>
-                    <tr><td>9:40 AM</td><td>9:55 AM</td></tr>
                     <tr><td>9:45 AM</td><td>10:00 AM</td></tr>
                     <tr><td>10:15 AM</td><td>10:30 AM</td></tr>
                     <tr><td>10:45 AM</td><td>11:00 AM</td></tr>
-                    <tr><td>10:55 AM</td><td>11:10 AM</td></tr>
-                    <tr><td>11:15 AM</td><td>11:30 AM</td></tr>
-                    <tr><td>11:45 AM</td><td>12:00 PM</td></tr>
-                    <tr><td>12:15 PM</td><td>12:30 PM</td></tr>
-                    <tr><td>12:45 PM</td><td>1:00 PM</td></tr>
                     <tr><td>1:15 PM</td><td>1:30 PM</td></tr>
-                    <tr><td>1:45 PM</td><td>2:00 PM</td></tr>
-                    <tr><td>2:15 PM</td><td>2:30 PM</td></tr>
-                    <tr><td>2:45 PM</td><td>3:00 PM</td></tr>
                     <tr><td>3:15 PM</td><td>3:30 PM</td></tr>
                     <tr><td>3:45 PM</td><td>4:00 PM</td></tr>
-                    <tr><td>4:15 PM</td><td>4:30 PM</td></tr>
-                    <tr><td>4:45 PM</td><td>5:00 PM</td></tr>
                     <tr><td>5:30 PM</td><td>5:45 PM</td></tr>
-                    <tr><td>6:45 PM</td><td>7:00 PM</td></tr>
-                    <tr><td>7:15 PM</td><td>7:30 PM</td></tr>
-                    <tr><td>8:00 PM</td><td>8:15 PM</td></tr>
+                    <tr><td>5:45 PM</td><td>6:00 PM</td></tr>
+                    <tr><td>6:15 PM</td><td>6:30 PM</td></tr>
+                    <tr><td>8:30 PM</td><td>8:45 PM</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -333,7 +314,7 @@
                 For service to Downtown Binghamton, please consider taking the <a href="ws.html" style="color:#92620a; font-weight:700; text-decoration:underline; text-underline-offset:2px;">Westside Outbound</a> or the <a href="dcl.html" style="color:#92620a; font-weight:700; text-decoration:underline; text-underline-offset:2px;">Downtown Center&ndash;Leroy St Outbound</a>.
               </div>
             </div>
-            <p class="sched-note">* Download the master schedule PDF for a comprehensive view of all timetables. All buses return to campus after reaching the UDC.</p>
+            <p class="sched-note">* Download the Fall 2026 schedule PDF for a comprehensive view of all timetables. All buses return to campus after reaching the UDC.</p>
           </div>
         </div><!-- /reg-out -->
 
@@ -390,26 +371,15 @@
                     <tr><td>10:00 AM</td><td>10:15 AM</td></tr>
                     <tr><td>10:30 AM</td><td>10:45 AM</td></tr>
                     <tr><td>11:00 AM</td><td>11:15 AM</td></tr>
-                    <tr><td>11:30 AM</td><td>11:45 AM</td></tr>
-                    <tr><td>12:00 PM <span class="sched-day-tag">No Acad&nbsp;A</span></td><td>12:15 PM</td></tr>
-                    <tr><td>12:30 PM</td><td>12:45 PM</td></tr>
-                    <tr><td>1:00 PM</td><td>1:15 PM</td></tr>
                     <tr><td>1:30 PM</td><td>1:45 PM</td></tr>
-                    <tr><td>2:00 PM</td><td>2:15 PM</td></tr>
-                    <tr><td>2:30 PM <span class="sched-day-tag">No Acad&nbsp;A</span></td><td>2:45 PM</td></tr>
-                    <tr><td>3:00 PM</td><td>3:15 PM</td></tr>
                     <tr><td>3:30 PM</td><td>3:45 PM</td></tr>
                     <tr><td>4:00 PM <span class="sched-day-tag">No Acad&nbsp;A</span></td><td>4:15 PM</td></tr>
-                    <tr><td>4:30 PM</td><td>4:45 PM</td></tr>
-                    <tr><td>5:00 PM</td><td>5:15 PM</td></tr>
                     <tr><td>5:15 PM <span class="sched-day-tag">No Acad&nbsp;A</span></td><td>5:30 PM</td></tr>
-                    <tr><td>5:25 PM</td><td>5:40 PM</td></tr>
                     <tr><td>5:30 PM</td><td>5:45 PM</td></tr>
-                    <tr><td>5:45 PM</td><td>6:00 PM</td></tr>
-                    <tr><td>6:25 PM</td><td>6:40 PM</td></tr>
-                    <tr><td>7:00 PM</td><td>7:15 PM</td></tr>
-                    <tr><td>7:30 PM</td><td>7:45 PM</td></tr>
-                    <tr><td>8:15 PM</td><td>8:30 PM</td></tr>
+                    <tr><td>5:33 PM</td><td>5:45 PM</td></tr>
+                    <tr><td>6:00 PM</td><td>6:15 PM</td></tr>
+                    <tr><td>6:30 PM</td><td>6:45 PM</td></tr>
+                    <tr><td>8:45 PM</td><td>9:00 PM</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -420,7 +390,7 @@
                 For service to Binghamton University from Downtown, please consider taking the <a href="ws.html" style="color:#92620a; font-weight:700; text-decoration:underline; text-underline-offset:2px;">Westside Inbound</a> or the <a href="dcl.html" style="color:#92620a; font-weight:700; text-decoration:underline; text-underline-offset:2px;">Downtown Center&ndash;Leroy St Inbound</a>.
               </div>
             </div>
-            <p class="sched-note">* Download the master schedule PDF for a comprehensive view of all timetables.</p>
+            <p class="sched-note">* Download the Fall 2026 schedule PDF for a comprehensive view of all timetables.</p>
           </div>
         </div><!-- /reg-in -->
 
@@ -443,7 +413,7 @@
         <div class="op-times">
           <div class="op-row">
             <span class="op-row-label">Weekdays</span>
-            <span class="op-row-time">7:15 AM &ndash; 8:00 PM</span>
+            <span class="op-row-time">7:15 AM &ndash; 9:00 PM</span>
           </div>
           <div class="op-row">
             <span class="op-row-label">Weekends</span>
@@ -462,8 +432,6 @@
       <div class="sb-card-body">
         <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+Full+Primary+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Fall 2026 Primary Schedule</a>
         <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+WBW+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Fall 2026 Welcome Back Weekend Schedule</a>
-        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
-        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
       </div>
     </div>
 

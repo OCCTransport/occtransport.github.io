@@ -81,7 +81,8 @@
 .sched-table tr:nth-child(even) td { background: var(--off-white); }
 .sched-table td:first-child { font-weight: 600; color: var(--navy); }
 .sched-note { font-size: 12px; color: var(--gray-400); margin-top: 10px; line-height: 1.55; }
-.sched-day-tag { font-size: 10px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .04em; margin-left: 5px; }
+.sched-day-tag { font-size: 10px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .04em; margin-left: 5px; text-decoration: underline; }
+.sched-table tr.day-variant td { font-style: italic; }
 
 /* Late Nite light purple theme */
 .latenite-tint { --ln-accent: #7c3aed; --ln-dark: #5b21b6; --ln-deep: #4c1d95; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: var(--radius-sm); }
@@ -453,22 +454,60 @@
                   <table class="sched-table">
                     <thead><tr><th>Depart Union</th><th>Riverside &amp; Columbus</th><th>Leroy &amp; Murray</th><th>Arrive UDC</th></tr></thead>
                     <tbody>
-                      <tr><td>7:30 AM</td><td>7:36 AM</td><td>7:41 AM</td><td>7:48 AM</td></tr>
-                      <tr><td>8:55 AM</td><td>9:01 AM</td><td>9:06 AM</td><td>9:13 AM</td></tr>
-                      <tr><td>10:40 AM</td><td>10:46 AM</td><td>10:51 AM</td><td>10:58 AM</td></tr>
-                      <tr><td>12:10 PM</td><td>12:16 PM</td><td>12:21 PM</td><td>12:28 PM</td></tr>
-                      <tr><td>1:45 PM</td><td>1:51 PM</td><td>1:56 PM</td><td>2:03 PM</td></tr>
-                      <tr><td>3:55 PM</td><td>4:01 PM</td><td>4:06 PM</td><td>4:13 PM</td></tr>
+                      <tr><td>Skips Union</td><td>7:01 AM</td><td>7:06 AM</td><td>7:13 AM</td></tr>
+                      <tr><td>7:50 AM</td><td>7:56 AM</td><td>8:01 AM</td><td>8:08 AM</td></tr>
+                      <tr><td>9:25 AM</td><td>9:31 AM</td><td>9:36 AM</td><td>9:43 AM</td></tr>
+                      <tr><td>9:45 AM</td><td>9:51 AM</td><td>9:56 AM</td><td>10:03 AM</td></tr>
+                      <tr><td>10:20 AM</td><td>10:26 AM</td><td>10:31 AM</td><td>10:38 AM</td></tr>
+                      <tr><td>11:10 AM</td><td>11:16 AM</td><td>11:21 AM</td><td>11:28 AM</td></tr>
+                      <tr><td>11:55 AM</td><td>12:01 PM</td><td>12:06 PM</td><td>12:13 PM</td></tr>
+                      <tr><td>12:35 PM</td><td>12:41 PM</td><td>12:46 PM</td><td>12:53 PM</td></tr>
+                      <tr><td>1:55 PM</td><td>2:01 PM</td><td>2:06 PM</td><td>2:13 PM</td></tr>
+                      <tr><td>2:40 PM</td><td>2:46 PM</td><td>2:51 PM</td><td>2:58 PM</td></tr>
+                      <tr><td>3:35 PM</td><td>3:41 PM</td><td>3:46 PM</td><td>3:53 PM</td></tr>
+                      <tr><td>4:15 PM</td><td>4:21 PM</td><td>4:26 PM</td><td>4:33 PM</td></tr>
                       <tr><td>4:50 PM</td><td>4:56 PM</td><td>5:01 PM</td><td>5:08 PM</td></tr>
+                      <tr><td>5:05 PM</td><td>5:11 PM</td><td>5:16 PM</td><td>5:23 PM</td></tr>
+                      <tr><td>5:40 PM</td><td>5:46 PM</td><td>5:51 PM</td><td>5:58 PM</td></tr>
+                      <tr><td>6:25 PM</td><td>6:31 PM</td><td>6:36 PM</td><td>6:45 PM</td></tr>
                       <tr><td>6:45 PM</td><td>6:51 PM</td><td>6:56 PM</td><td>7:03 PM</td></tr>
+                      <tr><td>7:10 PM</td><td>7:16 PM</td><td>7:21 PM</td><td>7:28 PM</td></tr>
+                      <tr><td>7:40 PM</td><td>7:46 PM</td><td>7:51 PM</td><td>7:58 PM</td></tr>
+                      <tr><td>8:20 PM</td><td>8:26 PM</td><td>8:31 PM</td><td>8:38 PM</td></tr>
+                      <tr><td>9:15 PM</td><td>9:21 PM</td><td>9:26 PM</td><td>9:33 PM</td></tr>
+                      <tr><td>11:00 PM</td><td>11:06 PM</td><td>11:11 PM</td><td>11:18 PM</td></tr>
+                      <tr><td>11:45 PM</td><td>11:51 PM</td><td>11:56 PM</td><td>12:03 AM</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
               <div class="sched-panel" id="ro-wkn">
-                <p class="callout"><strong>No OCCT service on summer weekends.</strong> The DCL Shuttle does not operate Saturday or Sunday during summer service. For weekend transportation, please use <a href="https://www.gobroomecounty.com/transit/" target="_blank" rel="noopener noreferrer">BC Transit</a>.</p>
+                <div class="sched-table-wrap">
+                  <table class="sched-table">
+                    <thead><tr><th>Depart Union</th><th>Riverside &amp; Columbus</th><th>Leroy &amp; Murray</th><th>Arrive UDC</th></tr></thead>
+                    <tbody>
+                      <tr><td>8:45 AM</td><td>8:51 AM</td><td>8:56 AM</td><td>9:03 AM</td></tr>
+                      <tr><td>9:30 AM</td><td>9:36 AM</td><td>9:41 AM</td><td>9:48 AM</td></tr>
+                      <tr><td>10:15 AM</td><td>10:21 AM</td><td>10:26 AM</td><td>10:33 AM</td></tr>
+                      <tr><td>11:35 AM</td><td>11:41 AM</td><td>11:46 AM</td><td>11:53 AM</td></tr>
+                      <tr><td>12:40 PM</td><td>12:46 PM</td><td>12:51 PM</td><td>12:58 PM</td></tr>
+                      <tr><td>1:40 PM</td><td>1:46 PM</td><td>1:51 PM</td><td>1:58 PM</td></tr>
+                      <tr><td>2:45 PM</td><td>2:51 PM</td><td>2:56 PM</td><td>3:03 PM</td></tr>
+                      <tr><td>4:15 PM</td><td>4:21 PM</td><td>4:26 PM</td><td>4:33 PM</td></tr>
+                      <tr><td>6:15 PM</td><td>6:21 PM</td><td>6:26 PM</td><td>6:33 PM</td></tr>
+                      <tr><td>7:30 PM</td><td>7:36 PM</td><td>7:41 PM</td><td>7:48 PM</td></tr>
+                      <tr><td>8:20 PM</td><td>8:26 PM</td><td>8:31 PM</td><td>8:38 PM</td></tr>
+                      <tr><td>9:15 PM</td><td>9:21 PM</td><td>9:26 PM</td><td>9:33 PM</td></tr>
+                      <tr class="day-variant"><td>10:15 PM</td><td>10:21 PM</td><td>10:26 PM</td><td>10:33 PM <span class="sched-day-tag">Sun only</span></td></tr>
+                      <tr class="day-variant"><td>11:00 PM</td><td>11:06 PM</td><td>11:12 PM</td><td>11:18 PM <span class="sched-day-tag">Sat only</span></td></tr>
+                      <tr class="day-variant"><td>11:10 PM</td><td>11:16 PM</td><td>11:22 PM</td><td>11:28 PM <span class="sched-day-tag">Sun only</span></td></tr>
+                      <tr class="day-variant"><td>11:45 PM</td><td>11:51 PM</td><td>11:56 PM</td><td>12:03 AM <span class="sched-day-tag">Sat only</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="sched-note">Saturday &amp; Sunday service. Runs marked <em>Sat only</em> or <em>Sun only</em> operate on that day only.</p>
               </div>
-              <p class="sched-note">Summer 2026 service: 5/25/26 to 8/7/26. Mon&ndash;Fri only. All buses return to campus after reaching the UDC.</p>
+              <p class="sched-note">All buses return to campus after reaching the UDC.</p>
             </div>
           </div><!-- /reg-out -->
 
@@ -578,22 +617,58 @@
                   <table class="sched-table">
                     <thead><tr><th>Depart UDC</th><th>Leroy &amp; Murray</th><th>Riverside &amp; Columbus</th><th>Arrive BU</th></tr></thead>
                     <tbody>
-                      <tr><td>8:40 AM</td><td>8:43 AM</td><td>8:49 AM</td><td>9:00 AM</td></tr>
-                      <tr><td>9:25 AM</td><td>9:28 AM</td><td>9:34 AM</td><td>9:45 AM</td></tr>
-                      <tr><td>11:00 AM</td><td>11:03 AM</td><td>11:09 AM</td><td>11:20 AM</td></tr>
-                      <tr><td>11:50 AM</td><td>11:53 AM</td><td>11:59 AM</td><td>12:10 PM</td></tr>
-                      <tr><td>2:00 PM</td><td>2:03 PM</td><td>2:09 PM</td><td>2:20 PM</td></tr>
-                      <tr><td>3:35 PM</td><td>3:38 PM</td><td>3:44 PM</td><td>3:55 PM</td></tr>
-                      <tr><td>5:05 PM</td><td>5:08 PM</td><td>5:14 PM</td><td>5:25 PM</td></tr>
-                      <tr><td>8:05 PM</td><td>8:08 PM</td><td>8:14 PM</td><td>8:25 PM</td></tr>
+                      <tr><td>7:20 AM</td><td>7:23 AM</td><td>7:29 AM</td><td>7:40 AM</td></tr>
+                      <tr><td>8:00 AM</td><td>8:03 AM</td><td>8:09 AM</td><td>8:20 AM</td></tr>
+                      <tr><td>8:50 AM</td><td>8:53 AM</td><td>8:59 AM</td><td>9:10 AM</td></tr>
+                      <tr><td>9:05 AM</td><td>9:08 AM</td><td>9:14 AM</td><td>9:25 AM <span class="sched-day-tag">Skips Acad A</span></td></tr>
+                      <tr><td>9:15 AM</td><td>9:18 AM</td><td>9:24 AM</td><td>9:45 AM</td></tr>
+                      <tr><td>9:55 AM</td><td>9:58 AM</td><td>10:04 AM</td><td>10:15 AM</td></tr>
+                      <tr><td>10:30 AM</td><td>10:33 AM</td><td>10:39 AM</td><td>10:56 AM</td></tr>
+                      <tr><td>10:55 AM</td><td>10:58 AM</td><td>11:04 AM</td><td>11:15 AM</td></tr>
+                      <tr><td>11:30 AM</td><td>11:33 AM</td><td>11:39 AM</td><td>11:56 AM</td></tr>
+                      <tr><td>12:00 PM</td><td>12:03 PM</td><td>12:09 PM</td><td>12:26 PM</td></tr>
+                      <tr><td>12:50 PM</td><td>12:53 PM</td><td>12:59 PM</td><td>1:10 PM</td></tr>
+                      <tr><td>1:35 PM</td><td>1:38 PM</td><td>1:44 PM</td><td>1:55 PM</td></tr>
+                      <tr><td>2:40 PM</td><td>2:43 PM</td><td>2:49 PM</td><td>3:00 PM</td></tr>
+                      <tr><td>3:33 PM</td><td>3:36 PM</td><td>3:42 PM</td><td>3:59 PM <span class="sched-day-tag">Skips Acad A</span></td></tr>
+                      <tr><td>4:27 PM</td><td>4:30 PM</td><td>4:36 PM</td><td>4:50 PM</td></tr>
+                      <tr><td>5:15 PM</td><td>5:18 PM</td><td>5:24 PM</td><td>5:35 PM</td></tr>
+                      <tr><td>5:55 PM</td><td>5:58 PM</td><td>6:04 PM</td><td>6:15 PM</td></tr>
+                      <tr><td>6:45 PM</td><td>6:48 PM</td><td>6:54 PM</td><td>7:05 PM</td></tr>
+                      <tr><td>7:35 PM</td><td>7:38 PM</td><td>7:44 PM</td><td>7:55 PM</td></tr>
+                      <tr><td>8:10 PM</td><td>8:13 PM</td><td>8:19 PM</td><td>8:30 PM</td></tr>
+                      <tr><td>9:15 PM</td><td>9:18 PM</td><td>9:24 PM</td><td>9:35 PM</td></tr>
+                      <tr class="day-variant"><td>10:05 PM</td><td>10:08 PM</td><td>10:14 PM</td><td>10:25 PM <span class="sched-day-tag">No Fri</span></td></tr>
+                      <tr><td>10:35 PM</td><td>10:38 PM</td><td>10:44 PM</td><td>10:55 PM</td></tr>
+                      <tr><td>12:05 AM</td><td>12:08 AM</td><td>12:14 AM</td><td>12:25 AM</td></tr>
                     </tbody>
                   </table>
                 </div>
               </div>
               <div class="sched-panel" id="ri-wkn">
-                <p class="callout"><strong>No OCCT service on summer weekends.</strong> The DCL Shuttle does not operate Saturday or Sunday during summer service. For weekend transportation, please use <a href="https://www.gobroomecounty.com/transit/" target="_blank" rel="noopener noreferrer">BC Transit</a>.</p>
+                <div class="sched-table-wrap">
+                  <table class="sched-table">
+                    <thead><tr><th>Depart UDC</th><th>Leroy &amp; Murray</th><th>Riverside &amp; Columbus</th><th>Arrive BU</th></tr></thead>
+                    <tbody>
+                      <tr><td>9:40 AM</td><td>9:43 AM</td><td>9:49 AM</td><td>10:00 AM</td></tr>
+                      <tr><td>9:50 AM</td><td>9:53 AM</td><td>9:59 AM</td><td>10:10 AM</td></tr>
+                      <tr><td>11:35 AM</td><td>11:38 AM</td><td>11:44 AM</td><td>11:55 AM</td></tr>
+                      <tr><td>12:40 PM</td><td>12:43 PM</td><td>12:49 PM</td><td>1:00 PM</td></tr>
+                      <tr><td>1:40 PM</td><td>1:43 PM</td><td>1:49 PM</td><td>2:00 PM</td></tr>
+                      <tr><td>2:40 PM</td><td>2:43 PM</td><td>2:49 PM</td><td>3:00 PM</td></tr>
+                      <tr><td>5:25 PM</td><td>5:28 PM</td><td>5:34 PM</td><td>5:45 PM</td></tr>
+                      <tr><td>7:10 PM</td><td>7:13 PM</td><td>7:19 PM</td><td>7:30 PM</td></tr>
+                      <tr><td>8:00 PM</td><td>8:03 PM</td><td>8:09 PM</td><td>8:20 PM</td></tr>
+                      <tr><td>8:55 PM</td><td>8:58 PM</td><td>9:04 PM</td><td>9:15 PM</td></tr>
+                      <tr class="day-variant"><td>9:40 PM</td><td>9:43 PM</td><td>9:49 PM</td><td>10:00 PM <span class="sched-day-tag">Sun only</span></td></tr>
+                      <tr class="day-variant"><td>10:35 PM</td><td>10:38 PM</td><td>10:44 PM</td><td>10:55 PM <span class="sched-day-tag">Sat only</span></td></tr>
+                      <tr class="day-variant"><td>10:50 PM</td><td>10:53 PM</td><td>10:59 PM</td><td>11:10 PM <span class="sched-day-tag">Sun only</span></td></tr>
+                      <tr><td>12:05 AM</td><td>12:08 AM</td><td>12:14 AM</td><td>12:25 AM</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="sched-note">Saturday &amp; Sunday service. Runs marked <em>Sat only</em> or <em>Sun only</em> operate on that day only.</p>
               </div>
-              <p class="sched-note">Summer 2026 service: 5/25/26 to 8/7/26. Mon&ndash;Fri only.</p>
             </div>
           </div><!-- /reg-in -->
         </div><!-- /panel-regular -->
@@ -603,7 +678,7 @@
           <div class="latenite-tint" style="padding:20px;">
 
             <div class="callout callout-night" style="margin-bottom:16px;">
-              <strong>Late Nite Service does not operate during summer.</strong> Late Nite DCL runs Friday &amp; Saturday nights during the Fall and Spring semesters only. The schedule below is for reference: service returns in the fall.
+              <strong>Late Nite runs Friday &amp; Saturday nights only.</strong> Late Nite DCL operates after midnight on Fri &amp; Sat, with buses loading at the Union barricades and Downtown at the Hawley Street barricades.
             </div>
 
             <!-- Direction tabs -->
@@ -837,15 +912,15 @@
         <h3>Operating Times</h3>
       </div>
       <div class="sb-card-body" id="op-times-body">
-        <p style="font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-400); margin-bottom:10px;" id="op-times-label">Summer 2026 Service</p>
+        <p style="font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-400); margin-bottom:10px;" id="op-times-label">Regular Service</p>
         <div class="op-times">
           <div class="op-row">
             <span class="op-row-label">Weekdays</span>
-            <span class="op-row-time" id="op-wkd">7:30 AM &ndash; 8:05 PM</span>
+            <span class="op-row-time" id="op-wkd">7:01 AM &ndash; 12:25 AM</span>
           </div>
           <div class="op-row">
             <span class="op-row-label">Weekends</span>
-            <span class="op-row-time" id="op-wknd">No OCCT Service</span>
+            <span class="op-row-time" id="op-wknd">8:45 AM &ndash; 12:25 AM</span>
           </div>
         </div>
       </div>
@@ -878,8 +953,6 @@
       <div class="sb-card-body">
         <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+Full+Primary+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Fall 2026 Primary Schedule</a>
         <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+WBW+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Fall 2026 Welcome Back Weekend Schedule</a>
-        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+Full+Master+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Master Schedule</a>
-        <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-sb" target="_blank" rel="noopener noreferrer">Summer 2026 Interim Schedule</a>
       </div>
     </div>
 
@@ -1018,8 +1091,8 @@ function setService(svc) {
     document.getElementById('svc-card-title').textContent = 'Regular Service';
     document.getElementById('op-times-label').textContent = 'Regular Service';
     document.getElementById('op-times-body').style.background = '';
-    document.getElementById('op-wkd').textContent = '7:15\u00A0AM\u00A0\u2013\u00A011:45\u00A0PM';
-    document.getElementById('op-wknd').textContent = '9:15\u00A0AM\u00A0\u2013\u00A011:45\u00A0PM';
+    document.getElementById('op-wkd').textContent = '7:01\u00A0AM\u00A0\u2013\u00A012:25\u00A0AM';
+    document.getElementById('op-wknd').textContent = '8:45\u00A0AM\u00A0\u2013\u00A012:25\u00A0AM';
     document.getElementById('sb-latenite-info').style.display = 'none';
   } else {
     lnBtn.classList.add('ln-active');
@@ -1027,7 +1100,7 @@ function setService(svc) {
     document.getElementById('svc-card-title').textContent = 'Late Nite Service';
     document.getElementById('op-times-label').textContent = 'Late Nite Service';
     document.getElementById('op-wkd').textContent = 'Not operated';
-    document.getElementById('op-wknd').textContent = '12:25\u00A0AM\u00A0\u2013\u00A03:05\u00A0AM';
+    document.getElementById('op-wknd').textContent = '12:25\u00A0AM\u00A0\u2013\u00A03:39\u00A0AM';
     document.getElementById('sb-latenite-info').style.display = '';
   }
 }
