@@ -136,13 +136,13 @@
   </div>
 </div>
 
-<!-- SUMMER: IU SUSPENDED -->
-<div class="no-wkn-bar" id="suspendBar" style="display:none; background:#5b21b6; border-bottom-color:rgba(180,100,255,0.45);">
-  <div class="mod-bar-inner" style="color:#e9d5ff;">
+<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
+<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
-    <span>The ITC&ndash;UClub (IU) Shuttle is suspended for Summer 2026. For service to the ITC, ride the RIU Shuttle. Regular IU service returns in the fall.</span>
+    <span>Welcome Back Weekend (Aug 14&ndash;17): the ITC&ndash;Campus Shuttle serves the ITC on Fri 8/14 &amp; Mon 8/17. Regular ITC&ndash;UClub service begins Tuesday, Aug 18.</span>
   </div>
 </div>
 
@@ -159,17 +159,17 @@
 <!-- ARRIVALS BOARD: single route (IU at the ITC) -->
 <div class="panels itc-single">
   <div class="panel">
-    <div class="panel-label">IU &middot; ITC&ndash;UClub Shuttle: Arrivals at the Innovative Technologies Complex</div>
+    <div class="panel-label" id="panelLabel">IU &middot; ITC&ndash;UClub Shuttle: Arrivals at the Innovative Technologies Complex</div>
     <div class="itc-body">
 
       <!-- Route identity + next arrival -->
       <div class="itc-hero">
-        <span class="badge dark" style="background:#CF9FFF;">IU</span>
+        <span class="badge dark" id="heroBadge" style="background:#CF9FFF;">IU</span>
         <div class="itc-hero-mid">
-          <div class="itc-route-name">ITC&ndash;UClub Shuttle</div>
-          <div class="itc-dir">
+          <div class="itc-route-name" id="heroName">ITC&ndash;UClub Shuttle</div>
+          <div class="itc-dir" id="heroDir">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            Arriving at the ITC toward UClub, Meadows &amp; Hayes &rarr; University Union
+            <span id="heroDirText">Arriving at the ITC toward UClub, Meadows &amp; Hayes &rarr; University Union</span>
           </div>
         </div>
         <div class="itc-next">
@@ -216,25 +216,43 @@
 
 <script>
 /* =====================================================================
- * IU (ITC–UClub) ARRIVALS AT THE ITC
+ * ITC ARRIVALS BOARD  (Fall 2026)
  *
- * Times below are ARRIVALS AT THE ITC STOP, taken from the "ITC" column of
- * the IU schedule (routes/iu.html). The IU Shuttle runs WEEKDAYS ONLY.
+ * Regular service (8/18/2026 onward): the IU (ITC-UClub) Shuttle arrives at
+ * the ITC, WEEKDAYS ONLY. Times are the "ITC" column of the IU schedule
+ * (routes/iu.html).
  *
- * SUMMER 2026: the IU Shuttle is suspended for the whole summer (regular +
- * interim weeks). SUMMER_SUSPENDED gates all arrivals off, so the board shows
- * the suspended state with no times. Flip it to false in the fall to restore
- * live arrivals (the fall times are preserved below). See the Fall Restoration
- * Checklist in .claude/CLAUDE.md.
+ * Welcome Back Weekend (8/14-8/17): the IU Shuttle does not run, but the
+ * ITC-Campus Shuttle (ICS) serves the ITC on Friday 8/14 & Monday 8/17.
+ * Those days show ICS arrivals (the "ITC" column of the WBW ICS schedule).
+ *
+ * Before 8/14: pre-service placeholder.
  * ===================================================================== */
-var SUMMER_SUSPENDED = true;
+function serviceState(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  if (y !== 2026) return 'regular';
+  if (m < 7) return 'pre';
+  if (m === 7) {
+    if (d < 14) return 'pre';
+    if (d <= 17) return 'wbw';
+    return 'regular';
+  }
+  return 'regular';
+}
 
 /* IU arrivals at the ITC, weekday only (24h "HH:MM"). ~Every 30 min, plus
-   extra early-morning trips. Preserved for fall restoration. */
+   extra early-morning trips. */
 var ITC_ARRIVALS_WEEKDAY = [
-  "07:35","07:45","08:05","08:35","09:05","09:35","10:05","10:35","11:05","11:35",
+  "07:35","07:50","08:05","08:35","09:05","09:35","10:05","10:35","11:05","11:35",
   "12:05","12:35","13:05","13:35","14:05","14:35","15:05","15:35","16:05","16:35",
-  "17:05","17:35","18:05","18:35","19:05","19:35","20:05","20:35","21:05"
+  "17:05","17:35","18:05","18:35","19:05","19:35","20:05","20:35","21:05","21:35"
+];
+
+/* ICS arrivals at the ITC during Welcome Back Weekend (Fri 8/14 & Mon 8/17). */
+var ITC_ARRIVALS_WBW = [
+  "08:05","08:35","09:05","09:35","10:05","10:35","11:05","11:35","12:05","12:35",
+  "13:05","13:35","14:05","14:35","15:05","15:35","16:05","16:35","17:05","17:35",
+  "18:05","18:35"
 ];
 
 var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -260,12 +278,42 @@ function fmtClock(d) {
   return h + ':' + pad2(m) + ':' + pad2(s) + ' ' + ampm;
 }
 
-/* Scheduled ITC arrivals for the given day (empty when no service). */
+function numSort(a, b) { return a - b; }
+
+/* Scheduled ITC arrivals for the given day, plus which shuttle is arriving.
+ * mode: 'iu' (regular weekday IU) | 'ics' (WBW Fri/Mon ITC-Campus Shuttle)
+ *       | 'pre' | 'wbwoff' (WBW Sat/Sun) | 'weekend' (regular weekend). */
 function scheduledToday(now) {
-  if (SUMMER_SUSPENDED) return [];
+  var state = serviceState(now);
   var jsDay = now.getDay();
-  if (jsDay === 0 || jsDay === 6) return [];   /* weekday only */
-  return ITC_ARRIVALS_WEEKDAY.map(toMin).sort(function(a, b) { return a - b; });
+  if (state === 'pre') return { times: [], mode: 'pre' };
+  if (state === 'wbw') {
+    if (jsDay === 5 || jsDay === 1) return { times: ITC_ARRIVALS_WBW.map(toMin).sort(numSort), mode: 'ics' };
+    return { times: [], mode: 'wbwoff' };
+  }
+  if (jsDay === 0 || jsDay === 6) return { times: [], mode: 'weekend' };
+  return { times: ITC_ARRIVALS_WEEKDAY.map(toMin).sort(numSort), mode: 'iu' };
+}
+
+/* Set the hero identity (badge, route name, direction, panel label). */
+function setIdentity(mode) {
+  var badge = document.getElementById('heroBadge');
+  var name  = document.getElementById('heroName');
+  var dir   = document.getElementById('heroDirText');
+  var label = document.getElementById('panelLabel');
+  if (mode === 'ics') {
+    badge.textContent = 'ICS';
+    badge.style.background = 'rgb(174,225,174)';
+    name.innerHTML = 'ITC&ndash;Campus Shuttle';
+    dir.innerHTML  = 'Arriving at the ITC toward West Gym, Hillside &rarr; Campus';
+    label.innerHTML = 'ICS &middot; ITC&ndash;Campus Shuttle: Arrivals at the Innovative Technologies Complex';
+  } else {
+    badge.textContent = 'IU';
+    badge.style.background = '#CF9FFF';
+    name.innerHTML = 'ITC&ndash;UClub Shuttle';
+    dir.innerHTML  = 'Arriving at the ITC toward UClub, Meadows &amp; Hayes &rarr; University Union';
+    label.innerHTML = 'IU &middot; ITC&ndash;UClub Shuttle: Arrivals at the Innovative Technologies Complex';
+  }
 }
 
 /* Next arrival with a 1-min grace window (matches the other boards). */
@@ -285,27 +333,35 @@ function render() {
   document.getElementById('dateDisplay').textContent =
     DAY_NAMES[jsDay] + ', ' + MON_NAMES[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
 
-  var isWeekend = (jsDay === 0 || jsDay === 6);
-  document.getElementById('suspendBar').style.display = SUMMER_SUSPENDED ? 'block' : 'none';
-  document.getElementById('noWknBar').style.display   = (!SUMMER_SUSPENDED && isWeekend) ? 'block' : 'none';
+  var sched   = scheduledToday(now);
+  var times   = sched.times;
+  var mode    = sched.mode;
+  var state   = serviceState(now);
 
-  var times   = scheduledToday(now);
+  setIdentity(mode);
+  document.getElementById('wbwBar').style.display   = (state === 'wbw') ? 'block' : 'none';
+  document.getElementById('noWknBar').style.display = (mode === 'weekend') ? 'block' : 'none';
+
   var nextEl  = document.getElementById('nextTime');
   var grid    = document.getElementById('timesGrid');
   var upWrap  = document.getElementById('upcomingWrap');
   var empty   = document.getElementById('emptyState');
 
-  /* No service today: show the empty / suspended state. */
+  /* No service today: show the empty state. */
   if (times.length === 0) {
     nextEl.textContent = 'No Service';
     nextEl.className    = 'itc-next-time none';
     grid.innerHTML      = '';
     upWrap.style.display = 'none';
     empty.style.display  = 'flex';
-    if (SUMMER_SUSPENDED) {
-      document.getElementById('emptyTitle').textContent = 'Suspended for the summer';
+    if (mode === 'pre') {
+      document.getElementById('emptyTitle').textContent = 'Fall service begins soon';
       document.getElementById('emptySub').innerHTML =
-        'The ITC&ndash;UClub (IU) Shuttle does not operate during Summer 2026. For service to the ITC this summer, ride the <a href="routes/riu.html">RIU Shuttle</a>. Regular IU service returns in the fall semester.';
+        'Regular ITC&ndash;UClub (IU) arrivals begin Tuesday, August 18. During Welcome Back Weekend (Aug 14&ndash;17), the ITC&ndash;Campus Shuttle serves the ITC on Friday, Aug 14 &amp; Monday, Aug 17.';
+    } else if (mode === 'wbwoff') {
+      document.getElementById('emptyTitle').textContent = 'No ITC arrivals today';
+      document.getElementById('emptySub').innerHTML =
+        'During Welcome Back Weekend, the ITC&ndash;Campus Shuttle serves the ITC on Friday, Aug 14 &amp; Monday, Aug 17 only. Regular ITC&ndash;UClub (IU) arrivals begin Tuesday, Aug 18.';
     } else {
       document.getElementById('emptyTitle').textContent = 'No weekend service';
       document.getElementById('emptySub').innerHTML =

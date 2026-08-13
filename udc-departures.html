@@ -10,6 +10,14 @@
 <title>Inbound Departures, University Downtown Center, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
+<style>
+/* Pre-service placeholder (flexbox + literal colors so the legacy board renders it too). */
+.pre-notice { flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4vh 6vw; color: #7a8fa6; }
+.pre-notice svg { width: 8vh; height: 8vh; opacity: 0.5; margin-bottom: 1.8vh; }
+.pre-notice-title { font-size: 4.2vh; font-weight: 800; color: #fff; letter-spacing: -0.01em; line-height: 1.1; }
+.pre-notice-sub { font-size: 2.3vh; line-height: 1.55; max-width: 62ch; margin-top: 1.6vh; }
+.pre-notice-dates { font-size: 2.1vh; color: #f0a500; font-weight: 700; margin-top: 1.8vh; }
+</style>
 </head>
 <body>
 
@@ -33,23 +41,13 @@
   </div>
 </div>
 
-<!-- SUMMER: NO WEEKEND SERVICE -->
-<div class="no-wkn-bar" id="noWknBar">
-  <div class="mod-bar-inner">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
-    </svg>
-    <span>No OCCT service operates on summer weekends. Please use BC Transit for weekend transportation.</span>
-  </div>
-</div>
-
-<!-- INTERIM WEEK NOTICE -->
-<div class="no-wkn-bar" id="interimBar" style="display:none; background:#5b21b6;">
+<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
+<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
   <div class="mod-bar-inner">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
-    <span>Interim service week: only the ICS shuttle is operating on campus. No downtown routes today.</span>
+    <span>Welcome Back Weekend schedule (Aug 14&ndash;17): limited inbound service. Regular service begins Tuesday, Aug 18.</span>
   </div>
 </div>
 
@@ -64,7 +62,7 @@
 </div>
 
 <!-- DEPARTURE BOARD: two-panel layout -->
-<div class="panels">
+<div class="panels" id="panelsWrap">
 
   <!-- LEFT PANEL: MS IN & WS IN: depart from UDC -->
   <div class="panel">
@@ -131,7 +129,7 @@
         <div><span class="badge" style="background:#D2042D;">DCL</span></div>
         <div class="td-dest">
           <div class="route-name">Downtown Center&ndash;Leroy Inbound</div>
-          <div class="route-stops">State &amp; Hawley Sts &rarr; Leroy St &rarr; BU</div>
+          <div class="route-stops">Leroy &amp; Murray &rarr; Riverside Dr &rarr; BU</div>
         </div>
         <div class="td-time"><div class="dep-time" id="next-DCL">--</div></div>
         <div class="td-after"><div class="after-time" id="after-DCL">--</div></div>
@@ -156,6 +154,16 @@
 
 </div><!-- /panels -->
 
+<!-- PRE-SERVICE PLACEHOLDER (before 8/14) -->
+<div class="pre-notice" id="preNotice">
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+  </svg>
+  <div class="pre-notice-title">Fall 2026 service begins soon</div>
+  <div class="pre-notice-sub">Inbound service is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.</div>
+  <div class="pre-notice-dates">Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18</div>
+</div>
+
 <!-- SERVICE ALERTS -->
 <div class="alerts-bar" id="alertsBar">
   <span class="alerts-label">Service Alerts</span>
@@ -175,67 +183,76 @@
 
 <script>
 /* =====================================================================
- * MODIFIED SCHEDULE CONFIGURATION
+ * MODIFIED SCHEDULE CONFIGURATION  (applies to REGULAR fall service only)
  * ===================================================================== */
 var MODIFIED = {
   active: false,
-  notice: "Memorial Day: No OCCT service today.",
+  notice: "Modified schedule in effect today.",
   schedules: {
     MS:  { weekday: [], weekend: [] },
     WS:  { weekday: [], weekend: [] },
     DCL: { weekday: [], weekend: [] },
     DS:  { weekday: [], weekend: [] },
-    // UDC: { weekday: [], weekend: [] },  // Hidden in summer
+    UDC: { weekday: [], weekend: [] }
   }
 };
 
 /* =====================================================================
- * SUMMER 2026 SERVICE PERIODS
- *
- * Regular summer service: 5/25/2026 – 8/7/2026 (Mon–Fri only)
- * Interim weeks (ICS only): 5/18–5/22, 6/30–7/3, 8/10–8/14 (Mon–Fri only)
- * During interim weeks, no downtown service operates. Schedules return
- * empty and cards show "No More Service".
+ * FALL 2026 SERVICE PERIODS
+ *   before 8/14/2026 ......... pre-service placeholder
+ *   8/14/2026 - 8/17/2026 .... Welcome Back Weekend (reduced schedule)
+ *   8/18/2026 onward ......... regular fall service
  * ===================================================================== */
-function isInterimWeek(now) {
-  var y = now.getFullYear();
-  var m = now.getMonth();   /* 0-indexed: Jan=0 … Dec=11 */
-  var d = now.getDate();
-  if (y !== 2026) return false;
-  if (m === 4 && d >= 18 && d <= 22) return true;     /* May 18–22 */
-  if (m === 5 && d === 30) return true;               /* Jun 30 */
-  if (m === 6 && d >= 1 && d <= 3) return true;       /* Jul 1–3 */
-  if (m === 7 && d >= 10 && d <= 14) return true;     /* Aug 10–14 */
-  return false;
+function serviceState(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  if (y !== 2026) return 'regular';
+  if (m < 7) return 'pre';
+  if (m === 7) {
+    if (d < 14) return 'pre';
+    if (d <= 17) return 'wbw';
+    return 'regular';
+  }
+  return 'regular';
 }
 
 /* =====================================================================
- * INBOUND SCHEDULES: 24-hour "HH:MM"
- * Times represent departures from the downtown terminus heading to BU.
- * MS & WS depart from UDC; DCL departs from State & Hawley Sts;
- * DS departs from Visions Arena (across the street from UDC).
+ * INBOUND SCHEDULES: 24-hour "HH:MM" (departures toward BU).
+ * Times are each route's "Leaves UDC" column heading back to campus.
+ * MS, WS & UDC Express depart the UDC / Arena stop; DCL & DS depart
+ * their nearby downtown stops. Day-restricted entries { t, d:[...] }
+ * carry after-midnight tails onto the correct calendar day
+ *   (0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat).
+ * WBW times (8/14-8/17) from the Welcome Back Weekend Schedule;
+ * regular times from the Fall 2026 Primary Schedule.
  * ===================================================================== */
-/* ── SUMMER 2026 SCHEDULES ── All times 24h "HH:MM", weekdays only.
- * Fall semester: restore weekend arrays and original weekday times.
- * =========================================================================== */
+var WBW_SCHEDULES = {
+  MS:  ["09:45","20:25"],
+  WS:  ["09:03","11:50","13:50","15:35","17:20","19:35"],
+  DCL: ["09:40","11:10","14:55","16:25","18:55","21:25"],
+  DS:  ["13:05","17:50"]
+};
+
 var SCHEDULES = {
   MS: {
-    weekday: ["10:05","12:20","14:45","18:30","20:10"],
-    weekend: []
+    weekday: ["07:10","08:25","09:30","10:20","11:30","12:28","13:58","16:05","17:55","19:05","20:25","22:00"],
+    weekend: ["10:35","13:05","15:05","17:40","19:30","22:00"]
   },
   WS: {
-    weekday: ["07:50","09:15","11:00","12:30","14:05","16:15","17:10","19:05"],
+    weekday: ["07:15","07:23","08:00","08:10","08:50","09:45","10:05","10:40","11:30","12:15","12:55","14:15","15:00","15:58","16:38","18:03","18:45","19:05","19:30","20:00","20:38","21:40","23:18",{t:"00:03",d:[2,3,4,5]}],
+    weekend: ["09:05","09:50","10:35","11:55","12:58","13:58","15:10","16:35","18:35","19:50","20:40","21:35",{t:"22:35",d:[0]},{t:"23:18",d:[6]},{t:"23:28",d:[0]},{t:"00:03",d:[6]}]
+  },
+  UDC: {
+    weekday: ["07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","13:30","15:30","16:00","17:15","17:30","17:33","18:00","18:30","20:45"],
     weekend: []
   },
   DCL: {
-    weekday: ["08:40","09:25","11:00","11:50","14:00","15:35","17:05","20:05"],
-    weekend: []
+    weekday: ["07:20","08:00","08:50","09:05","09:15","09:55","10:30","10:55","11:30","12:00","12:50","13:35","14:40","15:33","16:27","17:15","17:55","18:45","19:35","20:10","21:15","22:05","22:35",{t:"00:05",d:[2,3,4,5]}],
+    weekend: ["09:40","09:50","11:35","12:40","13:40","14:40","17:25","19:10","20:00","20:55",{t:"21:40",d:[0]},{t:"22:35",d:[6]},{t:"22:50",d:[0]},{t:"00:05",d:[6]}]
   },
   DS: {
-    weekday: ["08:30","10:15","13:20","15:45","18:05"],
-    weekend: []
-  },
-  UDC: { weekday: [], weekend: [] } /* UDC Express: not in summer service */
+    weekday: ["08:05","08:40","09:35","10:40","11:30","12:30","13:55","16:00","17:05","18:20","19:20","20:00","21:10","22:10"],
+    weekend: ["10:15","12:40","14:40","17:15","19:10","21:35"]
+  }
 };
 
 /* ===================================================================== */
@@ -268,19 +285,32 @@ function fmtClock(d) {
 var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-function getDepartures(routeKey, now) {
-  /* Interim weeks: no downtown service runs */
-  if (isInterimWeek(now)) return [];
-
-  var base   = SCHEDULES[routeKey];
-  var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
-  var src    = modded ? modded : base;
-  var jsDay  = now.getDay();
-  var times  = (jsDay === 0 || jsDay === 6) ? src.weekend : src.weekday;
-  return times
+/* Expand a schedule array (strings + {t,d} objects) into sorted minute values
+ * for the given JS weekday. */
+function expand(arr, jsDay) {
+  return arr
     .filter(function(e) { return typeof e === 'string' || e.d.indexOf(jsDay) !== -1; })
     .map(function(e) { return toMin(typeof e === 'string' ? e : e.t); })
     .sort(function(a, b) { return a - b; });
+}
+
+function getDepartures(routeKey, now) {
+  var state = serviceState(now);
+  var jsDay = now.getDay();
+
+  if (state === 'pre') return [];
+
+  if (state === 'wbw') {
+    var w = WBW_SCHEDULES[routeKey];
+    return w ? expand(w, jsDay) : [];
+  }
+
+  var base   = SCHEDULES[routeKey];
+  if (!base) return [];
+  var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
+  var src    = modded ? modded : base;
+  var times  = (jsDay === 0 || jsDay === 6) ? src.weekend : src.weekday;
+  return expand(times, jsDay);
 }
 
 function getNext(departures, nowMin) {
@@ -334,6 +364,7 @@ function refresh() {
   var now    = new Date();
   var jsDay  = now.getDay();
   var nowMin = now.getHours() * 60 + now.getMinutes();
+  var state  = serviceState(now);
 
   if (!manualMode) {
     var auto = (jsDay === 0 || jsDay === 6) ? 'weekend' : 'weekday';
@@ -345,31 +376,43 @@ function refresh() {
     DAY_NAMES[jsDay] + ', ' + MON_NAMES[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
 
   var modBar = document.getElementById('modBar');
-  if (MODIFIED.active) {
+  if (MODIFIED.active && state === 'regular') {
     modBar.classList.add('on');
     document.getElementById('modNotice').textContent = MODIFIED.notice;
   } else {
     modBar.classList.remove('on');
   }
 
+  var panels    = document.getElementById('panelsWrap');
+  var preNotice = document.getElementById('preNotice');
+  var wbwBar    = document.getElementById('wbwBar');
+
+  if (state === 'pre') {
+    panels.style.display    = 'none';
+    preNotice.style.display = 'flex';
+    wbwBar.style.display    = 'none';
+    return;
+  }
+  panels.style.display    = '';
+  preNotice.style.display = 'none';
+  wbwBar.style.display    = (state === 'wbw') ? 'block' : 'none';
+
+  var routes = ['MS','WS','UDC','DCL','DS'];
   var deps = {};
-  ['MS','WS','DCL','DS','UDC'].forEach(function(k) {
-    deps[k] = getDepartures(k, now);
-  });
+  routes.forEach(function(k) { deps[k] = getDepartures(k, now); });
 
-  /* Summer: show no-weekend banner when weekend mode is active */
-  document.getElementById('noWknBar').style.display = (dayMode === 'weekend') ? 'block' : 'none';
+  function show(k, v) { document.getElementById('card-' + k).classList.toggle('hidden', !v); }
 
-  /* Interim weeks: show interim banner; downtown routes show "No More Service" */
-  var interim = isInterimWeek(now);
-  document.getElementById('interimBar').style.display = (interim && dayMode === 'weekday') ? 'block' : 'none';
+  if (state === 'wbw') {
+    /* UDC Express does not run during Welcome Back Weekend */
+    ['MS','WS','DCL','DS'].forEach(function(k) { show(k, deps[k].length > 0); });
+    show('UDC', false);
+  } else {
+    ['MS','WS','DCL','DS'].forEach(function(k) { show(k, true); });
+    show('UDC', deps.UDC.length > 0);   /* UDC Express: weekday only */
+  }
 
-  /* Summer: UDC Express not in service */
-  document.getElementById('card-UDC').classList.add('hidden');
-
-  ['MS','WS','DCL','DS','UDC'].forEach(function(k) {
-    updateCard(k, nowMin, deps[k]);
-  });
+  routes.forEach(function(k) { updateCard(k, nowMin, deps[k]); });
 }
 
 refresh();
