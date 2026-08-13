@@ -290,9 +290,9 @@
   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
   </svg>
-  <div class="pre-notice-title">Fall 2026 service begins soon</div>
-  <div class="pre-notice-sub">OCC Transport is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.</div>
-  <div class="pre-notice-dates">Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18</div>
+  <div class="pre-notice-title" id="preTitle">Fall 2026 service begins soon</div>
+  <div class="pre-notice-sub" id="preSub">OCC Transport is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.</div>
+  <div class="pre-notice-dates" id="preDates">Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18</div>
 </div>
 
 <!-- SERVICE ALERTS -->
@@ -361,6 +361,7 @@ function serviceState(now) {
   if (y !== 2026) return 'regular';
   if (m < 7) return 'pre';            /* before August 2026 */
   if (m === 7) {                      /* August 2026 */
+    if (d >= 10 && d <= 13) return 'ics';   /* interim week: ICS shuttle only */
     if (d < 14) return 'pre';
     if (d <= 17) return 'wbw';
     return 'regular';
@@ -507,7 +508,7 @@ function getDepartures(routeKey, now) {
   var state = serviceState(now);
   var jsDay = now.getDay();
 
-  if (state === 'pre') return [];
+  if (state === 'pre' || state === 'ics') return [];
 
   if (state === 'wbw') {
     var w = WBW_SCHEDULES[routeKey];
@@ -600,12 +601,21 @@ function refresh() {
   var preNotice = document.getElementById('preNotice');
   var wbwBar    = document.getElementById('wbwBar');
 
-  /* PRE-SERVICE: hide the board, show the "service begins" notice. */
-  if (state === 'pre') {
+  /* PRE-SERVICE / INTERIM: hide the board, show the centered notice. */
+  if (state === 'pre' || state === 'ics') {
     panels.style.display    = 'none';
     preNotice.style.display = 'flex';
     wbwBar.style.display    = 'none';
     document.getElementById('lnBar').classList.remove('on');
+    if (state === 'ics') {
+      document.getElementById('preTitle').innerHTML = 'ITC&ndash;Campus Shuttle service today';
+      document.getElementById('preSub').innerHTML   = 'During interim week, only the ITC&ndash;Campus Shuttle (ICS) is running, departing the Mohawk Stop across from the University Union. Full weekday &amp; weekend service begins Welcome Back Weekend (Friday, August 14), and regular service begins Tuesday, August 18.';
+      document.getElementById('preDates').innerHTML = 'ICS shuttle only today &nbsp;&bull;&nbsp; Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18';
+    } else {
+      document.getElementById('preTitle').innerHTML = 'Fall 2026 service begins soon';
+      document.getElementById('preSub').innerHTML   = 'OCC Transport is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.';
+      document.getElementById('preDates').innerHTML = 'Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18';
+    }
     return;
   }
   panels.style.display    = '';
