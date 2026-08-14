@@ -1,6 +1,6 @@
 const ALERT = {
   active: true,
-  text: 'Fall 2026 Schedule is now published. OCCT will be running ICS-only interim service 8/10-8/13, and alternate Welcome Back Weekend service 8/14-8/17. Regular service will begin on Tuesday, August 18th.',
+  text: 'Welcome Back Weekend alternate service is now in effect. Buses leave from Lot C on Friday, Saturday, and Sunday. Regular service begins on Tuesday, August 18.',
   link: { href: 'news.html', label: 'Details' }
 };
 
