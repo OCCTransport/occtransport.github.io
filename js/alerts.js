@@ -1,5 +1,5 @@
 const ALERT = {
-  active: true,
+  active: false,
   text: 'Welcome Back Weekend alternate service is now in effect. Buses leave from Lot C on Friday, Saturday, and Sunday. Regular service begins on Tuesday, August 18.',
   link: { href: 'news.html', label: 'Details' }
 };

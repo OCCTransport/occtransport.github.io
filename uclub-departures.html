@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/departures.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UClub Arrivals, University Plaza, OCC Transport</title>
+<link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
+
+<style>
+/* ── UClub combined arrivals board (IU: ITC-UClub + UC: UClub) ──
+   Reuses the shared chrome (time bar, alert ticker, disclaimer) from
+   css/departures.css and adds the components below: a next-arrival hero
+   whose identity follows whichever shuttle arrives next, plus a merged
+   chronological grid of the day's UClub arrivals tagged by route. */
+.panels.uc-single { grid-template-columns: 1fr; }
+.uc-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+
+/* Route identity + next arrival hero */
+.uc-hero {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2.2vw;
+  padding: 2.6vh 3vw;
+  background: var(--surf);
+  border-bottom: 1px solid var(--border);
+}
+.uc-hero .badge {
+  width: auto;
+  min-width: 12vh;
+  font-size: 5.6vh;
+  padding: 1.6vh 2.2vw;
+  border-radius: 14px;
+}
+.uc-hero-mid { min-width: 0; }
+.uc-route-name { font-size: 3.6vh; font-weight: 800; color: #fff; letter-spacing: -0.01em; line-height: 1.08; }
+.uc-dir { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0.6vw; font-size: 1.95vh; color: var(--muted); margin-top: 0.7vh; }
+.uc-dir svg { width: 1.9vh; height: 1.9vh; flex-shrink: 0; }
+.uc-next { text-align: right; }
+.uc-next-label { font-size: 1.45vh; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin-bottom: 0.5vh; }
+.uc-next-time {
+  font-size: 7.4vh;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.uc-next-time.soon { color: var(--soon); }
+.uc-next-time.none { font-size: 3vh; font-weight: 500; font-style: italic; color: var(--muted); }
+
+/* Merged arrivals grid */
+.uc-upcoming { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 2.2vh 3vw 1vh; }
+.uc-upcoming-label { flex-shrink: 0; display: flex; align-items: center; gap: 1.4vw; font-size: 1.45vh; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); margin-bottom: 1.6vh; }
+.uc-legend { display: inline-flex; align-items: center; gap: 0.5vw; text-transform: none; letter-spacing: 0; }
+.uc-legend .uc-chip-badge { font-size: 1.25vh; }
+.uc-times {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: min-content;
+  gap: 1.2vh 1.2vw;
+  align-content: start;
+}
+.uc-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7vw;
+  font-variant-numeric: tabular-nums;
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1vh 0.5vw;
+}
+.uc-chip-badge { font-size: 1.55vh; font-weight: 800; padding: 0.35vh 0.7vw; border-radius: 5px; color: #fff; letter-spacing: 0.03em; }
+.uc-chip-badge.dark { color: #1a2942; }
+.uc-chip-time { font-size: 2.6vh; font-weight: 700; color: var(--text); }
+.uc-chip.past { opacity: 0.3; }
+.uc-chip.next { background: rgba(52,208,88,0.14); border-color: var(--soon); box-shadow: inset 0 0 0 2px var(--soon); }
+.uc-chip.next .uc-chip-time { color: #fff; }
+
+/* Empty / pre-service state */
+.uc-empty {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.4vh;
+  padding: 2vh 3vw;
+  color: var(--muted);
+}
+.uc-empty svg { width: 6.5vh; height: 6.5vh; opacity: 0.45; }
+.uc-empty-title { font-size: 3.2vh; font-weight: 700; color: var(--text); }
+.uc-empty-sub { font-size: 2vh; max-width: 72ch; line-height: 1.55; }
+
+@media (max-width: 768px) {
+  .uc-hero { grid-template-columns: auto 1fr; gap: 12px; padding: 16px; }
+  .uc-hero .badge { min-width: 56px; font-size: 1.6rem; padding: 8px 12px; border-radius: 10px; }
+  .uc-route-name { font-size: 1.25rem; }
+  .uc-dir { font-size: 0.8rem; gap: 5px; }
+  .uc-dir svg { width: 13px; height: 13px; }
+  .uc-next { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
+  .uc-next-label { font-size: 0.62rem; }
+  .uc-next-time { font-size: 2.4rem; }
+  .uc-next-time.none { font-size: 1.1rem; }
+  .uc-upcoming { padding: 14px 16px; }
+  .uc-upcoming-label { font-size: 0.62rem; margin-bottom: 12px; }
+  .uc-times { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .uc-chip { padding: 10px 4px; border-radius: 8px; }
+  .uc-chip-time { font-size: 1.05rem; }
+  .uc-empty svg { width: 44px; height: 44px; }
+  .uc-empty-title { font-size: 1.3rem; }
+  .uc-empty-sub { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TIME BAR -->
+<div class="time-bar">
+  <div class="time-bar-logo">
+    <img src="https://occtransport.s3.amazonaws.com/Logos/OCC+Transport+Logo.png" alt="OCC Transport">
+  </div>
+  <div class="time-bar-center">
+    <div class="time-bar-location">UClub / University Plaza</div>
+    <div class="time-bar-clock" id="clock">--:-- --</div>
+    <div class="time-bar-date" id="dateDisplay">Loading&hellip;</div>
+  </div>
+  <div class="time-bar-right">
+    <div class="legend-hint"><span class="legend-swatch"></span> Arriving within 5 min</div>
+  </div>
+</div>
+
+<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
+<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span>Welcome Back Weekend (Aug 14&ndash;17): only the UClub (UC) Shuttle serves UClub. Regular ITC&ndash;UClub (IU) service begins Tuesday, Aug 18.</span>
+  </div>
+</div>
+
+<!-- ARRIVALS BOARD: combined UClub arrivals (IU + UC) -->
+<div class="panels uc-single">
+  <div class="panel">
+    <div class="panel-label" id="panelLabel">Arrivals at UClub &middot; ITC&ndash;UClub (IU) &amp; UClub (UC) Shuttles</div>
+    <div class="uc-wrap">
+
+      <!-- Next arrival hero (identity follows whichever shuttle is next) -->
+      <div class="uc-hero">
+        <span class="badge dark" id="heroBadge" style="background:#CF9FFF;">IU</span>
+        <div class="uc-hero-mid">
+          <div class="uc-route-name" id="heroName">ITC&ndash;UClub Shuttle</div>
+          <div class="uc-dir" id="heroDir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            <span id="heroDirText">Arriving at UClub</span>
+          </div>
+        </div>
+        <div class="uc-next">
+          <div class="uc-next-label">Next Arrival</div>
+          <div class="uc-next-time" id="nextTime">--</div>
+        </div>
+      </div>
+
+      <!-- Merged upcoming arrivals -->
+      <div class="uc-upcoming" id="upcomingWrap">
+        <div class="uc-upcoming-label">
+          <span>Upcoming Arrivals at UClub</span>
+          <span class="uc-legend"><span class="uc-chip-badge dark" style="background:#CF9FFF;">IU</span> ITC&ndash;UClub</span>
+          <span class="uc-legend"><span class="uc-chip-badge" style="background:#BF40BF;">UC</span> UClub Shuttle</span>
+        </div>
+        <div class="uc-times" id="timesGrid"></div>
+      </div>
+
+      <!-- Empty / pre-service state -->
+      <div class="uc-empty" id="emptyState">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div class="uc-empty-title" id="emptyTitle">No arrivals scheduled</div>
+        <div class="uc-empty-sub" id="emptySub"></div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /panels -->
+
+<!-- SERVICE ALERTS -->
+<div class="alerts-bar" id="alertsBar">
+  <span class="alerts-label">Service Alerts</span>
+  <div class="alerts-ticker">
+    <span class="alert-item green" id="alertItem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+      </svg>
+      No active alerts
+    </span>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <p>This board displays scheduled arrival times based on current published schedules only. This is not a live tracking board. Actual arrivals may vary due to traffic, weather, and other conditions.</p>
+</div>
+
+<script>
+/* =====================================================================
+ * UCLUB COMBINED ARRIVALS  (Fall 2026)
+ *
+ * Merges the two shuttles that serve the UClub / University Plaza stop into
+ * one chronological feed, so the hero always shows whichever arrives next:
+ *   IU  ITC-UClub Shuttle  (weekday only)  -> "UClub" column, routes/iu.html
+ *   UC  UClub Shuttle       (weekday + weekend) -> "UClub" column
+ *
+ * Welcome Back Weekend (8/14-8/17): IU does not run; only the UC Shuttle
+ * serves UClub (WBW schedule). Before 8/14: pre-service placeholder.
+ * ===================================================================== */
+function serviceState(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  if (y !== 2026) return 'regular';
+  if (m < 7) return 'pre';
+  if (m === 7) {
+    if (d < 14) return 'pre';
+    if (d <= 17) return 'wbw';
+    return 'regular';
+  }
+  return 'regular';
+}
+
+/* IU arrivals at UClub, weekday only (24h "HH:MM"). */
+var IU_UCLUB = [
+  "07:40","07:55","08:10","08:40","09:10","09:40","10:10","10:40","11:10","11:40",
+  "12:10","12:40","13:10","13:40","14:10","14:40","15:10","15:40","16:10","16:40",
+  "17:10","17:40","18:10","18:40","19:10","19:40","20:10","20:40","21:10","21:40"
+];
+
+/* UC arrivals at UClub. Day-restricted entries { t, d:[JS weekday numbers] }
+   (0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat). */
+var UC_UCLUB = {
+  weekday: ["08:30","09:20","11:00","11:25","13:00","13:50","16:45","17:50","22:05","22:20","22:50","23:20",{t:"23:50",d:[5]}],
+  weekend: ["09:20","10:20","11:20","12:20","13:20","14:20","15:20","15:50","16:20","17:20","17:50","18:20","19:20","20:20","21:20",{t:"21:50",d:[6]},{t:"22:50",d:[6]},"23:20",{t:"23:50",d:[6]}]
+};
+
+/* UC arrivals at UClub during Welcome Back Weekend (8/14-8/17). */
+var UC_UCLUB_WBW = ["09:05","10:35","11:35","12:35","13:35","14:35","15:35","16:50","18:35","19:35","20:50"];
+
+var ROUTE_META = {
+  IU: { name: 'ITC&ndash;UClub Shuttle', color: '#CF9FFF', dark: true,
+        dir: 'Arriving at UClub from the ITC, continuing to Meadows &amp; Hayes &rarr; University Union' },
+  UC: { name: 'UClub Shuttle', color: '#BF40BF', dark: false,
+        dir: 'Arriving at UClub from the Mohawk Stop, continuing to Washington &amp; Lehigh &rarr; campus' }
+};
+
+var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function pad2(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
+
+function toMin(str) {
+  var p = str.split(':');
+  return Number(p[0]) * 60 + Number(p[1]);
+}
+function fmtMin(min) {
+  var h24  = Math.floor(min / 60) % 24;
+  var m    = min % 60;
+  var ampm = h24 < 12 ? 'AM' : 'PM';
+  var h12  = h24 % 12 || 12;
+  return h12 + ':' + pad2(m) + ' ' + ampm;
+}
+function fmtClock(d) {
+  var h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
+  var ampm = h < 12 ? 'AM' : 'PM';
+  h = h % 12 || 12;
+  return h + ':' + pad2(m) + ':' + pad2(s) + ' ' + ampm;
+}
+
+/* Append a route's arrivals (strings + {t,d} objects) as tagged entries. */
+function pushTagged(arr, jsDay, route, out) {
+  for (var i = 0; i < arr.length; i++) {
+    var e = arr[i];
+    if (typeof e === 'string') out.push({ m: toMin(e), route: route });
+    else if (e.d.indexOf(jsDay) !== -1) out.push({ m: toMin(e.t), route: route });
+  }
+}
+
+/* Merged, sorted UClub arrivals for the day + the service mode. */
+function arrivalsToday(now) {
+  var state = serviceState(now);
+  var jsDay = now.getDay();
+  var out = [];
+  if (state === 'pre') return { list: [], mode: 'pre' };
+  if (state === 'wbw') {
+    pushTagged(UC_UCLUB_WBW, jsDay, 'UC', out);
+  } else {
+    var weekend = (jsDay === 0 || jsDay === 6);
+    if (!weekend) pushTagged(IU_UCLUB, jsDay, 'IU', out);   /* IU weekday only */
+    pushTagged(weekend ? UC_UCLUB.weekend : UC_UCLUB.weekday, jsDay, 'UC', out);
+  }
+  out.sort(function(a, b) { return a.m - b.m; });
+  return { list: out, mode: state };
+}
+
+/* Set the hero identity to whichever shuttle is arriving next. */
+function setIdentity(route) {
+  var meta  = ROUTE_META[route] || ROUTE_META.IU;
+  var badge = document.getElementById('heroBadge');
+  badge.textContent = route;
+  badge.style.background = meta.color;
+  badge.className = 'badge' + (meta.dark ? ' dark' : '');
+  document.getElementById('heroName').innerHTML    = meta.name;
+  document.getElementById('heroDirText').innerHTML = meta.dir;
+}
+
+/* Next arrival object with a 1-min grace window (matches the other boards). */
+function getNext(list, nowMin) {
+  var recent = null, future = null;
+  for (var i = 0; i < list.length; i++) {
+    var m = list[i].m;
+    if (m >= nowMin - 1 && m < nowMin) recent = list[i];
+    else if (m >= nowMin) { future = list[i]; break; }
+  }
+  return recent !== null ? recent : future;
+}
+
+function render() {
+  var now    = new Date();
+  var jsDay  = now.getDay();
+  var nowMin = now.getHours() * 60 + now.getMinutes();
+
+  document.getElementById('clock').textContent = fmtClock(now);
+  document.getElementById('dateDisplay').textContent =
+    DAY_NAMES[jsDay] + ', ' + MON_NAMES[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+
+  var res   = arrivalsToday(now);
+  var list  = res.list;
+  var state  = res.mode;
+
+  document.getElementById('wbwBar').style.display = (state === 'wbw') ? 'block' : 'none';
+
+  var nextEl  = document.getElementById('nextTime');
+  var grid    = document.getElementById('timesGrid');
+  var upWrap  = document.getElementById('upcomingWrap');
+  var empty   = document.getElementById('emptyState');
+
+  /* No service today: show the empty / pre-service state. */
+  if (list.length === 0) {
+    nextEl.textContent = 'No Service';
+    nextEl.className    = 'uc-next-time none';
+    grid.innerHTML      = '';
+    upWrap.style.display = 'none';
+    empty.style.display  = 'flex';
+    document.getElementById('emptyTitle').textContent = 'Fall service begins soon';
+    document.getElementById('emptySub').innerHTML =
+      'UClub shuttle service is not running today. The UClub (UC) Shuttle begins Welcome Back Weekend (Friday, August 14); the ITC&ndash;UClub (IU) Shuttle and full service begin Tuesday, August 18.';
+    return;
+  }
+
+  empty.style.display  = 'none';
+  upWrap.style.display = 'flex';
+
+  var nextObj = getNext(list, nowMin);
+  if (nextObj === null) {
+    /* Arrivals ran today but none remain: keep the last route's identity. */
+    setIdentity(list[list.length - 1].route);
+    nextEl.textContent = 'Service ended';
+    nextEl.className    = 'uc-next-time none';
+  } else {
+    setIdentity(nextObj.route);
+    var soon = nextObj.m >= nowMin && nextObj.m - nowMin <= 5;
+    nextEl.textContent = fmtMin(nextObj.m);
+    nextEl.className    = 'uc-next-time' + (soon ? ' soon' : '');
+  }
+
+  grid.innerHTML = list.map(function(a) {
+    var cls = 'uc-chip';
+    if (a === nextObj)   cls += ' next';
+    else if (a.m < nowMin) cls += ' past';
+    var meta = ROUTE_META[a.route];
+    return '<div class="' + cls + '">' +
+             '<span class="uc-chip-badge' + (meta.dark ? ' dark' : '') + '" style="background:' + meta.color + '">' + a.route + '</span>' +
+             '<span class="uc-chip-time">' + fmtMin(a.m) + '</span>' +
+           '</div>';
+  }).join('');
+}
+
+render();
+setInterval(function() {
+  var now = new Date();
+  document.getElementById('clock').textContent = fmtClock(now);
+  if (now.getSeconds() % 30 === 0) render();
+}, 1000);
+
+/* ── SERVICE ALERTS ── */
+function fetchAlerts() {
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://binghamtonupublic.etaspot.net/service.php?service=get_service_announcements&token=TESTING', true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) return;
+      if (xhr.status < 200 || xhr.status >= 300) return;   /* leave placeholder as-is */
+      var data;
+      try { data = JSON.parse(xhr.responseText); } catch (e) { return; }
+      var groups = data.get_service_announcements || [];
+      var highAlerts = [];
+      for (var i = 0; i < groups.length; i++) {
+        var g = groups[i];
+        if (g.type === 'high' && Array.isArray(g.announcements)) {
+          for (var j = 0; j < g.announcements.length; j++) {
+            var text = (g.announcements[j].text || '').replace(/^\s+|\s+$/g, '');
+            if (text && !/no current/i.test(text)) highAlerts.push(text);
+          }
+        }
+      }
+      renderAlerts(highAlerts);
+    };
+    xhr.send();
+  } catch (e) {
+    /* network/CORS error: leave placeholder as-is */
+  }
+}
+
+function renderAlerts(alerts) {
+  var item = document.getElementById('alertItem');
+  if (!alerts.length) {
+    item.className = 'alert-item green';
+    item.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:1.3vh;height:1.3vh;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> No active alerts';
+  } else {
+    item.className = 'alert-item red';
+    item.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:1.3vh;height:1.3vh;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></svg> ' + alerts.join(' &nbsp;•&nbsp; ');
+  }
+}
+
+fetchAlerts();
+setInterval(fetchAlerts, 60000);
+
+/* ── MIDNIGHT REFRESH ── */
+(function scheduleMidnightRefresh() {
+  var now = new Date();
+  var midnight = new Date(now);
+  midnight.setHours(24, 0, 0, 0);
+  setTimeout(function() { location.reload(); }, midnight - now);
+})();
+</script>
+</body>
+</html>
