@@ -141,16 +141,6 @@
   </div>
 </div>
 
-<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
-<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
-  <div class="mod-bar-inner">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
-    </svg>
-    <span>Welcome Back Weekend (Aug 14&ndash;17): only the UClub (UC) Shuttle serves UClub. Regular ITC&ndash;UClub (IU) service begins Tuesday, Aug 18.</span>
-  </div>
-</div>
-
 <!-- ARRIVALS BOARD: combined UClub arrivals (IU + UC) -->
 <div class="panels uc-single">
   <div class="panel">
@@ -221,21 +211,7 @@
  * one chronological feed, so the hero always shows whichever arrives next:
  *   IU  ITC-UClub Shuttle  (weekday only)  -> "UClub" column, routes/iu.html
  *   UC  UClub Shuttle       (weekday + weekend) -> "UClub" column
- *
- * Welcome Back Weekend (8/14-8/17): IU does not run; only the UC Shuttle
- * serves UClub (WBW schedule). Before 8/14: pre-service placeholder.
  * ===================================================================== */
-function serviceState(now) {
-  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
-  if (y !== 2026) return 'regular';
-  if (m < 7) return 'pre';
-  if (m === 7) {
-    if (d < 14) return 'pre';
-    if (d <= 17) return 'wbw';
-    return 'regular';
-  }
-  return 'regular';
-}
 
 /* IU arrivals at UClub, weekday only (24h "HH:MM"). */
 var IU_UCLUB = [
@@ -250,9 +226,6 @@ var UC_UCLUB = {
   weekday: ["08:30","09:20","11:00","11:25","13:00","13:50","16:45","17:50","22:05","22:20","22:50","23:20",{t:"23:50",d:[5]}],
   weekend: ["09:20","10:20","11:20","12:20","13:20","14:20","15:20","15:50","16:20","17:20","17:50","18:20","19:20","20:20","21:20",{t:"21:50",d:[6]},{t:"22:50",d:[6]},"23:20",{t:"23:50",d:[6]}]
 };
-
-/* UC arrivals at UClub during Welcome Back Weekend (8/14-8/17). */
-var UC_UCLUB_WBW = ["09:05","10:35","11:35","12:35","13:35","14:35","15:35","16:50","18:35","19:35","20:50"];
 
 var ROUTE_META = {
   IU: { name: 'ITC&ndash;UClub Shuttle', color: '#CF9FFF', dark: true,
@@ -293,21 +266,15 @@ function pushTagged(arr, jsDay, route, out) {
   }
 }
 
-/* Merged, sorted UClub arrivals for the day + the service mode. */
+/* Merged, sorted UClub arrivals for the day. */
 function arrivalsToday(now) {
-  var state = serviceState(now);
   var jsDay = now.getDay();
   var out = [];
-  if (state === 'pre') return { list: [], mode: 'pre' };
-  if (state === 'wbw') {
-    pushTagged(UC_UCLUB_WBW, jsDay, 'UC', out);
-  } else {
-    var weekend = (jsDay === 0 || jsDay === 6);
-    if (!weekend) pushTagged(IU_UCLUB, jsDay, 'IU', out);   /* IU weekday only */
-    pushTagged(weekend ? UC_UCLUB.weekend : UC_UCLUB.weekday, jsDay, 'UC', out);
-  }
+  var weekend = (jsDay === 0 || jsDay === 6);
+  if (!weekend) pushTagged(IU_UCLUB, jsDay, 'IU', out);   /* IU weekday only */
+  pushTagged(weekend ? UC_UCLUB.weekend : UC_UCLUB.weekday, jsDay, 'UC', out);
   out.sort(function(a, b) { return a.m - b.m; });
-  return { list: out, mode: state };
+  return { list: out };
 }
 
 /* Set the hero identity to whichever shuttle is arriving next. */
@@ -343,25 +310,22 @@ function render() {
 
   var res   = arrivalsToday(now);
   var list  = res.list;
-  var state  = res.mode;
-
-  document.getElementById('wbwBar').style.display = (state === 'wbw') ? 'block' : 'none';
 
   var nextEl  = document.getElementById('nextTime');
   var grid    = document.getElementById('timesGrid');
   var upWrap  = document.getElementById('upcomingWrap');
   var empty   = document.getElementById('emptyState');
 
-  /* No service today: show the empty / pre-service state. */
+  /* No arrivals scheduled: show the empty state. */
   if (list.length === 0) {
     nextEl.textContent = 'No Service';
     nextEl.className    = 'uc-next-time none';
     grid.innerHTML      = '';
     upWrap.style.display = 'none';
     empty.style.display  = 'flex';
-    document.getElementById('emptyTitle').textContent = 'Fall service begins soon';
+    document.getElementById('emptyTitle').textContent = 'No arrivals today';
     document.getElementById('emptySub').innerHTML =
-      'UClub shuttle service is not running today. The UClub (UC) Shuttle begins Welcome Back Weekend (Friday, August 14); the ITC&ndash;UClub (IU) Shuttle and full service begin Tuesday, August 18.';
+      'There are no scheduled UClub arrivals right now. Please check back later.';
     return;
   }
 

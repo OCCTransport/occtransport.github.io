@@ -10,14 +10,6 @@
 <title>Next Departure, University Union, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
-<style>
-/* Pre-service placeholder (flexbox + literal colors so the legacy board renders it too). */
-.pre-notice { flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4vh 6vw; color: #7a8fa6; }
-.pre-notice svg { width: 8vh; height: 8vh; opacity: 0.5; margin-bottom: 1.8vh; }
-.pre-notice-title { font-size: 4.2vh; font-weight: 800; color: #fff; letter-spacing: -0.01em; line-height: 1.1; }
-.pre-notice-sub { font-size: 2.3vh; line-height: 1.55; max-width: 62ch; margin-top: 1.6vh; }
-.pre-notice-dates { font-size: 2.1vh; color: #f0a500; font-weight: 700; margin-top: 1.8vh; }
-</style>
 </head>
 <body>
 
@@ -48,16 +40,6 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
     </svg>
     <span id="modNotice"></span>
-  </div>
-</div>
-
-<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
-<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
-  <div class="mod-bar-inner">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
-    </svg>
-    <span>Welcome Back Weekend schedule (Aug 14&ndash;17): buses depart from Lot C on Fri&ndash;Sun and from the University Union on Mon. Regular service begins Tuesday, Aug 18.</span>
   </div>
 </div>
 
@@ -215,23 +197,6 @@
         <div class="td-after"><div class="after-time" id="after-IU">--</div></div>
       </div>
 
-      <!-- ICS (ITC-Campus Shuttle): Welcome Back Weekend Fri 8/14 & Mon 8/17 only -->
-      <div class="dep-row hidden" id="card-ICS">
-        <div><span class="badge dark" style="background:rgb(174,225,174);">ICS</span></div>
-        <div class="td-dest">
-          <div class="route-name">ITC&ndash;Campus Shuttle</div>
-          <div class="route-stops">Mohawk; ITC; Hillside &rarr; Campus</div>
-          <!-- STOP TAG removed 2026-08-14, restore Monday 8/18:
-          <div class="mohawk-tag">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Lot C (Fri) / Mohawk (Mon)
-          </div>
-          -->
-        </div>
-        <div class="td-time"><div class="dep-time" id="next-ICS">--</div></div>
-        <div class="td-after"><div class="after-time" id="after-ICS">--</div></div>
-      </div>
-
       <!-- UC (UClub) -->
       <div class="dep-row" id="card-UC">
         <div><span class="badge" style="background:#BF40BF;">UC</span></div>
@@ -287,16 +252,6 @@
 
 </div><!-- /panels -->
 
-<!-- PRE-SERVICE PLACEHOLDER (before 8/14) -->
-<div class="pre-notice" id="preNotice">
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-  </svg>
-  <div class="pre-notice-title" id="preTitle">Fall 2026 service begins soon</div>
-  <div class="pre-notice-sub" id="preSub">OCC Transport is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.</div>
-  <div class="pre-notice-dates" id="preDates">Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18</div>
-</div>
-
 <!-- SERVICE ALERTS -->
 <div class="alerts-bar" id="alertsBar">
   <span class="alerts-label">Service Alerts</span>
@@ -345,54 +300,6 @@ var MODIFIED = {
     LNWS: { weekday: [], weekend: [] },
     LNDCL:{ weekday: [], weekend: [] }
   }
-};
-
-/* =====================================================================
- * FALL 2026 SERVICE PERIODS
- *
- *   before 8/14/2026 ......... pre-service ("service begins" placeholder)
- *   8/14/2026 - 8/17/2026 .... Welcome Back Weekend (reduced schedule;
- *                              Fri-Sun depart Lot C, Mon depart the Union)
- *   8/18/2026 onward ......... regular fall service
- *
- * WBW "Leaves Campus" times: Fall 2026 Welcome Back Weekend Schedule.
- * Regular times: Fall 2026 Regular Service Primary Schedule.
- * ===================================================================== */
-function serviceState(now) {
-  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
-  if (y !== 2026) return 'regular';
-  if (m < 7) return 'pre';            /* before August 2026 */
-  if (m === 7) {                      /* August 2026 */
-    if (d >= 10 && d <= 13) return 'ics';   /* interim week: ICS shuttle only */
-    if (d < 14) return 'pre';
-    if (d <= 17) return 'wbw';
-    return 'regular';
-  }
-  return 'regular';                   /* Sep-Dec 2026 */
-}
-
-/* =====================================================================
- * WELCOME BACK WEEKEND (8/14-8/17): one reduced schedule for all four days.
- * "Leaves Campus" times: Fri-Sun from Lot C, Mon from the University Union.
- * ICS (ITC-Campus Shuttle) runs Friday 8/14 & Monday 8/17 only -> d:[5,1].
- * ===================================================================== */
-var WBW_SCHEDULES = {
-  WS:  ["09:15","10:45","14:30","16:00","18:30","21:00"],
-  DCL: ["08:45","11:30","13:30","15:15","17:00","19:15"],
-  MS:  ["12:30","17:15"],
-  DS:  ["09:25","20:00"],
-  UC:  ["09:00","10:30","11:30","12:30","13:30","14:30","15:30","16:45","18:30","19:30","20:45"],
-  VS:  ["10:00","11:45","13:45","15:45","17:45","19:45"],
-  OC:  ["10:45","12:45","14:45","16:45","18:45"],
-  CS:  ["08:45","10:15","11:15","12:15","13:15","14:15","15:15","16:30","18:15","19:15","20:30"],
-  ICS: [
-    {t:"08:00",d:[5,1]},{t:"08:30",d:[5,1]},{t:"09:00",d:[5,1]},{t:"09:30",d:[5,1]},
-    {t:"10:00",d:[5,1]},{t:"10:30",d:[5,1]},{t:"11:00",d:[5,1]},{t:"11:30",d:[5,1]},
-    {t:"12:00",d:[5,1]},{t:"12:30",d:[5,1]},{t:"13:00",d:[5,1]},{t:"13:30",d:[5,1]},
-    {t:"14:00",d:[5,1]},{t:"14:30",d:[5,1]},{t:"15:00",d:[5,1]},{t:"15:30",d:[5,1]},
-    {t:"16:00",d:[5,1]},{t:"16:30",d:[5,1]},{t:"17:00",d:[5,1]},{t:"17:30",d:[5,1]},
-    {t:"18:00",d:[5,1]},{t:"18:30",d:[5,1]}
-  ]
 };
 
 /* =====================================================================
@@ -507,17 +414,7 @@ function expand(arr, jsDay) {
 }
 
 function getDepartures(routeKey, now) {
-  var state = serviceState(now);
   var jsDay = now.getDay();
-
-  if (state === 'pre' || state === 'ics') return [];
-
-  if (state === 'wbw') {
-    var w = WBW_SCHEDULES[routeKey];
-    return w ? expand(w, jsDay) : [];
-  }
-
-  /* regular fall */
   var base   = SCHEDULES[routeKey];
   if (!base) return [];
   var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
@@ -574,13 +471,12 @@ function setMode(mode, manual) {
   refresh();
 }
 
-var ROUTES = ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','CS','DE','LNWS','LNDCL','ICS'];
+var ROUTES = ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','CS','DE','LNWS','LNDCL'];
 
 function refresh() {
   var now    = new Date();
   var jsDay  = now.getDay();
   var nowMin = now.getHours() * 60 + now.getMinutes();
-  var state  = serviceState(now);
 
   if (!manualMode) {
     var auto = (jsDay === 0 || jsDay === 6) ? 'weekend' : 'weekday';
@@ -592,37 +488,12 @@ function refresh() {
     DAY_NAMES[jsDay] + ', ' + MON_NAMES[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
 
   var modBar = document.getElementById('modBar');
-  if (MODIFIED.active && state === 'regular') {
+  if (MODIFIED.active) {
     modBar.classList.add('on');
     document.getElementById('modNotice').textContent = MODIFIED.notice;
   } else {
     modBar.classList.remove('on');
   }
-
-  var panels    = document.getElementById('panelsWrap');
-  var preNotice = document.getElementById('preNotice');
-  var wbwBar    = document.getElementById('wbwBar');
-
-  /* PRE-SERVICE / INTERIM: hide the board, show the centered notice. */
-  if (state === 'pre' || state === 'ics') {
-    panels.style.display    = 'none';
-    preNotice.style.display = 'flex';
-    wbwBar.style.display    = 'none';
-    document.getElementById('lnBar').classList.remove('on');
-    if (state === 'ics') {
-      document.getElementById('preTitle').innerHTML = 'ITC&ndash;Campus Shuttle service today';
-      document.getElementById('preSub').innerHTML   = 'During interim week, only the ITC&ndash;Campus Shuttle (ICS) is running, departing the Mohawk Stop across from the University Union. Full weekday &amp; weekend service begins Welcome Back Weekend (Friday, August 14), and regular service begins Tuesday, August 18.';
-      document.getElementById('preDates').innerHTML = 'ICS shuttle only today &nbsp;&bull;&nbsp; Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18';
-    } else {
-      document.getElementById('preTitle').innerHTML = 'Fall 2026 service begins soon';
-      document.getElementById('preSub').innerHTML   = 'OCC Transport is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.';
-      document.getElementById('preDates').innerHTML = 'Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18';
-    }
-    return;
-  }
-  panels.style.display    = '';
-  preNotice.style.display = 'none';
-  wbwBar.style.display    = (state === 'wbw') ? 'block' : 'none';
 
   var deps = {};
   ROUTES.forEach(function(k) { deps[k] = getDepartures(k, now); });
@@ -632,35 +503,28 @@ function refresh() {
 
   show('RIU', false);   /* Summer only */
 
-  if (state === 'wbw') {
-    ['WS','DCL','MS','DS','UC','VS','OC','CS','ICS'].forEach(function(k) { show(k, deps[k].length > 0); });
-    ['UDC','IU','DE','LNWS','LNDCL'].forEach(function(k) { show(k, false); });
-    document.getElementById('lnBar').classList.remove('on');
-  } else {
-    /* REGULAR FALL */
-    ['WS','DCL','MS','DS','VS','UC'].forEach(function(k) { show(k, true); });
-    ['UDC','IU','OC','DE'].forEach(function(k) { show(k, deps[k].length > 0); });
-    show('ICS', false);
+  /* REGULAR FALL */
+  ['WS','DCL','MS','DS','VS','UC'].forEach(function(k) { show(k, true); });
+  ['UDC','IU','OC','DE'].forEach(function(k) { show(k, deps[k].length > 0); });
 
-    /* Late Nite: show only while a late-nite trip still remains today */
-    var lnWS  = hasFuture(deps.LNWS);
-    var lnDCL = hasFuture(deps.LNDCL);
-    show('LNWS', lnWS);
-    show('LNDCL', lnDCL);
-    document.getElementById('lnBar').classList.toggle('on', lnWS || lnDCL);
+  /* Late Nite: show only while a late-nite trip still remains today */
+  var lnWS  = hasFuture(deps.LNWS);
+  var lnDCL = hasFuture(deps.LNDCL);
+  show('LNWS', lnWS);
+  show('LNDCL', lnDCL);
+  document.getElementById('lnBar').classList.toggle('on', lnWS || lnDCL);
 
-    /* CS runs as a continuous loop by day; only show the card near a fixed
-       evening / weekend / late-nite departure (within 30 min before or after). */
-    var csVisible = (function() {
-      var c = deps.CS;
-      if (!c.length) return false;
-      var fut = c.filter(function(m) { return m >= nowMin; });
-      if (fut.length > 0 && fut[0] - nowMin <= 30) return true;
-      var last = c[c.length - 1];
-      return nowMin > last && nowMin <= last + 30;
-    })();
-    show('CS', csVisible);
-  }
+  /* CS runs as a continuous loop by day; only show the card near a fixed
+     evening / weekend / late-nite departure (within 30 min before or after). */
+  var csVisible = (function() {
+    var c = deps.CS;
+    if (!c.length) return false;
+    var fut = c.filter(function(m) { return m >= nowMin; });
+    if (fut.length > 0 && fut[0] - nowMin <= 30) return true;
+    var last = c[c.length - 1];
+    return nowMin > last && nowMin <= last + 30;
+  })();
+  show('CS', csVisible);
 
   ROUTES.forEach(function(k) { updateCard(k, nowMin, deps[k]); });
 }

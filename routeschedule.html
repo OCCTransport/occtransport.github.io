@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 <style>
 /* ============================================================
-   OCCT routes & schedules: transit-wayfinding language
+   OCCT routes & schedules: transit & wayfinding language
    Matches index.html. Type: Overpass (headings) + Public Sans.
    ============================================================ */
 :root {
@@ -76,7 +76,7 @@ nav { background: var(--brand-darker); }
 .sec-eyebrow { font-family: var(--head); font-weight: 700; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 
 /* ── SCHEDULE DOWNLOADS (extends the language: PDF file-type badge) ── */
-.dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 360px)); gap: 10px; }
 .dl-item { display: flex; align-items: center; gap: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; text-decoration: none; transition: border-color .12s, box-shadow .12s; }
 .dl-item:hover { border-color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
 .fbadge { font-family: var(--head); font-weight: 800; font-size: 11px; letter-spacing: .05em; background: var(--surf-2); color: var(--ink-2); border-radius: var(--r-sm); padding: 6px 8px; flex-shrink: 0; }
@@ -213,20 +213,6 @@ footer { background: var(--brand-darker); }
         <span class="dl-item-text">
           <span class="dl-item-title">Fall 2026 Primary Schedule</span>
           <div class="dl-item-meta">Regular service &middot; Fall 2026 &middot; PDF</div>
-        </span>
-      </a>
-      <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+WBW+Schedule.pdf" class="dl-item" target="_blank" rel="noopener noreferrer">
-        <span class="fbadge">PDF</span>
-        <span class="dl-item-text">
-          <span class="dl-item-title">Fall 2026 Welcome Back Weekend Schedule</span>
-          <div class="dl-item-meta">Welcome Back Weekend &middot; 8/14/26 &ndash; 8/17/26 &middot; PDF</div>
-        </span>
-      </a>
-      <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="dl-item" target="_blank" rel="noopener noreferrer">
-        <span class="fbadge">PDF</span>
-        <span class="dl-item-text">
-          <span class="dl-item-title">ICS Interim Schedule</span>
-          <div class="dl-item-meta">ITC&ndash;Campus Shuttle &middot; interim weeks only &middot; PDF</div>
         </span>
       </a>
     </div>
@@ -394,8 +380,6 @@ footer { background: var(--brand-darker); }
         </div>
         <div class="box-body">
           <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+Full+Primary+Schedule.pdf" class="btn-box" target="_blank" rel="noopener noreferrer">Fall 2026 Primary Schedule</a>
-          <a href="https://occtransport.s3.us-east-1.amazonaws.com/Fall+2026/OCCT+Fall+2026+WBW+Schedule.pdf" class="btn-box" target="_blank" rel="noopener noreferrer">Fall 2026 Welcome Back Weekend Schedule</a>
-          <a href="https://occtransport.s3.us-east-1.amazonaws.com/Summer+2026/OCCT+Summer+2026+ICS+Schedule.pdf" class="btn-box" target="_blank" rel="noopener noreferrer">ICS Interim Schedule</a>
         </div>
       </div>
 

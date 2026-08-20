@@ -10,14 +10,6 @@
 <title>MS Departures, Pharmacy School, OCC Transport</title>
 <link rel="icon" type="image/png" href="img/OCCTransportLogo(1) (1).png">
 
-<style>
-/* Pre-service placeholder (flexbox + literal colors so the legacy board renders it too). */
-.pre-notice { flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4vh 6vw; color: #7a8fa6; }
-.pre-notice svg { width: 8vh; height: 8vh; opacity: 0.5; margin-bottom: 1.8vh; }
-.pre-notice-title { font-size: 4.2vh; font-weight: 800; color: #fff; letter-spacing: -0.01em; line-height: 1.1; }
-.pre-notice-sub { font-size: 2.3vh; line-height: 1.55; max-width: 62ch; margin-top: 1.6vh; }
-.pre-notice-dates { font-size: 2.1vh; color: #f0a500; font-weight: 700; margin-top: 1.8vh; }
-</style>
 </head>
 <body>
 
@@ -38,16 +30,6 @@
     </div>
     <div class="auto-label" id="autoLabel">Auto-detected</div>
     <div class="legend-hint"><span class="legend-swatch"></span> Scheduled within 5 min</div>
-  </div>
-</div>
-
-<!-- WELCOME BACK WEEKEND NOTICE (8/14-8/17) -->
-<div class="no-wkn-bar" id="wbwBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
-  <div class="mod-bar-inner">
-    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
-    </svg>
-    <span>Welcome Back Weekend schedule (Aug 14&ndash;17): limited Main Street service. Regular service begins Tuesday, Aug 18.</span>
   </div>
 </div>
 
@@ -124,16 +106,6 @@
 
 </div><!-- /panels -->
 
-<!-- PRE-SERVICE PLACEHOLDER (before 8/14) -->
-<div class="pre-notice" id="preNotice">
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-  </svg>
-  <div class="pre-notice-title">Fall 2026 service begins soon</div>
-  <div class="pre-notice-sub">Main Street service is not running today. Welcome Back Weekend service (a reduced schedule) begins Friday, August 14. Regular weekday and weekend service begins Tuesday, August 18.</div>
-  <div class="pre-notice-dates">Welcome Back Weekend: Aug 14&ndash;17 &nbsp;&bull;&nbsp; Regular service: Aug 18</div>
-</div>
-
 <!-- SERVICE ALERTS -->
 <div class="alerts-bar" id="alertsBar">
   <span class="alerts-label">Service Alerts</span>
@@ -165,35 +137,11 @@ var MODIFIED = {
 };
 
 /* =====================================================================
- * FALL 2026 SERVICE PERIODS
- *   before 8/14/2026 ......... pre-service placeholder
- *   8/14/2026 - 8/17/2026 .... Welcome Back Weekend (reduced schedule)
- *   8/18/2026 onward ......... regular fall service
- * ===================================================================== */
-function serviceState(now) {
-  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
-  if (y !== 2026) return 'regular';
-  if (m < 7) return 'pre';
-  if (m === 7) {
-    if (d < 14) return 'pre';
-    if (d <= 17) return 'wbw';
-    return 'regular';
-  }
-  return 'regular';
-}
-
-/* =====================================================================
  * SCHEDULES: times represent ARRIVALS AT THE PHARMACY SCHOOL STOP.
  * Outbound: MS departs Union, arrives Pharmacy School en route to UDC.
  * Inbound:  MS departs UDC, arrives Pharmacy School en route back to BU.
- * WBW arrivals (8/14-8/17) come from the Fall 2026 Welcome Back Weekend
- * Schedule; regular arrivals from the Fall 2026 Primary Schedule.
+ * Arrivals from the Fall 2026 Primary Schedule.
  * ===================================================================== */
-var WBW_SCHEDULES = {
-  MSOUT: ["12:39","17:24"],
-  MSIN:  ["09:57","20:37"]
-};
-
 var SCHEDULES = {
   /* MS Outbound: arrives Pharmacy School en route Union -> UDC */
   MSOUT: {
@@ -238,16 +186,7 @@ var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Sa
 var MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function getDepartures(routeKey, now) {
-  var state = serviceState(now);
   var jsDay = now.getDay();
-
-  if (state === 'pre') return [];
-
-  if (state === 'wbw') {
-    var w = WBW_SCHEDULES[routeKey];
-    return w ? w.map(toMin).sort(function(a, b) { return a - b; }) : [];
-  }
-
   var base   = SCHEDULES[routeKey];
   var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
   var src    = modded ? modded : base;
@@ -306,7 +245,6 @@ function refresh() {
   var now    = new Date();
   var jsDay  = now.getDay();
   var nowMin = now.getHours() * 60 + now.getMinutes();
-  var state  = serviceState(now);
 
   if (!manualMode) {
     var auto = (jsDay === 0 || jsDay === 6) ? 'weekend' : 'weekday';
@@ -318,26 +256,12 @@ function refresh() {
     DAY_NAMES[jsDay] + ', ' + MON_NAMES[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
 
   var modBar = document.getElementById('modBar');
-  if (MODIFIED.active && state === 'regular') {
+  if (MODIFIED.active) {
     modBar.classList.add('on');
     document.getElementById('modNotice').textContent = MODIFIED.notice;
   } else {
     modBar.classList.remove('on');
   }
-
-  var panels    = document.getElementById('panelsWrap');
-  var preNotice = document.getElementById('preNotice');
-  var wbwBar    = document.getElementById('wbwBar');
-
-  if (state === 'pre') {
-    panels.style.display    = 'none';
-    preNotice.style.display = 'flex';
-    wbwBar.style.display    = 'none';
-    return;
-  }
-  panels.style.display    = '';
-  preNotice.style.display = 'none';
-  wbwBar.style.display    = (state === 'wbw') ? 'block' : 'none';
 
   var deps = {};
   ['MSOUT','MSIN'].forEach(function(k) {
