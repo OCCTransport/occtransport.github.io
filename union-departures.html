@@ -49,7 +49,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6a9.72 9.72 0 01.748-3.752A9.753 9.753 0 003 12c0 5.385 4.365 9.75 9.75 9.75 4.596 0 8.477-3.182 9.502-7.498a.75.75 0 000-.25z"/>
     </svg>
-    <span>Late Nite Service in effect: WS &amp; DCL routes may be suspended due to biohazard incidents or other operational issues. Allow extra wait time.</span>
+    <span>Late Nite Service in effect: All runs may be suspended due to biohazard incidents or other operational issues. Allow extra wait time.</span>
   </div>
 </div>
 
@@ -473,6 +473,20 @@ function setMode(mode, manual) {
 
 var ROUTES = ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','CS','DE','LNWS','LNDCL'];
 
+/* Late Nite window (Fri & Sat nights). LN + DE trips run past midnight and are
+ * stored on the calendar day they occur (d:[6,0]); this returns tonight's
+ * upcoming trips spanning midnight (tomorrow's early trips carried as +1440),
+ * capped to a 5-hour horizon so a spent night does not surface next night. */
+var LN_MORNING_END = 3 * 60 + 30;   /* 03:30: last LN trips of the night */
+var LN_HORIZON     = 5 * 60;        /* only show LN/DE departures within 5h */
+
+function nightUpcoming(key, now, nowMin) {
+  var today = getDepartures(key, now).filter(function(m) { return m >= nowMin - 1; });
+  var tmr   = new Date(now.getTime() + 86400000);
+  var next  = getDepartures(key, tmr).map(function(m) { return m + 1440; });
+  return today.concat(next).filter(function(m) { return m <= nowMin + LN_HORIZON; });
+}
+
 function refresh() {
   var now    = new Date();
   var jsDay  = now.getDay();
@@ -504,15 +518,31 @@ function refresh() {
   show('RIU', false);   /* Summer only */
 
   /* REGULAR FALL */
-  ['WS','DCL','MS','DS','VS','UC'].forEach(function(k) { show(k, true); });
-  ['UDC','IU','OC','DE'].forEach(function(k) { show(k, deps[k].length > 0); });
+  ['MS','DS','VS','UC'].forEach(function(k) { show(k, true); });
+  ['UDC','IU','OC'].forEach(function(k) { show(k, deps[k].length > 0); });
 
-  /* Late Nite: show only while a late-nite trip still remains today */
-  var lnWS  = hasFuture(deps.LNWS);
-  var lnDCL = hasFuture(deps.LNDCL);
-  show('LNWS', lnWS);
-  show('LNDCL', lnDCL);
-  document.getElementById('lnBar').classList.toggle('on', lnWS || lnDCL);
+  /* ── LATE NITE (Fri & Sat nights) ──
+   * Once the last regular WS/DCL run of the night has departed, swap the WS/DCL
+   * cards to Late Nite (LN WS / LN DCL) and keep DE showing, each counting down
+   * across midnight to its next respective late-nite run. */
+  var lastReg = Math.max(
+    deps.WS.length  ? deps.WS[deps.WS.length - 1]   : -1,
+    deps.DCL.length ? deps.DCL[deps.DCL.length - 1] : -1
+  );
+  var eveningLN = (jsDay === 5 || jsDay === 6) && lastReg >= 0 && nowMin > lastReg;
+  var morningLN = (jsDay === 6 || jsDay === 0) && nowMin <= LN_MORNING_END;
+  var lnMode    = eveningLN || morningLN;
+
+  /* Late-nite departures that span midnight (override today-only deps). */
+  deps.LNWS  = nightUpcoming('LNWS',  now, nowMin);
+  deps.LNDCL = nightUpcoming('LNDCL', now, nowMin);
+  deps.DE    = nightUpcoming('DE',    now, nowMin);
+
+  show('WS',  !lnMode);  show('LNWS',  lnMode);
+  show('DCL', !lnMode);  show('LNDCL', lnMode);
+  show('DE',  deps.DE.length > 0);
+
+  document.getElementById('lnBar').classList.toggle('on', lnMode);
 
   /* CS runs as a continuous loop by day; only show the card near a fixed
      evening / weekend / late-nite departure (within 30 min before or after). */
