@@ -1,7 +1,7 @@
 const ALERT = {
-  active: false,
-  text: 'Welcome Back Weekend alternate service is now in effect. Buses leave from Lot C on Friday, Saturday, and Sunday. Regular service begins on Tuesday, August 18.',
-  link: { href: 'news.html', label: 'Details' }
+  active: true,
+  text: 'Construction on Main Street may be affecting Westside and Main Street Routes. ETA Transit or SPOT App may provide departure times that do not reflect actual schedules. Please refer to OCCT Website or PDF schedules for up-to-date information.',
+ // link: { href: 'news.html', label: 'Details' }
 };
 
 (function () {
