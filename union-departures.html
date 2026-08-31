@@ -53,6 +53,16 @@
   </div>
 </div>
 
+<!-- ALTERNATE SCHEDULE BANNER (Labor Day Weekend 9/5-9/7) -->
+<div class="no-wkn-bar" id="altBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span>Labor Day Weekend Alternate Schedule (Sept 5&ndash;7): reduced service on all routes. Regular service resumes Tuesday, Sept 8.</span>
+  </div>
+</div>
+
 <!-- DEPARTURE BOARD: two-panel layout -->
 <div class="panels" id="panelsWrap">
 
@@ -227,6 +237,21 @@
         <div class="td-after"><div class="after-time" id="after-CS">--</div></div>
       </div>
 
+      <!-- ICS (ITC-Campus Shuttle): alternate-schedule days only -->
+      <div class="dep-row hidden" id="card-ICS">
+        <div><span class="badge dark" style="background:rgb(174,225,174);">ICS</span></div>
+        <div class="td-dest">
+          <div class="route-name">ITC&ndash;Campus Shuttle</div>
+          <div class="route-stops">ITC; Hillside &rarr; Campus</div>
+          <div class="mohawk-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Cross the street: Mohawk Stop
+          </div>
+        </div>
+        <div class="td-time"><div class="dep-time" id="next-ICS">--</div></div>
+        <div class="td-after"><div class="after-time" id="after-ICS">--</div></div>
+      </div>
+
       <div class="dep-row" id="card-VS">
         <div><span class="badge" style="background:#E37383;">VS</span></div>
         <div class="td-dest">
@@ -325,11 +350,11 @@ var SCHEDULES = {
     weekend: ["10:35","11:40","13:40","15:30","18:15","20:15"]
   },
   DS: {
-    weekday: ["09:55","11:05","12:05","13:35","15:40","18:40","20:00","21:35"],
+    weekday: ["09:55","11:05","12:05","13:35","15:40","17:30","18:40","20:00","21:35"],
     weekend: ["10:15","12:40","14:40","17:15","19:10","21:35"]
   },
   UDC: {
-    weekday: ["07:15","07:45","08:10","08:15","08:25","08:35","08:45","09:02","09:15","09:45","10:15","10:45","13:15","15:15","15:45","17:30","17:45","18:15","20:30"],
+    weekday: ["07:15","07:45","08:10","08:15","08:25","08:35","08:45","09:02","09:15","09:45","10:15","10:45","13:15","15:15","15:45","17:45","18:15","20:30"],
     weekend: []
   },
   UC: {
@@ -413,8 +438,35 @@ function expand(arr, jsDay) {
     .sort(function(a, b) { return a - b; });
 }
 
+/* =====================================================================
+ * ALTERNATE (reduced) SCHEDULE -- Labor Day Weekend 9/5-9/7 2026.
+ * One reduced timetable for all three days. IU, UDC Express, DE and Late
+ * Nite do not run; ICS (ITC-Campus Shuttle) runs in place of IU.
+ * (Additional alternate ranges 9/11-13 & 9/19-21 to be added week-of.)
+ * ===================================================================== */
+function isAlternate(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  return y === 2026 && m === 8 && d >= 5 && d <= 7;
+}
+
+var ALT_SCHEDULES = {
+  WS:  ["09:15","10:45","14:30","16:00","18:30","21:00"],
+  DCL: ["08:45","11:30","13:30","15:15","17:00","19:15"],
+  MS:  ["12:30","17:15"],
+  DS:  ["09:25","20:00"],
+  UC:  ["09:00","10:30","11:30","12:30","13:30","14:30","15:30","16:45","18:30","19:30","20:45"],
+  VS:  ["10:00","11:45","13:45","15:45","17:45","19:45"],
+  OC:  ["10:45","12:45","14:45","16:45","18:45"],
+  CS:  ["08:45","10:15","11:15","12:15","13:15","14:15","15:15","16:30","18:15","19:15","20:30"],
+  ICS: ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30"]
+};
+
 function getDepartures(routeKey, now) {
   var jsDay = now.getDay();
+  if (isAlternate(now)) {
+    var a = ALT_SCHEDULES[routeKey];
+    return a ? expand(a, jsDay) : [];
+  }
   var base   = SCHEDULES[routeKey];
   if (!base) return [];
   var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
@@ -471,7 +523,7 @@ function setMode(mode, manual) {
   refresh();
 }
 
-var ROUTES = ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','CS','DE','LNWS','LNDCL'];
+var ROUTES = ['WS','DCL','MS','DS','UDC','UC','IU','VS','OC','CS','DE','LNWS','LNDCL','ICS'];
 
 /* Late Nite window (Fri & Sat nights). LN + DE trips run past midnight and are
  * stored on the calendar day they occur (d:[6,0]); this returns tonight's
@@ -517,9 +569,24 @@ function refresh() {
 
   show('RIU', false);   /* Summer only */
 
+  var alt = isAlternate(now);
+  document.getElementById('altBar').style.display = alt ? 'block' : 'none';
+
+  if (alt) {
+    /* ── ALTERNATE (Labor Day Weekend) ── one reduced schedule for all routes.
+     * ICS runs in place of IU; UDC Express, DE and Late Nite do not run.
+     * CS shows its fixed alternate departures like any other route. */
+    ['WS','DCL','MS','DS','UC','VS','OC','CS','ICS'].forEach(function(k) { show(k, deps[k].length > 0); });
+    ['UDC','IU','DE','LNWS','LNDCL'].forEach(function(k) { show(k, false); });
+    document.getElementById('lnBar').classList.remove('on');
+    ROUTES.forEach(function(k) { updateCard(k, nowMin, deps[k]); });
+    return;
+  }
+
   /* REGULAR FALL */
   ['MS','DS','VS','UC'].forEach(function(k) { show(k, true); });
   ['UDC','IU','OC'].forEach(function(k) { show(k, deps[k].length > 0); });
+  show('ICS', false);
 
   /* ── LATE NITE (Fri & Sat nights) ──
    * Once the last regular WS/DCL run of the night has departed, swap the WS/DCL

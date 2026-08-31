@@ -44,6 +44,16 @@
   </div>
 </div>
 
+<!-- ALTERNATE SCHEDULE BANNER (Labor Day Weekend 9/5-9/7) -->
+<div class="no-wkn-bar" id="altBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span>Labor Day Weekend Alternate Schedule (Sept 5&ndash;7): reduced service. Regular service resumes Tuesday, Sept 8.</span>
+  </div>
+</div>
+
 <!-- DEPARTURE BOARD: two-panel layout -->
 <div class="panels" id="panelsWrap">
 
@@ -241,8 +251,26 @@ function expand(arr, jsDay) {
     .sort(function(a, b) { return a - b; });
 }
 
+/* Alternate (reduced) inbound schedule -- Labor Day Weekend 9/5-9/7 2026.
+ * "Leaves UDC" times. UDC Express does not run. */
+function isAlternate(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  return y === 2026 && m === 8 && d >= 5 && d <= 7;
+}
+
+var ALT_SCHEDULES = {
+  WS:  ["09:03","11:50","13:50","15:35","17:20","19:35"],
+  DCL: ["09:40","11:10","14:55","16:25","18:55","21:25"],
+  MS:  ["09:45","20:25"],
+  DS:  ["13:05","17:50"]
+};
+
 function getDepartures(routeKey, now) {
   var jsDay = now.getDay();
+  if (isAlternate(now)) {
+    var a = ALT_SCHEDULES[routeKey];
+    return a ? expand(a, jsDay) : [];
+  }
   var base   = SCHEDULES[routeKey];
   if (!base) return [];
   var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
@@ -326,8 +354,17 @@ function refresh() {
 
   function show(k, v) { document.getElementById('card-' + k).classList.toggle('hidden', !v); }
 
-  ['MS','WS','DCL','DS'].forEach(function(k) { show(k, true); });
-  show('UDC', deps.UDC.length > 0);   /* UDC Express: weekday only */
+  var alt = isAlternate(now);
+  document.getElementById('altBar').style.display = alt ? 'block' : 'none';
+
+  if (alt) {
+    /* Alternate (Labor Day Weekend): reduced MS/WS/DCL/DS; UDC Express off. */
+    ['MS','WS','DCL','DS'].forEach(function(k) { show(k, deps[k].length > 0); });
+    show('UDC', false);
+  } else {
+    ['MS','WS','DCL','DS'].forEach(function(k) { show(k, true); });
+    show('UDC', deps.UDC.length > 0);   /* UDC Express: weekday only */
+  }
 
   routes.forEach(function(k) { updateCard(k, nowMin, deps[k]); });
 }

@@ -1,7 +1,7 @@
 const ALERT = {
   active: true,
-  text: 'Construction on Main Street may be affecting Westside and Main Street Routes. ETA Transit or SPOT App may provide departure times that do not reflect actual schedules. Please refer to OCCT Website or PDF schedules for up-to-date information.',
- // link: { href: 'news.html', label: 'Details' }
+  text: 'Labor Day Weekend (9/5&ndash;9/7): OCCT is running an Alternate reduced schedule on all routes. Regular weekday and weekend service resumes Tuesday, 9/8.',
+  link: { href: 'routeschedule.html', label: 'View schedules' }
 };
 
 (function () {

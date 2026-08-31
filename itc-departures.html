@@ -146,6 +146,16 @@
   </div>
 </div>
 
+<!-- ALTERNATE SCHEDULE BANNER (Labor Day Weekend 9/5-9/7) -->
+<div class="no-wkn-bar" id="altBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span>Labor Day Weekend Alternate Schedule (Sept 5&ndash;7): the ITC&ndash;Campus Shuttle (ICS) serves the ITC in place of the IU Shuttle. Regular service resumes Tuesday, Sept 8.</span>
+  </div>
+</div>
+
 <!-- ARRIVALS BOARD: single route (IU at the ITC) -->
 <div class="panels itc-single">
   <div class="panel">
@@ -245,10 +255,25 @@ function fmtClock(d) {
 
 function numSort(a, b) { return a - b; }
 
+/* ICS (ITC-Campus Shuttle) arrivals at the ITC -- alternate-schedule days.
+ * On alternate days the IU Shuttle does not run; ICS serves the ITC. */
+var ITC_ARRIVALS_ALT = [
+  "08:05","08:35","09:05","09:35","10:05","10:35","11:05","11:35","12:05","12:35",
+  "13:05","13:35","14:05","14:35","15:05","15:35","16:05","16:35","17:05","17:35",
+  "18:05","18:35"
+];
+
+/* Labor Day Weekend 9/5-9/7 2026. */
+function isAlternate(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  return y === 2026 && m === 8 && d >= 5 && d <= 7;
+}
+
 /* Scheduled ITC arrivals for the given day.
- * mode: 'iu' (weekday IU) | 'weekend' (no service). */
+ * mode: 'iu' (weekday IU) | 'ics' (alternate ITC-Campus Shuttle) | 'weekend'. */
 function scheduledToday(now) {
   var jsDay = now.getDay();
+  if (isAlternate(now)) return { times: ITC_ARRIVALS_ALT.map(toMin).sort(numSort), mode: 'ics' };
   if (jsDay === 0 || jsDay === 6) return { times: [], mode: 'weekend' };
   return { times: ITC_ARRIVALS_WEEKDAY.map(toMin).sort(numSort), mode: 'iu' };
 }
@@ -259,6 +284,14 @@ function setIdentity(mode) {
   var name  = document.getElementById('heroName');
   var dir   = document.getElementById('heroDirText');
   var label = document.getElementById('panelLabel');
+  if (mode === 'ics') {
+    badge.textContent = 'ICS';
+    badge.style.background = 'rgb(174,225,174)';
+    name.innerHTML = 'ITC&ndash;Campus Shuttle';
+    dir.innerHTML  = 'Arriving at the ITC toward Hillside &rarr; Campus';
+    label.innerHTML = 'ICS &middot; ITC&ndash;Campus Shuttle: Arrivals at the Innovative Technologies Complex';
+    return;
+  }
   badge.textContent = 'IU';
   badge.style.background = '#CF9FFF';
   name.innerHTML = 'ITC&ndash;UClub Shuttle';
@@ -289,6 +322,7 @@ function render() {
 
   setIdentity(mode);
   document.getElementById('noWknBar').style.display = (mode === 'weekend') ? 'block' : 'none';
+  document.getElementById('altBar').style.display   = (mode === 'ics') ? 'block' : 'none';
 
   var nextEl  = document.getElementById('nextTime');
   var grid    = document.getElementById('timesGrid');

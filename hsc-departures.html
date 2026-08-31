@@ -43,6 +43,16 @@
   </div>
 </div>
 
+<!-- ALTERNATE SCHEDULE BANNER (Labor Day Weekend 9/5-9/7) -->
+<div class="no-wkn-bar" id="altBar" style="display:none; background:#0a7ea4; border-bottom-color:rgba(120,200,230,0.45);">
+  <div class="mod-bar-inner">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/>
+    </svg>
+    <span>Labor Day Weekend Alternate Schedule (Sept 5&ndash;7): reduced Main Street service. Regular service resumes Tuesday, Sept 8.</span>
+  </div>
+</div>
+
 <!-- DEPARTURE BOARD: two-panel layout -->
 <div class="panels" id="panelsWrap">
 
@@ -185,8 +195,24 @@ function fmtClock(d) {
 var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+/* Alternate (reduced) schedule -- Labor Day Weekend 9/5-9/7 2026.
+ * MS arrivals at the Pharmacy School stop, outbound & inbound. */
+function isAlternate(now) {
+  var y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  return y === 2026 && m === 8 && d >= 5 && d <= 7;
+}
+
+var ALT_SCHEDULES = {
+  MSOUT: ["12:39","17:24"],
+  MSIN:  ["09:57","20:37"]
+};
+
 function getDepartures(routeKey, now) {
   var jsDay = now.getDay();
+  if (isAlternate(now)) {
+    var a = ALT_SCHEDULES[routeKey];
+    return a ? a.map(toMin).sort(function(x, y2) { return x - y2; }) : [];
+  }
   var base   = SCHEDULES[routeKey];
   var modded = MODIFIED.active && MODIFIED.schedules[routeKey];
   var src    = modded ? modded : base;
@@ -262,6 +288,8 @@ function refresh() {
   } else {
     modBar.classList.remove('on');
   }
+
+  document.getElementById('altBar').style.display = isAlternate(now) ? 'block' : 'none';
 
   var deps = {};
   ['MSOUT','MSIN'].forEach(function(k) {
