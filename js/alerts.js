@@ -1,6 +1,6 @@
 const ALERT = {
   active: true,
-  text: 'Labor Day Weekend (9/5&ndash;9/7): OCCT is running an Alternate reduced schedule on all routes. Regular weekday and weekend service resumes Tuesday, 9/8.',
+  text: 'Vestal Shopping: Due to construction, the Walmart stop has been temporarily relocated to AMC &bullet; Labor Day Weekend (9/5&ndash;9/7): OCCT is running an Alternate reduced schedule on all routes. Regular weekday and weekend service resumes Tuesday, 9/8. Late Nite service will not operate.',
   link: { href: 'routeschedule.html', label: 'View schedules' }
 };
 
