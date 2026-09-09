@@ -1,6 +1,6 @@
 const ALERT = {
   active: true,
-  text: 'Rosh Hashanah Break (9/11-9/13): OCCT is running an Alternate reduced schedule on all routes. Regular weekday and weekend service resumes Monday, 9/14. Late Nite service will not operate.',
+  text: 'Wednesday, Sep 9: Expect Severe Delays. Refer to SPOT or ETA Transit Announcements.      Rosh Hashanah Break (9/11-9/13): OCCT is running an Alternate reduced schedule on all routes. Regular weekday and weekend service resumes Monday, 9/14. Late Nite service will not operate.',
   link: { href: 'routeschedule.html', label: 'View schedules' }
 };
 
